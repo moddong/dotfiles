@@ -1,0 +1,117 @@
+syntax enable
+filetype on
+filetype indent on
+set t_Co=256
+set number
+"set relativenumber
+set cursorline
+set colorcolumn=80
+set showmode
+set showcmd
+set encoding=utf-8
+set list
+set listchars=trail:·,tab:»~,nbsp:+
+set mouse=a
+set smartindent
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set showmatch
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+set nobackup
+set noswapfile
+set nowrap
+set foldmethod=indent
+set foldlevelstart=99
+set fillchars=eob:\ 
+set signcolumn=yes
+"set background=dark
+
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
+nmap <c-n> :bn<cr>
+nmap <c-p> :bp<cr>
+nmap <c-x>k :bd<cr>
+nmap <a-d> :terminal<cr>
+tmap <a-d> exit<cr>
+
+imap <c-d> <del>
+imap <c-b> <left>
+imap <c-f> <right>
+imap <c-a> <home>
+imap <c-e> <end>
+imap <c-k> <c-o>d$
+imap <c-s> <esc>:w<cr>
+imap <c-n> <down>
+imap <c-p> <up>
+imap <a-j> <c-o>o
+imap <a-k> <c-o>O
+
+cmap <c-d> <del>
+cmap <c-b> <left>
+cmap <c-f> <right>
+cmap <c-a> <home>
+cmap <c-e> <end>
+
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE
+hi CursorLine ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE
+hi PmenuSel ctermfg=NONE ctermbg=NONE cterm=NONE
+hi QuickFixLine ctermfg=NONE ctermbg=NONE cterm=NONE
+hi ColorColumn ctermfg=NONE ctermbg=23 cterm=NONE
+hi Conceal ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Cursor ctermfg=NONE ctermbg=NONE cterm=NONE
+hi CursorColumn ctermfg=NONE ctermbg=23 cterm=NONE
+hi CursorIM ctermfg=NONE ctermbg=NONE cterm=NONE
+hi CursorLineNr ctermfg=23 ctermbg=NONE cterm=NONE
+hi EndOfBuffer ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Error ctermfg=NONE ctermbg=NONE cterm=reverse
+hi ErrorMsg ctermfg=NONE ctermbg=NONE cterm=NONE
+hi FoldColumn ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Folded ctermfg=NONE ctermbg=NONE cterm=NONE
+hi IncSearch ctermfg=NONE ctermbg=NONE cterm=reverse
+hi LineNr ctermfg=NONE ctermbg=NONE cterm=NONE
+hi MatchParen ctermfg=NONE ctermbg=NONE cterm=reverse
+hi ModeMsg ctermfg=NONE ctermbg=NONE cterm=NONE
+hi MoreMsg ctermfg=NONE ctermbg=NONE cterm=NONE
+hi NonText ctermfg=NONE ctermbg=NONE cterm=NONE
+hi PmenuSbar ctermfg=NONE ctermbg=NONE cterm=NONE
+hi PmenuThumb ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Question ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Search ctermfg=NONE ctermbg=NONE cterm=reverse
+hi SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
+hi SpecialKey ctermfg=darkgrey ctermbg=NONE cterm=NONE
+hi SpellBad ctermfg=NONE ctermbg=NONE cterm=underline
+hi SpellCap ctermfg=NONE ctermbg=NONE cterm=underline
+hi SpellLocal ctermfg=NONE ctermbg=NONE cterm=underline
+hi SpellRare ctermfg=NONE ctermbg=NONE cterm=underline
+hi StatusLine ctermfg=NONE ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=NONE
+hi ToolbarButton ctermfg=NONE ctermbg=NONE cterm=NONE
+hi ToolbarLine ctermfg=NONE ctermbg=NONE cterm=NONE
+hi VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Visual ctermfg=NONE ctermbg=23 cterm=NONE
+hi VisualNOS ctermfg=NONE ctermbg=23 cterm=NONE
+hi WarningMsg ctermfg=NONE ctermbg=NONE cterm=NONE
+hi WildMenu ctermfg=NONE ctermbg=NONE cterm=NONE
+hi debugBreakpoint ctermfg=NONE ctermbg=NONE cterm=reverse
+hi debugPC ctermfg=NONE ctermbg=NONE cterm=reverse
+hi Directory ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Title ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Comment ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Constant ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Identifier ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Ignore ctermfg=NONE ctermbg=NONE cterm=NONE
+hi PreProc ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Special ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Statement ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Todo ctermfg=NONE ctermbg=NONE cterm=reverse
+hi Type ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline
+hi Label ctermfg=NONE ctermbg=NONE cterm=NONE
