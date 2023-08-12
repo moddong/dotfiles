@@ -4,6 +4,16 @@ function config.whisky()
   require('whiskyline').setup()
 end
 
+function config.bufferline()
+  require('bufferline').setup({
+    options = {
+      modified_icon = '✥',
+      buffer_close_icon = '',
+      always_show_bufferline = false,
+    },
+  })
+end
+
 function config.hlsearch()
   require('hlsearch').setup()
 end

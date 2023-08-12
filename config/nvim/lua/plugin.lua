@@ -16,6 +16,11 @@ require('lazy').setup({
   --   config = conf.whisky,
   -- },
   {
+    'akinsho/bufferline.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = conf.bufferline,
+  },
+  {
     'nvimdev/dbsession.nvim',
     cmd = { 'SessionSave', 'SessionDelete', 'SessionLoad' },
     opts = true,
