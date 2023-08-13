@@ -3,12 +3,12 @@ local pd = {}
 local stl = {}
 
 local function get_stl_bg()
-  local res = api.nvim_get_hl_by_name('StatusLine', true)
+  local res = api.nvim_get_hl(0, { name = 'StatusLine' })
   if vim.tbl_count(res) == 0 then
     vim.notify('colorschem missing StatusLine config')
     return
   end
-  return res.background
+  return res.bg
 end
 
 local stl_bg
@@ -17,11 +17,11 @@ if not stl_bg then
 end
 
 local function stl_attr(group, trans)
-  local color = api.nvim_get_hl_by_name(group, true)
+  local color = api.nvim_get_hl(0, { name = group })
   trans = trans or false
   return {
     bg = trans and 'NONE' or stl_bg,
-    fg = color.foreground,
+    fg = color.fg,
   }
 end
 
@@ -447,8 +447,7 @@ local function render(comps, events, pieces)
       --because setup use a timer to defer parse and render this will cause missing
       --BufEnter event so add a safe check avoid filename and file icon can't get
       --when running `nvim file`
-      if #pieces[7] == 0 then
-        pieces[7] = stl_format(comps[7].name, comps[7].stl(args))
+      if #pieces[6] == 0 then
         pieces[6] = stl_format(comps[6].name, comps[6].stl(args))
       end
 
