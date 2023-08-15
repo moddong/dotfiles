@@ -146,20 +146,29 @@ function config.nvim_lsp()
     end,
     capabilities = capabilities,
     settings = {
-      Lua = {
-        diagnostics = {
-          enable = true,
-          globals = { 'vim', 'packer_plugins' },
-        },
-        runtime = { version = 'LuaJIT' },
-        workspace = {
-          library = vim.list_extend(
-            { [vim.fn.expand('$VIMRUNTIME/lua')] = true },
-            {}
-          ),
+    Lua = {
+      diagnostics = {
+        enable = true,
+        globals = { 'vim' },
+        disable = {
+          'missing-fields',
         },
       },
+      runtime = {
+        version = 'LuaJIT',
+        path = vim.split(package.path, ';'),
+      },
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME,
+        },
+        checkThirdParty = false,
+      },
+      completion = {
+        callSnippet = 'Replace',
+      },
     },
+  },
   })
 
   lspconfig.clangd.setup({
