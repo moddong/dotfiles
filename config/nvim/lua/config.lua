@@ -146,29 +146,29 @@ function config.nvim_lsp()
     end,
     capabilities = capabilities,
     settings = {
-    Lua = {
-      diagnostics = {
-        enable = true,
-        globals = { 'vim' },
-        disable = {
-          'missing-fields',
+      Lua = {
+        diagnostics = {
+          enable = true,
+          globals = { 'vim' },
+          disable = {
+            'missing-fields',
+          },
         },
-      },
-      runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
-      },
-      workspace = {
-        library = {
-          vim.env.VIMRUNTIME,
+        runtime = {
+          version = 'LuaJIT',
+          path = vim.split(package.path, ';'),
         },
-        checkThirdParty = false,
-      },
-      completion = {
-        callSnippet = 'Replace',
+        workspace = {
+          library = {
+            vim.env.VIMRUNTIME,
+          },
+          checkThirdParty = false,
+        },
+        completion = {
+          callSnippet = 'Replace',
+        },
       },
     },
-  },
   })
 
   lspconfig.clangd.setup({
@@ -199,10 +199,33 @@ function config.nvim_lsp()
     },
   })
 
+  lspconfig.rust_analyzer.setup({
+    on_attach = function(client, _)
+      client.server_capabilities.semanticTokensProvider = nil
+    end,
+    settings = {
+      ['rust-analyzer'] = {
+        imports = {
+          granularity = {
+            group = 'module',
+          },
+          prefix = 'self',
+        },
+        cargo = {
+          buildScripts = {
+            enable = true,
+          },
+        },
+        procMacro = {
+          enable = true,
+        },
+      },
+    },
+  })
+
   local servers = {
     'pyright',
     'bashls',
-    'jsonls',
     'html',
     'cssls',
     'tsserver',
