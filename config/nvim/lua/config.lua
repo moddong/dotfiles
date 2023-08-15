@@ -4,15 +4,15 @@ function config.whisky()
   require('whiskyline').setup()
 end
 
-function config.bufferline()
-  require('bufferline').setup({
-    options = {
-      modified_icon = '✥',
-      buffer_close_icon = '',
-      always_show_bufferline = false,
-    },
-  })
-end
+-- function config.bufferline()
+--   require('bufferline').setup({
+--     options = {
+--       modified_icon = '✥',
+--       buffer_close_icon = '',
+--       always_show_bufferline = false,
+--     },
+--   })
+-- end
 
 function config.hlsearch()
   require('hlsearch').setup()
@@ -25,14 +25,17 @@ function config.guard()
   ft('lua'):fmt('stylua')
   ft('python'):fmt('black')
   ft('go'):fmt('lsp'):append('golines')
-  ft('javascript'):fmt('prettier')
+  ft('javascript,typescript,javascriptreact'):fmt('prettier')
   ft('javascriptreact'):fmt('prettier')
-  require('guard').setup()
-  local curbuf = vim.api.nvim_get_current_buf()
-  vim.api.nvim_exec_autocmds(
-    'FileType',
-    { group = 'Guard', pattern = vim.bo[curbuf].filetype }
-  )
+  require('guard').setup({
+    fmt_on_save = false,
+    lsp_as_default_formatter = false,
+  })
+  -- local curbuf = vim.api.nvim_get_current_buf()
+  -- vim.api.nvim_exec_autocmds(
+  --   'FileType',
+  --   { group = 'Guard', pattern = vim.bo[curbuf].filetype }
+  -- )
 end
 
 function config.indentmini()
