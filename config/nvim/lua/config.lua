@@ -117,28 +117,48 @@ function config.nvim_lsp()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-  local signs = {
-    Error = ' ',
-    Warn = ' ',
-    Info = ' ',
-    Hint = ' ',
+  local t = {
+    'Error',
+    'Warn',
+    'Info',
+    'Hint',
   }
 
-  for type, icon in pairs(signs) do
+  for _, type in ipairs(t) do
     local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, { text = '⮞', texthl = hl, numhl = hl })
   end
 
   vim.diagnostic.config({
     signs = true,
-    update_in_insert = false,
-    underline = true,
     severity_sort = true,
-    virtual_text = {
-      prefix = '🔥',
-      source = true,
-    },
+    virtual_text = true,
   })
+
+  vim.lsp.set_log_level('OFF')
+
+  -- local signs = {
+  --   Error = ' ',
+  --   Warn = ' ',
+  --   Info = ' ',
+  --   Hint = ' ',
+  -- }
+
+  -- for type, icon in pairs(signs) do
+  --   local hl = 'DiagnosticSign' .. type
+  --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  -- end
+
+  -- vim.diagnostic.config({
+  --   signs = true,
+  --   update_in_insert = false,
+  --   underline = true,
+  --   severity_sort = true,
+  --   virtual_text = {
+  --     prefix = '🔥',
+  --     source = true,
+  --   },
+  -- })
 
   lspconfig.lua_ls.setup({
     on_attach = function(client, _)
