@@ -6,8 +6,8 @@ opt.encoding = 'utf-8'
 opt.clipboard = 'unnamedplus'
 opt.number = true
 opt.cursorline = true
-opt.textwidth = 80
-opt.colorcolumn = '80'
+opt.textwidth = 100
+opt.colorcolumn = '100'
 opt.smarttab = true
 opt.expandtab = true
 opt.autoindent = true
@@ -16,6 +16,7 @@ opt.shiftwidth = 2
 opt.splitright = true
 opt.softtabstop = -1
 opt.laststatus = 3
+opt.cmdheight = 0
 opt.history = 200
 opt.display = 'lastline'
 opt.wildmenu = true
@@ -37,12 +38,11 @@ opt.ttimeoutlen = 10
 opt.updatetime = 100
 opt.redrawtime = 1500
 opt.list = true
-opt.listchars = 'trail:·,tab:»·,nbsp:+,'
+opt.listchars = 'trail:·,tab:»·,nbsp:+,extends:→,precedes:←'
 opt.showmode = false
 opt.signcolumn = 'yes'
 opt.foldenable = false
-opt.foldlevel = 99
-opt.cmdheight = 0
+opt.foldlevelstart = 99
 
 -- wsl yanking to windows clipboard
 if vim.fn.has('wsl') == 1 then
