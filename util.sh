@@ -19,7 +19,7 @@ lsp() {
 
   info "install lua lsp server"
   local lua_lsp_home="${HOME}/.local/share/nvim/lua-language-server"
-  rm "${lua_lsp_home}"
+  rm -rf "${lua_lsp_home}"
   mkdir -p "${lua_lsp_home}"
 
   while [[ ! -e lua-language-server.tar.gz ]]; do
