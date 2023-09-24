@@ -111,6 +111,12 @@ function config.nvim_treesitter()
       },
     },
   })
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'javascriptreact', 'typescriptreact' },
+    callback = function(opt)
+      vim.bo[opt.buf].indentexpr = 'nvim_treesitter#indent()'
+    end,
+  })
 end
 
 function config.nvim_lsp()
@@ -231,6 +237,9 @@ function config.nvim_lsp()
             group = 'module',
           },
           prefix = 'self',
+        },
+        check = {
+          command = 'clippy',
         },
         cargo = {
           buildScripts = {
