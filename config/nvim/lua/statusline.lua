@@ -4,7 +4,7 @@ local stl = {}
 
 local function get_stl_bg()
   local res = api.nvim_get_hl(0, { name = 'StatusLine' })
-  if vim.tbl_count(res) == 0 then
+  if vim.tbl_isempty(res) then
     vim.notify('colorschem missing StatusLine config')
     return
   end
@@ -17,7 +17,7 @@ if not stl_bg then
 end
 
 local function stl_attr(group, trans)
-  local color = api.nvim_get_hl(0, { name = group })
+  local color = api.nvim_get_hl(0, { name = group, link = false })
   trans = trans or false
   return {
     bg = trans and 'NONE' or stl_bg,
@@ -111,20 +111,8 @@ function pd.fileicon()
 end
 
 function pd.fileinfo()
-  local function stl_file()
-    local fname = api.nvim_buf_get_name(0)
-    local sep = path_sep()
-    local parts = vim.split(fname, sep, { trimempty = true })
-    local index = #parts - 1 <= 0 and 1 or #parts - 1
-    fname = table.concat({ unpack(parts, index) }, sep)
-    if #fname == 0 then
-      fname = 'UNKNOWN'
-    end
-    return fname
-  end
-
   local result = {
-    stl = stl_file,
+    stl = '%t',
     name = 'fileinfo',
     event = { 'BufEnter' },
     attr = {
@@ -138,7 +126,7 @@ end
 function pd.lsp()
   local function lsp_stl(args)
     local client = lsp.get_client_by_id(args.data.client_id)
-    local msg = ''
+    local msg = client and client.name or ''
     if args.data.result then
       local val = args.data.result.value
       msg = val.title
@@ -168,15 +156,13 @@ function pd.lsp()
   return result
 end
 
-local function gitsigns_data(type)
-  if not vim.b.gitsigns_status_dict then
-    return ''
+local function gitsigns_data(bufnr, type)
+  local ok, dict = pcall(api.nvim_buf_get_var, bufnr, 'gitsigns_status_dict')
+  if not ok or vim.tbl_isempty(dict) or not dict[type] then
+    return 0
   end
 
-  local val = vim.b.gitsigns_status_dict[type]
-  val = (val == 0 or not val) and ''
-    or tostring(val) .. (type == 'head' and '' or ' ')
-  return val
+  return dict[type]
 end
 
 local function git_icons(type)
@@ -190,12 +176,12 @@ end
 
 function pd.gitadd()
   local result = {
-    stl = function()
-      local res = gitsigns_data('added')
-      return #res > 0 and git_icons('added') .. res or ''
+    stl = function(args)
+      local res = gitsigns_data(args.buf, 'added')
+      return res > 0 and git_icons('added') .. res or ''
     end,
     name = 'gitadd',
-    event = { 'User GitSignsUpdate' },
+    event = { 'User GitSignsUpdate', 'BufEnter' },
     attr = stl_attr('DiffAdd'),
   }
 
@@ -204,12 +190,12 @@ end
 
 function pd.gitchange()
   local result = {
-    stl = function()
-      local res = gitsigns_data('changed')
-      return #res > 0 and git_icons('changed') .. res or ''
+    stl = function(args)
+      local res = gitsigns_data(args.buf, 'changed')
+      return res > 0 and git_icons('changed') .. res or ''
     end,
     name = 'gitchange',
-    event = { 'User GitSignsUpdate' },
+    event = { 'User GitSignsUpdate', 'BufEnter' },
     attr = stl_attr('DiffChange'),
   }
 
@@ -218,12 +204,12 @@ end
 
 function pd.gitdelete()
   local result = {
-    stl = function()
-      local res = gitsigns_data('removed')
-      return #res > 0 and git_icons('deleted') .. res or ''
+    stl = function(args)
+      local res = gitsigns_data(args.buf, 'removed')
+      return res > 0 and git_icons('deleted') .. res or ''
     end,
     name = 'gitdelete',
-    event = { 'User GitSignsUpdate' },
+    event = { 'User GitSignsUpdate', 'BufEnter' },
     attr = stl_attr('DiffDelete'),
   }
 
@@ -233,12 +219,12 @@ end
 function pd.branch()
   local icon = ' '
   local result = {
-    stl = function()
-      local res = gitsigns_data('head')
-      return #res > 0 and icon .. res or 'UNKOWN'
+    stl = function(args)
+      local res = gitsigns_data(args.buf, 'head')
+      return res and icon .. res or 'UNKOWN'
     end,
     name = 'gitbranch',
-    event = { 'User GitSignsUpdate' },
+    event = { 'User GitSignsUpdate', 'BufEnter' },
     attr = stl_attr('Include'),
   }
   return result
@@ -260,7 +246,7 @@ local function diagnostic_info(severity)
     return ''
   end
   local count = #vim.diagnostic.get(0, { severity = severity })
-  return count == 0 and '' or '● ' .. tostring(count) .. ' '
+  return count == 0 and '' or '⏶ ' .. tostring(count) .. ' '
 end
 
 function pd.diagError()
@@ -385,6 +371,11 @@ local function default()
     pd.mode(),
     pd.space(),
     --
+    pd.encoding(),
+    pd.eol(),
+    pd.modified(),
+    pd.space(),
+    --
     pd.fileicon(),
     pd.fileinfo(),
     pd.space(),
@@ -398,13 +389,11 @@ local function default()
     pd.lsp(),
     pd.pad(),
     --
-    pd.encoding(),
-    pd.eol(),
-    pd.modified(),
     pd.space(),
     pd.gitadd(),
     pd.gitchange(),
     pd.gitdelete(),
+    pd.space(),
     pd.branch(),
     pd.space(),
     --
@@ -458,7 +447,6 @@ local function render(comps, events, pieces)
 end
 
 function stl.wrap()
-  vim.defer_fn(function()
     local comps, events, pieces = default()
     local stl_render = render(comps, events, pieces)
     for _, e in ipairs(vim.tbl_keys(events)) do
@@ -480,7 +468,6 @@ function stl.wrap()
         end,
       })
     end
-  end, 0)
 end
 
 stl.wrap()

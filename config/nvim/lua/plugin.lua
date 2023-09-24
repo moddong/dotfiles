@@ -27,6 +27,9 @@ require('lazy').setup({
   {
     'nvimdev/guard.nvim',
     ft = { 'c', 'cpp', 'python', 'go', 'rust', 'lua', 'javascriptreact' },
+    dependencies = {
+      'nvimdev/guard-collection',
+    },
     config = conf.guard,
   },
   { 'nvimdev/hlsearch.nvim', event = 'BufRead', config = conf.hlsearch },
