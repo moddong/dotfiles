@@ -1,6 +1,6 @@
 require('option')
 require('plugin')
 require('keymap')
-require('one')
--- require('solarized')
+-- require('one')
+require('solarized')
 require('statusline')
