@@ -54,8 +54,8 @@ imap <c-k> <c-o>d$
 imap <c-s> <esc>:w<cr>
 imap <c-n> <down>
 imap <c-p> <up>
-imap <a-j> <c-o>o
-imap <a-k> <c-o>O
+imap <c-j> <c-o>o
+imap <c-k> <c-o>O
 
 cmap <c-d> <del>
 cmap <c-b> <left>
