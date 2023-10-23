@@ -1,6 +1,5 @@
 local api, uv, lsp = vim.api, vim.uv, vim.lsp
 local pd = {}
-local stl = {}
 
 local function get_stl_bg()
   local res = api.nvim_get_hl(0, { name = 'StatusLine' })
@@ -25,8 +24,7 @@ local function stl_attr(group, trans)
   }
 end
 
-local function alias_mode()
-  return {
+local  alias = {
     --Normal
     ['n'] = 'Normal',
     ['no'] = 'O-Pending',
@@ -65,10 +63,8 @@ local function alias_mode()
     ['!'] = 'Shell',
     ['t'] = 'Terminal',
   }
-end
 
 function pd.mode()
-  local alias = alias_mode()
   local result = {
     stl = function()
       local mode = api.nvim_get_mode().mode
@@ -446,28 +442,25 @@ local function render(comps, events, pieces)
   end)
 end
 
-function stl.wrap()
-    local comps, events, pieces = default()
-    local stl_render = render(comps, events, pieces)
-    for _, e in ipairs(vim.tbl_keys(events)) do
-      local tmp = e
-      local pattern
-      if e:find('User') then
-        pattern = vim.split(e, '%s')[2]
-      end
+local comps, events, pieces = default()
+local stl_render = render(comps, events, pieces)
+for _, e in ipairs(vim.tbl_keys(events)) do
+  local tmp = e
+  local pattern
+  if e:find('User') then
+    pattern = vim.split(e, '%s')[2]
+    tmp = 'User'
+  end
 
-      api.nvim_create_autocmd(tmp, {
-        pattern = pattern,
-        callback = function(args)
-          vim.schedule(function()
-            local ok, res = coroutine.resume(stl_render, args)
-            if not ok then
-              vim.notify('[Stl] render failed ' .. res, vim.log.levels.ERROR)
-            end
-          end)
-        end,
-      })
-    end
+  api.nvim_create_autocmd(tmp, {
+    pattern = pattern,
+    callback = function(args)
+      vim.schedule(function()
+        local ok, res = coroutine.resume(stl_render, args)
+        if not ok then
+          vim.notify('[Stl] render failed ' .. res, vim.log.levels.ERROR)
+        end
+      end)
+    end,
+  })
 end
-
-stl.wrap()

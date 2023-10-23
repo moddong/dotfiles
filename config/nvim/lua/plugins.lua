@@ -9,16 +9,11 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup({
-  -- {
-  --   'nvimdev/whiskyline.nvim',
-  --    event = 'BufEnter',
-  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
-  --   config = conf.whisky,
-  -- },
   -- { 'akinsho/bufferline.nvim',
   --   dependencies = { 'nvim-tree/nvim-web-devicons' },
   --   config = conf.bufferline,
   -- },
+  { 'nvim-tree/nvim-web-devicons' },
   {
     'nvimdev/dbsession.nvim',
     cmd = { 'SessionSave', 'SessionDelete', 'SessionLoad' },
