@@ -1,5 +1,3 @@
-local conf = require('config')
-
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   vim.api.nvim_command(
@@ -25,19 +23,21 @@ require('lazy').setup({
     dependencies = {
       'nvimdev/guard-collection',
     },
-    config = conf.guard,
+    config = function()
+      require('config.guard')
+    end,
   },
-  { 'nvimdev/hlsearch.nvim', event = 'BufRead', config = conf.hlsearch },
+  { 'nvimdev/hlsearch.nvim', event = 'BufRead', opts = true },
   {
     'nvimdev/indentmini.nvim',
     event = 'BufEnter',
-    config = conf.indentmini,
+    opts = true,
   },
-  { 'windwp/nvim-autopairs', event = 'InsertEnter', config = conf.autopairs },
+  { 'windwp/nvim-autopairs', event = 'InsertEnter', opts = true },
   {
     'lewis6991/gitsigns.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    config = conf.gitsigns,
+    opts = {},
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -47,18 +47,27 @@ require('lazy').setup({
       'nvim-telescope/telescope-fzy-native.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
     },
-    config = conf.telescope,
+    config = function()
+      require('config.telescope')
+    end,
   },
   {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufRead',
-    config = conf.nvim_treesitter,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
+    config = function()
+      require('config.treesitter')
+    end,
   },
   { 'nvimdev/coman.nvim' },
-  { 'neovim/nvim-lspconfig', config = conf.nvim_lsp },
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('config.lspconfig')
+    end,
+  },
   {
     'nvimdev/lspsaga.nvim',
     event = 'LspAttach',
@@ -67,7 +76,14 @@ require('lazy').setup({
       { 'nvim-tree/nvim-web-devicons' },
       { 'nvim-treesitter/nvim-treesitter' },
     },
-    config = conf.lspsaga,
+    opts = {
+      symbol_in_winbar = {
+        hide_keyword = true,
+      },
+      outline = {
+        detail = false,
+      },
+    },
   },
   {
     'hrsh7th/nvim-cmp',
@@ -75,10 +91,17 @@ require('lazy').setup({
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-buffer' },
-      { 'L3MON4D3/LuaSnip', config = conf.lua_snip },
+      {
+        'L3MON4D3/LuaSnip',
+        config = function()
+          require('config.luasnip')
+        end,
+      },
       { 'saadparwaiz1/cmp_luasnip' },
     },
-    config = conf.nvim_cmp,
+    config = function()
+      require('config.cmp')
+    end,
   },
 }, {
   lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',

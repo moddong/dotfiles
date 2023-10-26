@@ -1,18 +1,9 @@
 local api, uv, lsp = vim.api, vim.uv, vim.lsp
 local pd = {}
 
-local function get_stl_bg()
-  local res = api.nvim_get_hl(0, { name = 'StatusLine' })
-  if vim.tbl_isempty(res) then
-    vim.notify('colorschem missing StatusLine config')
-    return
-  end
-  return res.bg
-end
-
 local stl_bg
 if not stl_bg then
-  stl_bg = get_stl_bg()
+  stl_bg = api.nvim_get_hl(0, { name = 'StatusLine' }).bg
 end
 
 local function stl_attr(group, trans)
