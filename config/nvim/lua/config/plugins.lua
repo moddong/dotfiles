@@ -19,6 +19,7 @@ require('lazy').setup({
   },
   {
     'nvimdev/guard.nvim',
+    event = 'BufRead',
     ft = { 'c', 'cpp', 'python', 'go', 'rust', 'lua', 'javascriptreact' },
     dependencies = {
       'nvimdev/guard-collection',
@@ -85,6 +86,13 @@ require('lazy').setup({
       },
     },
   },
+  -- {
+  --   'nvimdev/epo.nvim',
+  --   event = 'LspAttach',
+  --   config = function()
+  --     require('epo').setup({})
+  --   end,
+  -- },
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
