@@ -11,8 +11,8 @@ opt.colorcolumn = '100'
 opt.smarttab = true
 opt.expandtab = true
 opt.autoindent = true
-opt.tabstop = 2
-opt.shiftwidth = 2
+opt.tabstop = 4
+opt.shiftwidth = 4
 opt.splitright = true
 opt.softtabstop = -1
 opt.laststatus = 3
@@ -43,7 +43,6 @@ opt.showmode = false
 opt.signcolumn = 'yes'
 opt.foldenable = false
 opt.foldlevelstart = 99
--- vim.cmd.colorscheme('paradox')
 
 -- wsl yanking to windows clipboard
 if vim.fn.has('wsl') == 1 then
