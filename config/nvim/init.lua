@@ -1,5 +1,5 @@
 require('internal.option')
 require('internal.keymap')
 require('config.plugins')
-require('internal.colorscheme')
+require('config.colorscheme')
 require('internal.statusline')
