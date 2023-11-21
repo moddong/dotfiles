@@ -37,7 +37,7 @@ black() {
     sudo mv black_linux /usr/local/bin/black
 }
 
-basic() {
+arch() {
     sudo pacman --noconfirm -Syu zsh-autosuggestions  zsh-completions  \
         zsh-syntax-highlighting zsh-theme-powerlevel10k python3 python-pip \
         cmake ninja gcc clang curl unzip jq ripgrep lua-language-server \
@@ -45,6 +45,23 @@ basic() {
         fzf wqy-microhei adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
         waybar grim swappy slurp firefox nemo neom-fileroller hyprpaper wofi hyprland \
         pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-breeze
+
+    rustup default stable
+
+    sudo chsh -s /bin/zsh mdd
+
+    info 'fonts install!'
+    sudo cp -r ./fonts/* /usr/share/fonts
+    sudo fc-cache -fv
+
+    npm config set registry https://registry.npmmirror.com/
+    sudo npm config set registry https://registry.npmmirror.com/
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    sudo pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    go env -w GO111MODULE=on
+    go env -w GOPROXY=https://goproxy.cn,direct
+    sudo go env -w GO111MODULE=on
+    sudo go env -w GOPROXY=https://goproxy.cn,direct
 
     ENV_VARS=(
         'QT_IM_MODULE=fcitx'
@@ -56,24 +73,10 @@ basic() {
     for var in "${ENV_VARS[@]}"; do
         echo "$var" | sudo tee -a /etc/environment
     done
-
-    sudo chsh -s /bin/zsh mdd
-
-    info 'fonts install!'
-    sudo cp -r ./fonts/* /usr/share/fonts
-    sudo fc-cache -fv
 }
 
 registry() {
     info "config npm's and pip's registry and goproxy"
-    npm config set registry https://registry.npmmirror.com/
-    sudo npm config set registry https://registry.npmmirror.com/
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    sudo pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    go env -w GO111MODULE=on
-    go env -w GOPROXY=https://goproxy.cn,direct
-    sudo go env -w GO111MODULE=on
-    sudo go env -w GOPROXY=https://goproxy.cn,direct
 }
 
 link_file() {
@@ -104,7 +107,7 @@ main() {
         info 'run command [ ./util.sh nvim     ] to install nvim-nightly'
         info 'run command [ ./util.sh black    ] to install black'
         info 'run command [ ./util.sh registry ] to configure the registry of npm pip go rust'
-        info 'run command [ ./util.sh basic    ] to install basic software'
+        info 'run command [ ./util.sh arch     ] to install basic software'
         info 'run command [ ./util.sh config   ] to install dotfiles'
     else
         for fn in "$@"; do
