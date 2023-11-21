@@ -13,21 +13,7 @@ lsp() {
   sudo npm i -g bash-language-server
   sudo npm i -g @tailwindcss/language-server
   sudo npm i -g prettier
-  go install golang.org/x/tools/gopls@latest
-  go install github.com/segmentio/golines@latest
-  cargo install stylua
 
-  info "install lua lsp server"
-  local lua_lsp_home="${HOME}/.local/share/nvim/lua-language-server"
-  rm -rf "${lua_lsp_home}"
-  mkdir -p "${lua_lsp_home}"
-
-  while [[ ! -e lua-language-server.tar.gz ]]; do
-    local lua_lsp_tag=$(curl -s https://api.github.com/repos/LuaLS/lua-language-server/releases/latest | jq -r '.tag_name')
-    curl -fL "https://github.com/LuaLS/lua-language-server/releases/download/${lua_lsp_tag}/lua-language-server-${lua_lsp_tag}-linux-x64.tar.gz" -o lua-language-server.tar.gz
-  done
-  tar -xvf lua-language-server.tar.gz -C "${lua_lsp_home}"
-  rm -rf lua-language-server.tar.gz
 }
 
 nvim() {
@@ -41,17 +27,7 @@ nvim() {
   rm -rf nvim-linux64*
 }
 
-utils() {
-  info "install tree-sitter"
-  while [[ ! -e ./tree-sitter-linux-x64.gz ]]; do
-    local tree_sitter_tag=$(curl -s https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest | jq -r '.tag_name')
-    curl -fLO "https://github.com/tree-sitter/tree-sitter/releases/download/${tree_sitter_tag}/tree-sitter-linux-x64.gz"
-  done
-  gzip -d tree-sitter-linux-x64.gz
-  [[ -e /usr/local/bin/tree-sitter ]] && sudo rm /usr/local/bin/tree-sitter
-  chmod +x tree-sitter-linux-x64
-  sudo mv tree-sitter-linux-x64 /usr/local/bin/tree-sitter
-
+black() {
   info "install py formater black"
   while [[ ! -e ./black_linux ]]; do
     local black_tag=$(curl -s https://api.github.com/repos/psf/black/releases/latest  | jq -r '.tag_name')
@@ -63,16 +39,11 @@ utils() {
 }
 
 basic() {
-  sudo apt install -y zsh zsh-autosuggestions zsh-syntax-highlighting \
-                      python3 python3-pip gcc clang wget golang curl  \
-                      unzip jq ripgrep clangd clang-format \
-                      fonts-jetbrains-mono fonts-lxgw-wenkai
-  sudo chsh -s /bin/zsh md
-
-  git clone https://github.com/romkatv/powerlevel10k.git
-  sudo mkdir /usr/share/zsh/plugins
-  sudo mv powerlevel10k /usr/share/zsh/plugins/zsh-theme-powerlevel10k
-  sudo mv /usr/share/zsh-autosuggestions /usr/share/zsh-syntax-highlighting /usr/share/zsh/plugins
+  sudo pacman --noconfirm -Syu zsh-autosuggestions  zsh-completions  \
+              zsh-syntax-highlighting zsh-theme-powerlevel10k python3 python-pip \
+              cmake gcc clang curl unzip jq ripgrep lua-language-server \
+              tree-sitter nodejs npm rustup rust-analyzer go gopls tmux
+  sudo chsh -s /bin/zsh mdd
 
   info 'fonts install!'
   sudo cp -r ./fonts/* /usr/share/fonts

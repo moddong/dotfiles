@@ -32,14 +32,15 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # plugin
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias ls="ls --color=auto"
 alias ll="ls -lh --color=auto"
 alias la="ls -Alh --color=auto"
 alias reload="source ~/.zshrc"
-alias proxy="export HTTP_PROXY='http://192.168.0.110:8888';export HTTPS_PROXY='http://192.168.0.110:8888'"
+alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -"
+alias proxy="export HTTP_PROXY='http://192.168.0.110:10811';export HTTPS_PROXY='http://192.168.0.110:10811'"
 alias unproxy="unset HTTP_PROXY;unset HTTPS_PROXY"
 alias vi="nvim"
 
@@ -49,10 +50,7 @@ path_add() {
   fi
 }
 
-lsp_lua="${HOME}/.local/share/nvim/lua-language-server/bin"
-lsp_go="${HOME}/go/bin"
+#lsp_go="${HOME}/go/bin"
 lsp_rust="${HOME}/.cargo/bin"
 
-path_add "$lsp_lua"
-path_add "$lsp_go"
-path_add "$lsp_rust"
+#path_add "$lsp_go"
