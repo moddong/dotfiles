@@ -39,9 +39,13 @@ black() {
 
 basic() {
   sudo pacman --noconfirm -Syu zsh-autosuggestions  zsh-completions  \
-              zsh-syntax-highlighting zsh-theme-powerlevel10k python3 python-pip \
-              cmake gcc clang curl unzip jq ripgrep lua-language-server \
-              tree-sitter nodejs npm rustup rust-analyzer go gopls tmux
+    zsh-syntax-highlighting zsh-theme-powerlevel10k python3 python-pip \
+    cmake ninja gcc clang curl unzip jq ripgrep lua-language-server \
+    tree-sitter nodejs npm rustup rust-analyzer go gopls tmux wl-clipboard \
+    fzf wqy-microhei adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
+    waybar grim swappy slurp firefox nemo neom-fileroller hyprpaper wofi hyprland \
+    pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-breeze
+
   sudo chsh -s /bin/zsh mdd
 
   info 'fonts install!'
