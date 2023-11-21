@@ -13,7 +13,6 @@ lsp() {
   sudo npm i -g bash-language-server
   sudo npm i -g @tailwindcss/language-server
   sudo npm i -g prettier
-
 }
 
 nvim() {
@@ -88,7 +87,7 @@ main() {
   if [[ $# -eq 0 ]]; then
     info 'run command [ ./util.sh lsp      ] to install lsp server'
     info 'run command [ ./util.sh nvim     ] to install nvim-nightly'
-    info 'run command [ ./util.sh utils    ] to install tree-sitter black'
+    info 'run command [ ./util.sh black    ] to install black'
     info 'run command [ ./util.sh registry ] to configure the registry of npm pip go rust'
     info 'run command [ ./util.sh basic    ] to install basic software'
     info 'run command [ ./util.sh config   ] to install dotfiles'
