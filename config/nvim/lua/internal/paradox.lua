@@ -154,6 +154,7 @@ local groups = {
   { 'RapidFile', { fg = palette.blue, bold = true } },
   { 'RapidTargetPos', { fg = palette.teal, bold = true } },
   { 'LspSignatureActiveParameter', { fg = palette.yellow, underline = true } },
+  { 'netrwTreeBar', { link = 'Comment' } },
 }
 
 local g, api, opt = vim.g, vim.api, vim.opt
@@ -173,6 +174,7 @@ g.terminal_color_12 = palette.blue
 g.terminal_color_13 = palette.purple
 g.terminal_color_14 = palette.cyan
 g.terminal_color_15 = palette.fg
+
 api.nvim_command('hi clear')
 opt.background = 'dark'
 opt.termguicolors = true

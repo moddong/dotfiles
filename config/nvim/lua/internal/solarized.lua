@@ -238,7 +238,6 @@ g.terminal_color_15 = palette.base3
 api.nvim_command('hi clear')
 opt.background = 'dark'
 opt.termguicolors = true
-g.colors_name = 'solarized'
 for _, v in pairs(groups) do
   vim.api.nvim_set_hl(0, v[1], v[2])
 end
