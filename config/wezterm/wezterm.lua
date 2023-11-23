@@ -10,10 +10,10 @@ config.font = wezterm.font_with_fallback({
 	"LXGW WenKai Mono",
 })
 config.font_size = 14
-config.color_scheme = "Solarized (dark) (terminal.sexy)"
 config.enable_tab_bar = false
 config.colors = {
 	background = "#161a24",
+	foreground = "#ada37a",
 }
 
 config.window_padding = {
