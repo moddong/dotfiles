@@ -1,0 +1,25 @@
+[global]
+geometry = "300x50-20+35"
+padding = 10
+frame_color = "#2f343f"
+separator_color = frame
+font = JetBrainsMono Nerd Font 11
+markup = full
+format = "<b>%s</b>\n%b"
+vertical_alignment = center
+icon_position = off
+
+[urgency_low]
+timeout = 3
+background = "#2f343f"
+foreground = "#e0def4"
+
+[urgency_normal]
+timeout = 3
+background = "#2f343f"
+foreground = "#e0def4"
+
+[urgency_critical]
+timeout = 3
+background = "#2f343f"
+foreground = "#e0def4"
