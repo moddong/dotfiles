@@ -43,7 +43,7 @@ arch() {
         cmake ninja gcc clang curl unzip jq ripgrep lua-language-server \
         tree-sitter nodejs npm rustup rust-analyzer go gopls tmux wl-clipboard \
         fzf wqy-microhei adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
-        waybar grim swappy slurp imv firefox nemo neom-fileroller hyprpaper wofi hyprland \
+        waybar grim swappy slurp imv firefox nemo nemo-fileroller hyprpaper wofi hyprland \
         pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-breeze
 
     rustup default stable
