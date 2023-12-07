@@ -80,6 +80,7 @@ window#waybar {
 
 #mpd {
     border-radius: 5px 0px 0px 5px;
+    color: #ABE9B3;
 }
 #cpu {
     color: #7dcfff;
