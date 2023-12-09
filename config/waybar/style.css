@@ -5,19 +5,19 @@
     font-size: 13px;
     min-height: 0;
 }
-/* night*/
-/*@define-color bg rgb (22, 19, 32);*/
-@define-color bg rgb (250,250,250);
 
+/*
+ * #fafafa  day
+ * #161a24  night*/
 window#waybar {
     background: transparent;
-    color: white;
+    color: black;
 }
 
 #window {
-    color: #2e7de9;
+    color: #3760bf;
     /*color: #c0caf5;*/
-    background-color: @bg;
+    background-color: #fafafa;
     margin: 5px;
     margin-left: 5px;
     border-radius: 5px;
@@ -26,7 +26,7 @@ window#waybar {
 }
 
 #workspaces {
-    background-color: @bg;
+    background-color: #fafafa;
     margin: 5px;
     margin-left: 5px;
     border-radius: 5px;
@@ -37,7 +37,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: @bg;
+    color: #fafafa;
     background-color: #7aa2f7;
     border-radius: 5px;
     border-top: 5px solid #ABE9B3;
@@ -46,18 +46,18 @@ window#waybar {
 
 #workspaces button:hover {
     background-color: #7dcfff;
-    color: @bg;
+    color: #fafafa;
     border-radius: 5px;
 }
 
 #keyboard-state,#mpd, #tray, #cpu, #memory, #clock, #battery,#temperature, #pulseaudio, #network {
-    background-color: @bg;
+    background-color: #fafafa;
     padding: 5px 10px;
     margin: 5px 0px;
 }
 
 #custom-power {
-    color: @bg;
+    color: #fafafa;
     background-color: #db4b4b;
     border-radius: 5px;
     margin-right: 10px;
@@ -70,7 +70,7 @@ window#waybar {
 #custom-launcher {
     font-size: 20px;
     color: #89DCEB;
-    background-color: @bg;
+    background-color: #fafafa;
     border-radius: 5px;
     margin-left: 10px;
     margin-top: 5px;
@@ -116,7 +116,7 @@ window#waybar {
 
 #battery.warning:not(.charging) {
     background-color: #f7768e;
-    color: @bg;
+    color: #fafafa;
     border-radius: 5px 5px 5px 5px;
 }
 
