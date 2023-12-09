@@ -11,9 +11,11 @@ config.font = wezterm.font_with_fallback({
 })
 config.font_size = 14
 config.enable_tab_bar = false
+config.color_scheme = 'tokyonight_day'
 config.colors = {
-	background = "#161a24",
-	foreground = "#ada37a",
+	-- background = "#161a24",
+	-- foreground = "#ada37a",
+	background = "#fafafa",
 }
 
 config.window_padding = {

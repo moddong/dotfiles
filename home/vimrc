@@ -30,9 +30,9 @@ set foldlevelstart=99
 set fillchars=eob:\ 
 set signcolumn=yes
 "dark
-colorscheme habamax
+"colorscheme habamax
 "light
-"colorscheme zellner
+colorscheme shine
 
 
 nmap <c-h> <c-w>h
