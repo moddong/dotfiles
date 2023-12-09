@@ -1,5 +1,6 @@
 require('internal.option')
 require('internal.keymap')
 require('config.plugins')
-require('internal.paradox')
+require('internal.light')
+-- vim.cmd.colorscheme('tokyonight-day')
 require('internal.statusline')

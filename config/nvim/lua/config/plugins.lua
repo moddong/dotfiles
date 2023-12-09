@@ -18,6 +18,9 @@ require('lazy').setup({
     opts = true,
   },
   {
+    'folke/tokyonight.nvim',
+  },
+  {
     'nvimdev/guard.nvim',
     event = 'BufRead',
     ft = { 'c', 'cpp', 'python', 'go', 'rust', 'lua', 'javascriptreact' },
