@@ -6,7 +6,7 @@ local palette = {
   bg_popup = '#e9e9ec',
   bg_search = '#7890dd',
   bg_sidebar = '#e9e9ec',
-  bg_statusline = '#e9e9ec',
+  bg_statusline = '#d4d8da',
   bg_visual = '#b6bfe2',
   black = '#e9e9ed',
   blue0 = '#7890dd',
@@ -22,22 +22,16 @@ local palette = {
   cyan = '#007197',
   dark3 = '#8990b3',
   dark5 = '#68709a',
-  delta_add = '#57a7bc',
-  delta_delete = '#d99ea2',
-  diff_add = '#aecde6',
-  diff_change = '#d6d8e3',
-  diff_delete = '#dfccd4',
-  diff_text = '#92a6d5',
   error = '#c64343',
   fg = '#3760bf',
   fg_dark = '#6172b0',
   fg_float = '#3760bf',
   fg_gutter = '#a8aecb',
   fg_sidebar = '#6172b0',
-  git_add = '#4197a4',
-  git_change = '#506d9c',
-  git_delete = '#c47981',
-  git_ignore = '#8990b3',
+  diff_add = '#4197a4',
+  diff_change = '#506d9c',
+  diff_delete = '#c47981',
+  diff_text = '#8990b3',
   gitSigns_add = '#399a96',
   gitSigns_change = '#6482bd',
   gitSigns_delete = '#c25d64',
@@ -222,7 +216,7 @@ g.terminal_color_14 = palette.cyan
 g.terminal_color_15 = palette.fg
 
 api.nvim_command('hi clear')
-opt.background = 'dark'
+opt.background = 'light'
 opt.termguicolors = true
 for _, v in pairs(groups) do
   api.nvim_set_hl(0, v[1], v[2])
