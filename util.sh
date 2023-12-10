@@ -68,7 +68,6 @@ arch() {
         'XMODIFIERS=@im=fcitx'
         'SDL_IM_MODULE=fcitx'
         'GLFW_IM_MODULE=fcitx'
-        'QT_QPA_PLATFORM=wayland'
     )
 
     for var in "${ENV_VARS[@]}"; do
