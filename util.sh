@@ -40,11 +40,11 @@ black() {
 arch() {
     sudo pacman --noconfirm -Syu zsh-autosuggestions  zsh-completions  \
         zsh-syntax-highlighting zsh-theme-powerlevel10k python3 python-pip \
-        cmake ninja gcc clang curl unzip jq ripgrep lua-language-server \
+        cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains\
         tree-sitter nodejs npm rustup rust-analyzer go gopls tmux wl-clipboard \
         fzf wqy-microhei adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
         waybar grim swappy slurp imv firefox nemo nemo-fileroller hyprpaper wofi hyprland \
-        pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-breeze
+        pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-nord
 
     rustup default stable
 
@@ -75,10 +75,6 @@ arch() {
     done
 }
 
-registry() {
-    info "config npm's and pip's registry and goproxy"
-}
-
 link_file() {
     rm -rf "$2"
     ln -sv "$1" "$2"
@@ -106,7 +102,6 @@ main() {
         info 'run command [ ./util.sh lsp      ] to install lsp server'
         info 'run command [ ./util.sh nvim     ] to install nvim-nightly'
         info 'run command [ ./util.sh black    ] to install black'
-        info 'run command [ ./util.sh registry ] to configure the registry of npm pip go rust'
         info 'run command [ ./util.sh arch     ] to install basic software'
         info 'run command [ ./util.sh config   ] to install dotfiles'
     else

@@ -9,11 +9,11 @@
             "network",
             "pulseaudio",
             "temperature",
-            //"battery",
+            "battery",
             "keyboard-state",
-            "tray",
             "clock",
             "custom/power",
+            "tray",
         ],
         "hyprland/workspaces": {
             "all-outputs": true,
@@ -22,7 +22,7 @@
         },
         "custom/power": {
             "format": "󰐥",
-            "on-click": "shutdown now"
+            "on-click-right": "shutdown now"
         },
         "clock": {
             "format": "{:%H:%M} ",
@@ -108,7 +108,7 @@
                 "car": "",
                 "default": ["", "", ""]
             },
-            "on-click": "pavucontrol"
+            "on-click-right": "pavucontrol"
         },
         "hyprland/window": {  
             "format": "{}",
