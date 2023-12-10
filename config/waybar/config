@@ -1,7 +1,7 @@
 {
     "position": "top",
-        "modules-left": ["custom/launcher","hyprland/window"],
-        "modules-center": ["hyprland/workspaces"],
+        "modules-left": ["custom/launcher","hyprland/workspaces","hyprland/window"],
+        //"modules-center": ["hyprland/workspaces"],
         "modules-right": [
             "mpd",
             "cpu",
@@ -12,8 +12,8 @@
             "battery",
             "keyboard-state",
             "clock",
-            "custom/power",
             "tray",
+            "custom/power",
         ],
         "hyprland/workspaces": {
             "all-outputs": true,
