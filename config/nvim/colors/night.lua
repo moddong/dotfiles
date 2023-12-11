@@ -177,6 +177,7 @@ g.terminal_color_15 = palette.fg
 
 api.nvim_command('hi clear')
 opt.background = 'dark'
+g.colors_name = 'night'
 opt.termguicolors = true
 for _, v in pairs(groups) do
   api.nvim_set_hl(0, v[1], v[2])

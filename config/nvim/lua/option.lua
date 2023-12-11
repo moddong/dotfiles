@@ -43,6 +43,7 @@ opt.showmode = false
 opt.signcolumn = 'yes'
 opt.foldenable = false
 opt.foldlevelstart = 99
+vim.cmd.colorscheme('day')
 
 -- wsl yanking to windows clipboard
 if vim.fn.has('wsl') == 1 then
