@@ -1,4 +1,2 @@
-require('option')
-require('keymap')
-require('plugins')
-require('config.statusline')
+require('basic')
+require('config')
