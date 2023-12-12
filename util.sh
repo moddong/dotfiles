@@ -99,11 +99,7 @@ config() {
 
 main() {
     if [[ $# -eq 0 ]]; then
-        info 'run command [ ./util.sh lsp      ] to install lsp server'
-        info 'run command [ ./util.sh nvim     ] to install nvim-nightly'
-        info 'run command [ ./util.sh black    ] to install black'
-        info 'run command [ ./util.sh arch     ] to install basic software'
-        info 'run command [ ./util.sh config   ] to install dotfiles'
+        info 'script must have one or more arguments: lsp nvim black arch config '
     else
         for fn in "$@"; do
             ${fn}

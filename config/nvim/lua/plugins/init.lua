@@ -9,7 +9,7 @@ vim.opt.runtimepath:prepend(lazypath)
 require('lazy').setup({
   -- { 'akinsho/bufferline.nvim',
   --   dependencies = { 'nvim-tree/nvim-web-devicons' },
-  --   config = conf.bufferline,
+  --   config = plugins.bufferline,
   -- },
   { 'nvim-tree/nvim-web-devicons' },
   {
@@ -25,7 +25,7 @@ require('lazy').setup({
       'nvimdev/guard-collection',
     },
     config = function()
-      require('config.guard')
+      require('plugins.guard')
     end,
   },
   { 'nvimdev/hlsearch.nvim', event = 'BufRead', opts = true },
@@ -49,7 +49,7 @@ require('lazy').setup({
       'nvim-telescope/telescope-file-browser.nvim',
     },
     config = function()
-      require('config.telescope')
+      require('plugins.telescope')
     end,
   },
   {
@@ -59,14 +59,14 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()
-      require('config.treesitter')
+      require('plugins.treesitter')
     end,
   },
   { 'nvimdev/coman.nvim' },
   {
     'neovim/nvim-lspconfig',
     config = function()
-      require('config.lspconfig')
+      require('plugins.lspconfig')
     end,
   },
   {
@@ -102,13 +102,13 @@ require('lazy').setup({
       {
         'L3MON4D3/LuaSnip',
         config = function()
-          require('config.luasnip')
+          require('plugins.luasnip')
         end,
       },
       { 'saadparwaiz1/cmp_luasnip' },
     },
     config = function()
-      require('config.cmp')
+      require('plugins.cmp')
     end,
   },
 }, {
