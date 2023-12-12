@@ -43,6 +43,7 @@ opt.showmode = false
 opt.signcolumn = 'yes'
 opt.foldenable = false
 opt.foldlevelstart = 99
+opt.smoothscroll = true
 vim.cmd.colorscheme('day')
 
 -- wsl yanking to windows clipboard

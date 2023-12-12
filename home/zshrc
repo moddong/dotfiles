@@ -6,8 +6,8 @@ setopt histignorealldups sharehistory
 
 bindkey -e
 
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
 autoload -Uz compinit
@@ -43,14 +43,15 @@ alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias proxy="export HTTP_PROXY='http://192.168.0.110:10811';export HTTPS_PROXY='http://192.168.0.110:10811'"
 alias unproxy="unset HTTP_PROXY;unset HTTPS_PROXY"
 alias vi="nvim"
+alias lg="lazygit"
 
-path_add() {
-  if [[ -d "${1}" ]] && ! [[ "${PATH}" =~ "${1}" ]]; then
-    PATH="${1}:${PATH}"
-  fi
-}
+# path_add() {
+#   if [[ -d "${1}" ]] && ! [[ "${PATH}" =~ "${1}" ]]; then
+#     PATH="${1}:${PATH}"
+#   fi
+# }
 
 #lsp_go="${HOME}/go/bin"
-lsp_rust="${HOME}/.cargo/bin"
+#lsp_rust="${HOME}/.cargo/bin"
 
 #path_add "$lsp_go"
