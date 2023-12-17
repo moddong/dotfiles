@@ -4,6 +4,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'c',
     'cpp',
+    'rust',
     'go',
     'lua',
     'python',
@@ -22,23 +23,8 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
     disable = function(_, buf)
-      local max_filesize = 1024 * 1024 -- 1MB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
+      return vim.api.nvim_buf_line_count(buf) > 3000
     end,
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
   },
 })
 vim.api.nvim_create_autocmd('FileType', {

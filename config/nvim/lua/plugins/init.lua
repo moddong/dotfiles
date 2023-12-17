@@ -55,11 +55,30 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufRead',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
+    dependencies = {},
     config = function()
       require('plugins.treesitter')
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    ft = { 'c', 'rust', 'go', 'lua', 'cpp' },
+    config = function()
+      vim.defer_fn(function()
+        require('nvim-treesitter.configs').setup({
+          textobjects = {
+            select = {
+              enable = true,
+              keymaps = {
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = { query = '@class.inner' },
+              },
+            },
+          },
+        })
+      end, 0)
     end,
   },
   { 'nvimdev/coman.nvim' },
@@ -80,37 +99,45 @@ require('lazy').setup({
     opts = {
       symbol_in_winbar = {
         hide_keyword = true,
+        folder_level = 0,
       },
       outline = {
         detail = false,
+        layout = 'float',
       },
     },
+  },
+  {
+    'nvimdev/epo.nvim',
+    event = 'LspAttach',
+    -- opts = require('plugins.epo'),
+    opts = true,
+  },
+  {
+    'nvimdev/rapid.nvim',
+    cmd = 'Rapid',
+    config = function()
+      require('rapid').setup()
+    end
   },
   -- {
-  --   'nvimdev/epo.nvim',
-  --   event = 'LspAttach',
+  --   'hrsh7th/nvim-cmp',
+  --   event = 'InsertEnter',
+  --   dependencies = {
+  --     { 'hrsh7th/cmp-nvim-lsp' },
+  --     { 'hrsh7th/cmp-buffer' },
+  --     {
+  --       'L3MON4D3/LuaSnip',
+  --       config = function()
+  --         require('plugins.luasnip')
+  --       end,
+  --     },
+  --     { 'saadparwaiz1/cmp_luasnip' },
+  --   },
   --   config = function()
-  --     require('epo').setup({})
+  --     require('plugins.cmp')
   --   end,
   -- },
-  {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-buffer' },
-      {
-        'L3MON4D3/LuaSnip',
-        config = function()
-          require('plugins.luasnip')
-        end,
-      },
-      { 'saadparwaiz1/cmp_luasnip' },
-    },
-    config = function()
-      require('plugins.cmp')
-    end,
-  },
 }, {
   lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',
 })

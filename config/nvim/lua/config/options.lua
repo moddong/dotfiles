@@ -8,6 +8,7 @@ opt.number = true
 opt.cursorline = true
 opt.textwidth = 100
 opt.colorcolumn = '100'
+opt.completeopt = "menu,menuone,noselect"
 opt.smarttab = true
 opt.expandtab = true
 opt.autoindent = true

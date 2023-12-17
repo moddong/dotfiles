@@ -1,59 +1,29 @@
 local lspconfig = require('lspconfig')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
--- local capabilities = vim.tbl_deep_extend(
---   'force',
---   vim.lsp.protocol.make_client_capabilities(),
---   require('epo').register_cap()
--- )
-
-local t = {
-  'Error',
-  'Warn',
-  'Info',
-  'Hint',
-}
-
-for _, type in ipairs(t) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = '⮞', texthl = hl, numhl = hl })
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilities = vim.tbl_deep_extend(
+  'force',
+  vim.lsp.protocol.make_client_capabilities(),
+  require('epo').register_cap()
+)
+local function attach(client, _)
+  vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
+  client.server_capabilities.semanticTokensProvider = nil
+  local orignal = vim.notify
+  local mynotify = function(msg, level, opts)
+    if msg == 'No code actions available' or msg:find('overly') then
+      return
+    end
+    orignal(msg, level, opts)
+  end
+  vim.notify = mynotify
 end
-
-vim.diagnostic.config({
-  signs = true,
-  severity_sort = true,
-  virtual_text = true,
-})
 
 vim.lsp.set_log_level('OFF')
 
--- local signs = {
---   Error = ' ',
---   Warn = ' ',
---   Info = ' ',
---   Hint = ' ',
--- }
-
--- for type, icon in pairs(signs) do
---   local hl = 'DiagnosticSign' .. type
---   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
--- end
-
--- vim.diagnostic.config({
---   signs = true,
---   update_in_insert = false,
---   underline = true,
---   severity_sort = true,
---   virtual_text = {
---     prefix = '🔥',
---     source = true,
---   },
--- })
 
 lspconfig.lua_ls.setup({
-  on_attach = function(client, _)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
+  on_attach = attach,
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -82,6 +52,7 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.clangd.setup({
+  on_attach = attach,
   capabilities = capabilities,
   cmd = {
     'clangd',
@@ -94,6 +65,7 @@ lspconfig.clangd.setup({
 
 lspconfig.gopls.setup({
   cmd = { 'gopls', 'serve' },
+  on_attach = attach,
   capabilities = capabilities,
   init_options = {
     usePlaceholders = true,
@@ -110,9 +82,8 @@ lspconfig.gopls.setup({
 })
 
 lspconfig.rust_analyzer.setup({
-  on_attach = function(client, _)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
+  on_attach = attach,
+  capabilities = capabilities,
   settings = {
     ['rust-analyzer'] = {
       imports = {
@@ -147,6 +118,7 @@ local servers = {
 
 for _, server in ipairs(servers) do
   lspconfig[server].setup({
+    on_attach = attach,
     capabilities = capabilities,
   })
 end

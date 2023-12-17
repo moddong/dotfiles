@@ -1,3 +1,3 @@
 require('config.options')
-require('config.keys')
+require('config.keymaps')
 require('config.statusline')
