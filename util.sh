@@ -64,6 +64,7 @@ arch() {
     sudo go env -w GOPROXY=https://goproxy.cn,direct
 
     ENV_VARS=(
+        'GTK_IM_MODULE=fcitx'
         'QT_IM_MODULE=fcitx'
         'XMODIFIERS=@im=fcitx'
         'SDL_IM_MODULE=fcitx'
