@@ -35,28 +35,33 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# alias
 alias ls="ls --color=auto"
 alias ll="ls -lh --color=auto"
 alias la="ls -Alh --color=auto"
 alias reload="source ~/.zshrc"
-alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -"
-alias proxy="export HTTP_PROXY='http://192.168.0.110:10811';export HTTPS_PROXY='http://192.168.0.110:10811'"
-alias unproxy="unset HTTP_PROXY;unset HTTPS_PROXY"
 alias vi="nvim"
 alias lg="lazygit"
 alias update="sudo pacman -Syyu --noconfirm"
+alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -"
+proxy() {
+    if [ -d /mnt/c/ ]; then
+        export HTTP_PROXY="http://192.168.0.110:10811"
+        export HTTPS_PROXY="http://192.168.0.110:10811"
+    else
+        export HTTP_PROXY="http://127.0.0.1:10811"
+        export HTTPS_PROXY="http://127.0.0.1:10811"
+    fi
+}
+alias unproxy="unset HTTP_PROXY;unset HTTPS_PROXY"
 
+# env
 # path_add() {
 #   if [[ -d "${1}" ]] && ! [[ "${PATH}" =~ "${1}" ]]; then
 #     PATH="${1}:${PATH}"
 #   fi
 # }
 
-#lsp_go="${HOME}/go/bin"
-#lsp_rust="${HOME}/.cargo/bin"
-
-#path_add "$lsp_go"
-#
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
