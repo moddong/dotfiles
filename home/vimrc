@@ -42,6 +42,7 @@ nmap <c-l> <c-w>l
 nmap <c-n> :bn<cr>
 nmap <c-p> :bp<cr>
 nmap <c-x>k :bd<cr>
+nmap <c-x><c-e> :wqa<cr>
 nmap <a-d> :terminal<cr>
 tmap <a-d> exit<cr>
 
