@@ -38,11 +38,14 @@ black() {
 }
 
 arch() {
-    sudo pacman --noconfirm -Syu zsh-autosuggestions  zsh-completions  \
-        zsh-syntax-highlighting zsh-theme-powerlevel10k python3 python-pip \
-        cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains\
-        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux wl-clipboard \
-        fzf wqy-microhei adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
+    echo -e "\n[archlinuxcn]\nServer = https://mirrors.ustc.edu.cn/archlinuxcn/\$arch" | sudo tee -a /etc/pacman.conf
+    sudo pacman -Syu
+    sudo pacman -S archlinuxcn-keyring
+
+    yay --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
+        python3 python-pip cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
+        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux wl-clipboard linuxqq \
+        fzf wqy-microhei ttf-lxgw-wenkai adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
         waybar grim swappy slurp imv firefox nemo nemo-fileroller hyprpaper wofi hyprland \
         pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-nord
 
