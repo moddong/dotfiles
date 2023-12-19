@@ -86,7 +86,7 @@ link_file() {
 config() {
     info "install dotfiles"
     sleep 1
-    local dotfiles="$(pwd)"
+    local dotfiles="${HOME}/.dotfiles"
     local dotfiles_home="${dotfiles}/home"
     local dotfiles_config="${dotfiles}/config"
 
