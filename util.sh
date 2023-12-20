@@ -36,51 +36,10 @@ black() {
     sudo mv black_linux /usr/local/bin/black
 }
 
-arch_pm() {
-    echo -e "\n[archlinuxcn]\nServer = https://mirrors.ustc.edu.cn/archlinuxcn/\$arch" | sudo tee -a /etc/pacman.conf
-    sudo pacman -Syu
-    sudo pacman -S archlinuxcn-keyring
-
-    yay --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
-        python3 python-pip cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
-        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux wl-clipboard linuxqq lazygit \
-        fzf wqy-microhei ttf-lxgw-wenkai adobe-source-han-sans-cn-fonts ttf-font-awesome noto-fonts-emoji \
-        waybar grim swappy slurp imv firefox nemo nemo-fileroller hyprpaper wofi hyprland \
-        pavucontrol less python-msgpack doxygen mpv xpdf fcitx5-im fcitx5-rime fcitx5-nord
-
-    rustup default stable
-
-    sudo chsh -s /bin/zsh mdd
-
-    info 'fonts install!'
-    sudo cp -r ./fonts/* /usr/share/fonts
-    sudo fc-cache -fv
-
-    npm config set registry https://registry.npmmirror.com/
-    sudo npm config set registry https://registry.npmmirror.com/
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    sudo pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    go env -w GO111MODULE=on
-    go env -w GOPROXY=https://goproxy.cn,direct
-    sudo go env -w GO111MODULE=on
-    sudo go env -w GOPROXY=https://goproxy.cn,direct
-
-    ENV_VARS=(
-        'QT_IM_MODULE=fcitx'
-        'XMODIFIERS=@im=fcitx'
-        'SDL_IM_MODULE=fcitx'
-        'GLFW_IM_MODULE=fcitx'
-    )
-
-    for var in "${ENV_VARS[@]}"; do
-        echo "$var" | sudo tee -a /etc/environment
-    done
-}
-
-arch_wsl() {
+arch() {
     sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
         python3 python-pip python-msgpack cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
-        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf less lazygit
+        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit
 
     rustup default stable
 
@@ -94,6 +53,8 @@ arch_wsl() {
     go env -w GOPROXY=https://goproxy.cn,direct
     sudo go env -w GO111MODULE=on
     sudo go env -w GOPROXY=https://goproxy.cn,direct
+    [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
+    echo -e '[source.crates-io]\nreplace-with = 'utsc'\n\n[source.ustc]\nregistry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index/"' | tee -a ${CARGO_HOME}/config
 }
 link_file() {
     rm -rf "$2"
@@ -119,7 +80,7 @@ config() {
 
 main() {
     if [[ $# -eq 0 ]]; then
-        info 'script must have one or more arguments: lsp nvim black arch_wsl arch_pm config '
+        info 'script must have one or more arguments: lsp nvim black arch config '
     else
         for fn in "$@"; do
             ${fn}
