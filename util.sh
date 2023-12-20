@@ -54,7 +54,7 @@ arch() {
     sudo go env -w GO111MODULE=on
     sudo go env -w GOPROXY=https://goproxy.cn,direct
     [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
-    echo -e '[source.crates-io]\nreplace-with = 'utsc'\n\n[source.ustc]\nregistry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index/"' | tee -a ${CARGO_HOME}/config
+    echo -e '[source.crates-io]\nreplace-with = 'utsc'\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"' | tee -a ${CARGO_HOME}/config
 }
 link_file() {
     rm -rf "$2"
