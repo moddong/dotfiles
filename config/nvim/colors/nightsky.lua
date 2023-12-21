@@ -145,7 +145,7 @@ local groups = {
   --
   { 'Define', { link = 'PreProc' } },
   { 'Operator', { fg = p.fg_dim } },
-  { 'Comment', { fg = p.fg_alt } },
+  { 'Comment', { fg = '#3d4966' } },
   --------------------------------------------------------
   ---@punctuation
   { '@punctuation.bracket', { fg = p.fg_dim } },
