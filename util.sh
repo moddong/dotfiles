@@ -20,8 +20,7 @@ nvim() {
         curl -fLO "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
     done
     tar -xvf nvim-linux64.tar.gz
-    sudo cp -r nvim-linux64/{bin,lib,share} /usr/local
-    sudo cp -r nvim-linux64/man/man1/nvim.1 /usr/local/share/man/man1/
+    sudo cp -r nvim-linux64/* /usr/local
     rm -rf nvim-linux64*
 }
 
@@ -54,7 +53,7 @@ arch() {
     sudo go env -w GO111MODULE=on
     sudo go env -w GOPROXY=https://goproxy.cn,direct
     [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
-    echo -e '[source.crates-io]\nreplace-with = 'utsc'\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"' | tee -a ${CARGO_HOME}/config
+    echo -e '[source.crates-io]\nreplace-with = 'ustc'\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"' | tee -a ${CARGO_HOME}/config
 }
 link_file() {
     rm -rf "$2"

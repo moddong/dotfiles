@@ -110,7 +110,6 @@ require('lazy').setup({
   {
     'nvimdev/epo.nvim',
     event = 'LspAttach',
-    -- opts = require('plugins.epo'),
     opts = true,
   },
   {

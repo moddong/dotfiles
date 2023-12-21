@@ -1,37 +1,35 @@
-local map = function(mode, lhs, rhs, opts)
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
+local keymap = vim.keymap
 vim.g.mapleader = ' '
 
-map('n', '<c-x>k', '<cmd>bdelete<cr>')
-map('n', '<c-n>', '<cmd>bn<cr>')
-map('n', '<c-p>', '<cmd>bp<cr>')
-map('n', '<c-h>', '<c-w>h')
-map('n', '<c-j>', '<c-w>j')
-map('n', '<c-k>', '<c-w>k')
-map('n', '<c-l>', '<c-w>l')
-map('n', '<a-[>', '<cmd>vertical resize -5<cr>')
-map('n', '<a-]>', '<cmd>vertical resize +5<cr>')
+keymap.set('n', '<c-x>k', '<cmd>bdelete<cr>')
+keymap.set('n', '<c-n>', '<cmd>bn<cr>')
+keymap.set('n', '<c-p>', '<cmd>bp<cr>')
+keymap.set('n', '<c-h>', '<c-w>h')
+keymap.set('n', '<c-j>', '<c-w>j')
+keymap.set('n', '<c-k>', '<c-w>k')
+keymap.set('n', '<c-l>', '<c-w>l')
+keymap.set('n', '<a-[>', '<cmd>vertical resize -5<cr>')
+keymap.set('n', '<a-]>', '<cmd>vertical resize +5<cr>')
 
-map('i', '<c-d>', '<del>')
-map('i', '<c-b>', '<left>')
-map('i', '<c-f>', '<right>')
-map('i', '<c-a>', '<home>')
-map('i', '<c-e>', '<end>')
-map('i', '<c-k>', '<c-o>d$')
-map('i', '<c-s>', '<esc>:w<cr>')
-map('i', '<c-n>', '<down>')
-map('i', '<c-p>', '<up>')
-map('i', '<a-j>', '<c-o>o')
-map('i', '<a-k>', '<c-o>O')
+keymap.set('i', '<c-d>', '<del>')
+keymap.set('i', '<c-b>', '<left>')
+keymap.set('i', '<c-f>', '<right>')
+keymap.set('i', '<c-a>', '<home>')
+keymap.set('i', '<c-e>', '<end>')
+keymap.set('i', '<c-k>', '<c-o>d$')
+keymap.set('i', '<c-s>', '<esc>:w<cr>')
+keymap.set('i', '<c-n>', '<down>')
+keymap.set('i', '<c-p>', '<up>')
+keymap.set('i', '<a-j>', '<c-o>o')
+keymap.set('i', '<a-k>', '<c-o>O')
 
-map('c', '<c-d>', '<del>')
-map('c', '<c-b>', '<left>')
-map('c', '<c-f>', '<right>')
-map('c', '<c-a>', '<home>')
-map('c', '<c-e>', '<end>')
+keymap.set('c', '<c-d>', '<del>')
+keymap.set('c', '<c-b>', '<left>')
+keymap.set('c', '<c-f>', '<right>')
+keymap.set('c', '<c-a>', '<home>')
+keymap.set('c', '<c-e>', '<end>')
 
-map('i', '<TAB>', function()
+keymap.set('i', '<tab>', function()
   if vim.fn.pumvisible() == 1 then
     return '<C-n>'
   elseif vim.snippet.jumpable(1) then
@@ -40,56 +38,54 @@ map('i', '<TAB>', function()
     return '<TAB>'
   end
 end, { expr = true })
-
-map('i', '<S-TAB>', function()
+keymap.set('i', '<s-tab>', function()
   if vim.fn.pumvisible() == 1 then
-    return '<C-p>'
+    return '<c-p>'
   elseif vim.snippet.jumpable(-1) then
-    return '<cmd>lua vim.snippet.jump(-1)<CR>'
+    return '<cmd>lua vim.snippet.jump(-1)<cr>'
   else
-    return '<S-TAB>'
+    return '<s-tab>'
   end
 end, { expr = true })
-
-map('i', '<CR>', function()
-  return vim.fn.pumvisible() == 1 and '<C-y>'
-    or vim.fn.lexima['expand']('<LT>CR>', 'i')
+keymap.set('i', '<cr>', function()
+  return vim.fn.pumvisible() == 1 and '<c-y>'
+    or vim.fn.lexima['expand']('<lt>cr>', 'i')
 end, { expr = true })
 
-map('i', '<c-e>', function()
+keymap.set('i', '<c-e>', function()
   if vim.fn.pumvisible() == 1 then
     require('epo').disable_trigger()
     return '<c-e>'
   else
-    return '<Esc>g_a'
+    return '<esc>g_a'
   end
 end, { expr = true })
 
-map({ 'n', 'v' }, 'ga', '<cmd>Lspsaga code_action<cr>')
-map({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<cr>')
-map('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
-map('n', 'gh', '<cmd>Lspsaga finder<cr>')
-map('n', 'gr', '<cmd>Lspsaga rename<cr>')
-map('n', 'gd', '<cmd>Lspsaga peek_definition<cr>')
-map('n', 'gp', '<cmd>Lspsaga goto_definition<cr>')
-map('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
-map('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<cr>')
-map('n', '<leader>dw', '<cmd>Lspsaga show_workspace_diagnostics<cr>')
-map('n', '<leader>db', '<cmd>Lspsaga show_buf_diagnostics<cr>')
-map('n', '<leader>o', '<cmd>Lspsaga outline<cr>')
+keymap.set({ 'n', 'v' }, 'ga', '<cmd>Lspsaga code_action<cr>')
+keymap.set({ 'n', 't' }, '<A-d>', '<cmd>Lspsaga term_toggle<cr>')
+keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
+keymap.set('n', 'gh', '<cmd>Lspsaga finder<cr>')
+keymap.set('n', 'gr', '<cmd>Lspsaga rename<cr>')
+keymap.set('n', 'gd', '<cmd>Lspsaga peek_definition<cr>')
+keymap.set('n', 'gp', '<cmd>Lspsaga goto_definition<cr>')
+keymap.set('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
+keymap.set('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<cr>')
+keymap.set('n', '<leader>dw', '<cmd>Lspsaga show_workspace_diagnostics<cr>')
+keymap.set('n', '<leader>db', '<cmd>Lspsaga show_buf_diagnostics<cr>')
+keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<cr>')
 
-map('n', 'gcc', '<cmd>ComComment<cr>')
-map('x', 'gcc', ':ComComment<cr>')
-map('n', 'gcj', '<cmd>ComAnnotation<cr>')
+keymap.set('n', 'gcc', '<cmd>ComComment<cr>')
+keymap.set('x', 'gcc', ':ComComment<cr>')
+keymap.set('n', 'gcj', '<cmd>ComAnnotation<cr>')
 
-map('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
-map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
-map('n', '<leader>b', '<cmd>Telescope buffers<cr>')
-map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
-map('n', '<leader>fb', '<cmd>Telescope file_browser<cr>')
+keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
+keymap.set('n', '<leader>b', '<cmd>Telescope buffers<cr>')
+keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
+keymap.set('n', '<leader>fb', '<cmd>Telescope file_browser<cr>')
 
-map('n', '<leader>ss', '<cmd>SessionSave<cr>')
-map('n', '<leader>sl', '<cmd>SessionLoad<cr>')
+keymap.set('n', '<leader>ss', '<cmd>SessionSave<cr>')
+keymap.set('n', '<leader>sl', '<cmd>SessionLoad<cr>')
 
-map('n', '[g', '<cmd>lua require("gitsigns").next_hunk()<cr>')
-map('n', ']g', '<cmd>lua require("gitsigns").next_hunk()<cr>')
+keymap.set('n', '[g', '<cmd>lua require("gitsigns").next_hunk()<cr>')
+keymap.set('n', ']g', '<cmd>lua require("gitsigns").next_hunk()<cr>')
