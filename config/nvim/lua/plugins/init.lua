@@ -7,10 +7,6 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup({
-  -- { 'akinsho/bufferline.nvim',
-  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
-  --   config = plugins.bufferline,
-  -- },
   { 'nvim-tree/nvim-web-devicons' },
   {
     'nvimdev/dbsession.nvim',
@@ -119,24 +115,6 @@ require('lazy').setup({
       require('rapid').setup()
     end
   },
-  -- {
-  --   'hrsh7th/nvim-cmp',
-  --   event = 'InsertEnter',
-  --   dependencies = {
-  --     { 'hrsh7th/cmp-nvim-lsp' },
-  --     { 'hrsh7th/cmp-buffer' },
-  --     {
-  --       'L3MON4D3/LuaSnip',
-  --       config = function()
-  --         require('plugins.luasnip')
-  --       end,
-  --     },
-  --     { 'saadparwaiz1/cmp_luasnip' },
-  --   },
-  --   config = function()
-  --     require('plugins.cmp')
-  --   end,
-  -- },
 }, {
   lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',
 })
