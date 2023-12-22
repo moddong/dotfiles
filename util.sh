@@ -38,7 +38,7 @@ black() {
 arch() {
     sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
         python3 python-pip python-msgpack cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
-        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit
+        tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit elisa
 
     rustup default stable
 
