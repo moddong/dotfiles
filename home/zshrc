@@ -56,19 +56,23 @@ proxy() {
 alias unproxy="unset HTTP_PROXY;unset HTTPS_PROXY"
 
 # env
-# path_add() {
-#   if [[ -d "${1}" ]] && ! [[ "${PATH}" =~ "${1}" ]]; then
-#     PATH="${1}:${PATH}"
-#   fi
-# }
+path_add() {
+  if [[ -d "${1}" ]] && ! [[ "${PATH}" =~ "${1}" ]]; then
+    PATH="${1}:${PATH}"
+  fi
+}
 
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/var"
-export XDG_DOWNLOAD_DIR="$HOME/Downloads"
-export XDG_DOCUMENTS_DIR="$HOME/Documents"
+
 export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$XDG_DATA_HOME/go/bin"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+path_add "$GOBIN"
+path_add "$CARGO_HOME/bin"
+
+unset -f path_add
