@@ -1,13 +1,13 @@
-local palette = {
-  bg = '#161a24',
-  bg_dim = '#191721',
-  bg_lt = '#292c33',
-  bg_alt = '#303030',
+local p = {
+  bg = '#141821',
+  bg_float = '#14131f',
+  bg_dim = '#1c202e',
+  bg_alt = '#222738',
   fg = '#cccccc',
   fg_dim = '#989898',
   fg_alt = '#75715E',
   red = '#ff5f59',
-  orange = '#cc7a29',
+  orange = '#cc853d',
   yellow = '#ccad52',
   green = '#9eb336',
   cyan = '#52bccc',
@@ -16,96 +16,143 @@ local palette = {
   teal = '#47b38f',
   none = 'NONE',
 }
+
 local groups = {
-  { 'Normal', { fg = palette.fg, bg = palette.bg } },
-  { 'SignColumn', { bg = palette.bg } },
-  { 'LineNr', { fg = palette.bg_alt } },
-  { 'EndOfBuffer', { fg = palette.bg, bg = palette.none } },
-  { 'Search', { fg = palette.yellow, reverse = true } },
-  { 'Visual', { bg = palette.bg_alt } },
-  { 'ColorColumn', { bg = palette.bg_alt } },
-  { 'Whitespace', { fg = palette.bg_alt } },
-  { 'VertSplit', { fg = palette.bg_alt } },
-  { 'Title', { fg = palette.orange, bold = true } },
-  { 'Cursorline', { bg = palette.bg_alt } },
-  { 'CursorLineNr', { fg = palette.fg } },
-  { 'Pmenu', { bg = palette.bg_dim, fg = palette.fg_dim } },
-  { 'PmenuSel', { fg = palette.teal, bg = palette.bg_alt } },
+
+  { 'Normal', { fg = p.fg, bg = p.bg } },
+  --signcolumn
+  { 'SignColumn', { bg = p.bg } },
+  --buffer
+  { 'LineNr', { fg = '#272d40' } },
+  { 'EndOfBuffer', { fg = p.bg, bg = p.none } },
+  { 'Search', { fg = p.yellow, reverse = true } },
+  { 'Visual', { bg = p.bg_alt } },
+  { 'ColorColumn', { bg = p.bg_alt } },
+  { 'Whitespace', { fg = p.bg_alt } },
+  --window
+  { 'VertSplit', { fg = p.bg_alt } },
+  { 'Title', { fg = p.orange, bold = true } },
+  --cursorline
+  { 'Cursorline', { bg = p.bg_dim } },
+  { 'CursorLineNr', { fg = p.fg } },
+  --pmenu
+  { 'Pmenu', { bg = p.bg_float, fg = p.fg_dim } },
+  { 'PmenuSel', { fg = p.teal } },
   { 'PmenuSbar', { fg = '#586e75' } },
-  { 'PmenuThumb', { bg = palette.bg } },
-  { 'PmenuKind', { bg = palette.bg_dim, fg = palette.yellow } },
+  { 'PmenuKind', { bg = p.bg_float, fg = p.yellow } },
   { 'PmenuKindSel', { link = 'PmenuSel' } },
   { 'PmenuExtra', { link = 'Pmenu' } },
   { 'PmenuExtraSel', { link = 'PmenuSel' } },
   { 'WildMenu', { link = 'Pmenu' } },
-  { 'StatusLine', { fg = palette.fg_dim, bg = palette.bg_lt, bold = true } },
-  { 'StatusLineNC', { fg = palette.fg_dim, bg = palette.bg_alt } },
-  { 'WinBar', { bg = palette.none } },
-  { 'WinBarNC', { bg = palette.none } },
-  { 'Error', { fg = palette.red, bold = true } },
+  --statusline
+  { 'StatusLine', { fg = p.fg_dim, bg = p.bg_float, bold = true } },
+  { 'StatusLineNC', { fg = p.fg_dim, bg = p.bg_float } },
+  { 'WinBar', { bg = p.none } },
+  { 'WinBarNC', { bg = p.none } },
+  { 'WinSeparator', { bg = p.bg, fg = p.bg_dim } },
+  --Error
+  { 'Error', { fg = p.red, bold = true } },
   { 'ErrorMsg', { link = 'Error' } },
-  { 'TODO', { fg = palette.cyan } },
-  { 'Conceal', { fg = palette.blue, bg = palette.none } },
+  --Markup
+  { 'TODO', { fg = p.cyan } },
+  { 'Conceal', { fg = p.blue } },
   { 'NonText', { link = 'Comment' } },
-  { 'FloatBorder', { fg = palette.blue } },
-  { 'FloatNormal', { link = 'Normal' } },
-  { 'FloatShadow', { bg = palette.bg_alt } },
-  { 'Folded', { fg = palette.bg, bold = true } },
+  --Float
+  { 'FloatBorder', { fg = p.blue } },
+  { 'NormalFloat', { bg = p.bg_float } },
+  --Fold
+  { 'Folded', { fg = p.bg, bold = true } },
   { 'FoldColumn', { link = 'SignColumn' } },
-  { 'SpellBad', { fg = palette.red } },
-  { 'SpellCap', { undercurl = true, fg = palette.red } },
-  { 'SpellRare', { undercurl = true, fg = palette.purple } },
+  --Spell
+  { 'SpellBad', { fg = p.red } },
+  { 'SpellCap', { undercurl = true, sp = p.red } },
+  { 'SpellRare', { undercurl = true, fg = p.purple } },
   { 'SpellLocal', { undercurl = true } },
-  { 'WarningMsg', { fg = palette.red } },
-  { 'MoreMsg', { fg = palette.green } },
-  { 'NvimInternalError', { fg = palette.red } },
-  { 'Directory', { fg = palette.blue } },
-  { 'Identifier', { fg = palette.blue } },
-  { '@variable', { fg = palette.fg } },
-  { '@variable.builtin', { fg = palette.purple } },
-  { 'Constant', { fg = palette.orange } },
+  --Msg
+  { 'WarningMsg', { fg = p.red } },
+  { 'MoreMsg', { fg = p.green } },
+  --Internal
+  { 'NvimInternalError', { fg = p.red } },
+  { 'Directory', { fg = p.blue } },
+  --------------------------------------------------------
+  ---
+  ---@Langauge Relate
+  ---@Identifier
+  { 'Identifier', { fg = p.blue } },
+  -- various variable names
+  { '@variable', { fg = p.fg } },
+  --built-in variable names (e, {g, `this`)
+  { '@variable.builtin', { fg = p.purple } },
+  { 'Constant', { fg = p.orange } },
   { '@constant.builtin', { link = 'Constant' } },
+  -- constants defined by the preprocessor
   { '@constant.macro', { link = 'Constant' } },
-  { '@namespace', { fg = palette.cyan } },
-  { 'Keyword', { fg = palette.green } },
+  --modules or namespaces
+  { '@namespace', { fg = p.cyan } },
+  --symbols or atoms
+  -- ['@symbol'] = exe}},
+  --------------------------------------------------------
+  ---@Keywords
+  { 'Keyword', { fg = p.green } },
   { '@keyword.function', { link = 'Keyword' } },
   { '@keyword.return', { link = 'Keyword' } },
-  { '@keyword.operator', { link = 'Operator' } },
+  { '@keyword.operat', { link = 'Operator' } },
+  --if else
   { 'Conditional', { link = 'Keyword' } },
+  --for while
   { 'Repeat', { link = 'Conditional' } },
-  { 'Debug', { fg = palette.orange } },
-  { 'Label', { fg = palette.purple } },
-  { 'PreProc', { fg = palette.purple } },
+  --for attribute
+  { '@attribute', { link = 'Keyword' } },
+  { 'Debug', { fg = p.orange } },
+  { 'Label', { fg = p.purple } },
+  { 'PreProc', { fg = p.purple } },
   { 'Include', { link = 'PreProc' } },
-  { 'Exception', { fg = palette.purple } },
-  { 'Statement', { fg = palette.purple } },
-  { 'SpecialKey', { fg = palette.orange } },
-  { 'Special', { fg = palette.orange } },
-  { 'Type', { fg = palette.yellow } },
+  { 'Exception', { fg = p.purple } },
+  { 'Statement', { fg = p.purple } },
+  { 'SpecialKey', { fg = p.orange } },
+  { 'Special', { fg = p.orange } },
+  --------------------------------------------------------
+  ---@Types
+  { 'Type', { fg = p.yellow } },
   { '@type.builtin', { link = 'Type' } },
+  --type definitions (e, {g, `typedef` in C)
   { '@type.definition', { link = 'Type' } },
+  --type qualifiers (e, {g, `const`)
   { '@type.qualifier', { link = 'KeyWord' } },
+  --modifiers that affect storage in memory or life-time like C `static`
   { '@storageclass', { link = 'Keyword' } },
-  { '@field', { fg = palette.cyan } },
+  { '@field', { fg = p.cyan } },
   { '@property', { link = '@field' } },
-  { 'Function', { fg = palette.blue } },
+  --------------------------------------------------------
+  ---@Functions
+  { 'Function', { fg = p.blue } },
+  --built-in functions
   { '@function.builtin', { link = 'Function' } },
+  --function calls
   { '@function.call', { link = 'Function' } },
+  --preprocessor macros
   { '@function.macro', { link = 'Function' } },
   { '@method', { link = 'Function' } },
   { '@method.call', { link = 'Function' } },
-  { '@constructor', { fg = palette.orange } },
+  { '@constructor', { fg = p.n_orange } },
   { '@parameter', { link = '@variable' } },
-  { 'String', { fg = palette.teal } },
-  { 'Number', { fg = palette.purple } },
+  --------------------------------------------------------
+  ---@Literals
+  { 'String', { fg = p.teal } },
+  { 'Number', { fg = p.purple } },
   { 'Float', { link = 'Number' } },
   { 'Boolean', { link = 'Constant' } },
+  --
   { 'Define', { link = 'PreProc' } },
-  { 'Operator', { fg = palette.fg_dim } },
-  { 'Comment', { fg = palette.fg_alt } },
-  { '@punctuation.bracket', { fg = palette.fg_dim } },
-  { '@punctuation.delimiter', { fg = palette.fg_dim } },
-  { '@tag.html', { fg = palette.orange } },
+  { 'Operator', { fg = p.fg_dim } },
+  { 'Comment', { fg = '#3d4966' } },
+  --------------------------------------------------------
+  ---@punctuation
+  { '@punctuation.bracket', { fg = p.fg_dim } },
+  { '@punctuation.delimiter', { fg = p.fg_dim } },
+  --------------------------------------------------------
+  ---@Tag
+  { '@tag.html', { fg = p.orange } },
   { '@tag.attribute.html', { link = '@property' } },
   { '@tag.delimiter.html', { link = '@punctuation.delimiter' } },
   { '@tag.javascript', { link = '@tag.html' } },
@@ -114,18 +161,23 @@ local groups = {
   { '@tag.typescript', { link = '@tag.html' } },
   { '@tag.attribute.typescript', { link = '@tag.attribute.html' } },
   { '@tag.delimiter.typescript', { link = '@tag.delimiter.html' } },
-  { '@text.reference.markdown_inline', { fg = palette.blue } },
-  { 'DiffAdd', { fg = palette.teal, bg = palette.none } },
-  { 'DiffChange', { fg = palette.blue } },
-  { 'DiffDelete', { fg = palette.orange } },
-  { 'DiffText', { fg = palette.orange } },
+  --------------------------------------------------------
+  ---@Markdown
+  { '@text.reference.markdown.inline', { fg = p.blue } },
+  ---@Diff
+  { 'DiffAdd', { fg = p.teal } },
+  { 'DiffChange', { fg = p.blue } },
+  { 'DiffDelete', { fg = p.orange } },
+  { 'DiffText', { fg = p.orange } },
   { '@text.diff.add.diff', { link = 'DiffAdd' } },
   { '@text.diff.delete.diff', { link = 'DiffDelete' } },
   { '@text.diff.change.diff', { link = 'DiffChange' } },
+  --------------------------------------------------------
+  ---@Diagnostic
   { 'DiagnosticError', { link = 'Error' } },
-  { 'DiagnosticWarn', { fg = palette.yellow } },
-  { 'DiagnosticInfo', { fg = palette.blue } },
-  { 'DiagnosticHint', { fg = palette.cyan } },
+  { 'DiagnosticWarn', { fg = p.yellow } },
+  { 'DiagnosticInfo', { fg = p.blue } },
+  { 'DiagnosticHint', { fg = p.cyan } },
   { 'DiagnosticSignError', { link = 'DiagnosticError' } },
   { 'DiagnosticSignWarn', { link = 'DiagnosticWarn' } },
   { 'DiagnosticSignInfo', { link = 'DiagnosticInfo' } },
@@ -134,50 +186,56 @@ local groups = {
   { 'DiagnosticUnderlineWarn', { undercurl = true } },
   { 'DiagnosticUnderlineInfo', { undercurl = true } },
   { 'DiagnosticUnderlineHint', { undercurl = true } },
-  { 'GitGutterAdd', { fg = palette.teal } },
-  { 'GitGutterChange', { fg = palette.blue } },
-  { 'GitGutterDelete', { fg = palette.red } },
-  { 'GitGutterChangeDelete', { fg = palette.red } },
-  { 'TelescopePromptBorder', bg = palette.bg_alt, { fg = palette.bg_alt } },
-  { 'TelescopePromptNormal', bg = palette.bg_alt, { fg = palette.orange } },
-  { 'TelescopeResultsBorder', bg = palette.bg_alt, { fg = palette.bg_alt } },
-  { 'TelescopePreviewBorder', bg = palette.bg_alt, { fg = palette.bg_alt } },
-  { 'TelescopeResultsNormal', { fg = palette.fg } },
-  { 'TelescopeSelectionCaret', { fg = palette.yellow } },
-  { 'TelescopeMatching', { fg = palette.yellow } },
-  { 'CursorWord', { bg = palette.bg_alt } },
-  { 'IndentLine', { link = 'LineNr' } },
-  { 'SagaVariable', { fg = palette.green } },
-  { 'RapidFinished', { fg = palette.red, bold = true } },
-  { 'RapidTake', { fg = palette.purple, bold = true } },
-  { 'RapidDate', { fg = palette.purple, bold = true } },
-  { 'RapidFile', { fg = palette.blue, bold = true } },
-  { 'RapidTargetPos', { fg = palette.teal, bold = true } },
-  { 'LspSignatureActiveParameter', { fg = palette.yellow, underline = true } },
+  ---@plugin
+  { 'GitGutterAdd', { fg = p.teal } },
+  { 'GitGutterChange', { fg = p.blue } },
+  { 'GitGutterDelete', { fg = p.red } },
+  { 'GitGutterChangeDelete', { fg = p.red } },
+  --Telescope
+  { 'TelescopePromptBorder', { bg = p.bg_alt, fg = p.bg_alt } },
+  { 'TelescopePromptNormal', { bg = p.bg_alt, fg = p.orange } },
+  { 'TelescopeResultsBorder', { bg = p.bg_alt, fg = p.bg_alt } },
+  { 'TelescopePreviewBorder', { bg = p.bg_alt, fg = p.bg_alt } },
+  { 'TelescopeResultsNormal', { fg = p.fg } },
+  { 'TelescopeSelectionCaret', { fg = p.yellow } },
+  { 'TelescopeMatching', { fg = p.yellow } },
+  --CursorWord
+  { 'CursorWord', { bg = p.bg_alt } },
+  { 'IndentLine', { fg = p.bg_alt } },
+  --Lspsaga
+  { 'SagaVariable', { fg = p.green } },
+  --Rapid
+  { 'RapidFinished', { fg = p.red, bold = true } },
+  { 'RapidTake', { fg = p.purple, bold = true } },
+  { 'RapidDate', { fg = p.purple, bold = true } },
+  { 'RapidFile', { fg = p.blue, bold = true } },
+  { 'RapidTargetPos', { fg = p.teal, bold = true } },
+  --lsp relate
+  { 'LspSignatureActiveParameter', { fg = p.yellow, underline = true } },
+  --netrw
   { 'netrwTreeBar', { link = 'Comment' } },
 }
-
 local g, api, opt = vim.g, vim.api, vim.opt
-g.terminal_color_0 = palette.bg
-g.terminal_color_1 = palette.red
-g.terminal_color_2 = palette.green
-g.terminal_color_3 = palette.yellow
-g.terminal_color_4 = palette.blue
-g.terminal_color_5 = palette.purple
-g.terminal_color_6 = palette.cyan
-g.terminal_color_7 = palette.fg
-g.terminal_color_8 = palette.fg_dim
-g.terminal_color_9 = palette.red
-g.terminal_color_10 = palette.green
-g.terminal_color_11 = palette.yellow
-g.terminal_color_12 = palette.blue
-g.terminal_color_13 = palette.purple
-g.terminal_color_14 = palette.cyan
-g.terminal_color_15 = palette.fg
+g.terminal_color_0 = p.bg
+g.terminal_color_1 = p.red
+g.terminal_color_2 = p.green
+g.terminal_color_3 = p.yellow
+g.terminal_color_4 = p.blue
+g.terminal_color_5 = p.purple
+g.terminal_color_6 = p.cyan
+g.terminal_color_7 = p.fg
+g.terminal_color_8 = p.fg_dim
+g.terminal_color_9 = p.red
+g.terminal_color_10 = p.green
+g.terminal_color_11 = p.yellow
+g.terminal_color_12 = p.blue
+g.terminal_color_13 = p.purple
+g.terminal_color_14 = p.cyan
+g.terminal_color_15 = p.fg
 
 api.nvim_command('hi clear')
 opt.background = 'dark'
-g.colors_name = 'night'
+g.colors_name = 'nightsky'
 opt.termguicolors = true
 for _, v in pairs(groups) do
   api.nvim_set_hl(0, v[1], v[2])
