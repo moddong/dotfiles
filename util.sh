@@ -54,6 +54,16 @@ arch() {
     sudo go env -w GOPROXY=https://goproxy.cn,direct
     [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
     echo -e '[source.crates-io]\nreplace-with = 'ustc'\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"' | tee -a ${CARGO_HOME}/config
+
+    ENV_VARS=(
+        'QT_IM_MODULE=fcitx5'
+        'XMODIFIERS=@im=fcitx5'
+        'SDL_IM_MODULE=fcitx5'
+        'GLFW_IM_MODULE=fcitx5'
+    )
+    for var in "${ENV_VARS[@]}"; do
+        echo "$var" | sudo tee -a /etc/environment
+    done
 }
 link_file() {
     rm -rf "$2"
