@@ -27,7 +27,7 @@ nvim() {
 black() {
   info "install py formater black"
   while [[ ! -e ./black_linux ]]; do
-    local black_tag=$(curl -s https://api.github.com/repos/psf/black/releases/latest  | jq -r '.tag_name')
+    local black_tag=$(curl -s https://api.github.com/repos/psf/black/releases/latest  | jq -r ".tag_name")
     curl -fLO "https://github.com/psf/black/releases/download/${black_tag}/black_linux"
   done
   [[ -e /usr/local/bin/black ]] && sudo rm /usr/local/bin/black
@@ -53,13 +53,13 @@ arch() {
   sudo go env -w GO111MODULE=on
   sudo go env -w GOPROXY=https://goproxy.cn,direct
   [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
-  echo -e '[source.crates-io]\nreplace-with = 'ustc'\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"' | tee -a ${CARGO_HOME}/config
+  echo -e "[source.crates-io]\nreplace-with = "ustc"\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"" | tee -a ${CARGO_HOME}/config
 
   ENV_VARS=(
-    'QT_IM_MODULE=fcitx5'
-    'XMODIFIERS=@im=fcitx5'
-    'SDL_IM_MODULE=fcitx5'
-    'GLFW_IM_MODULE=fcitx5'
+    "QT_IM_MODULE=fcitx5"
+    "XMODIFIERS=@im=fcitx5"
+    "SDL_IM_MODULE=fcitx5"
+    "GLFW_IM_MODULE=fcitx5"
   )
   for var in "${ENV_VARS[@]}"; do
     echo "$var" | sudo tee -a /etc/environment
@@ -84,12 +84,12 @@ config() {
   for filename in $(ls ${dotfiles_config}); do
     link_file "${dotfiles_config}/${filename}" "${HOME}/.config/${filename}"
   done
-  info 'Dotfiles successfuly installed!'
+  info "Dotfiles successfuly installed!"
 }
 
 main() {
   if [[ $# -eq 0 ]]; then
-    info 'script must have one or more arguments: lsp nvim black arch config '
+    info "script must have one or more arguments: lsp nvim black arch config "
   else
     for fn in "$@"; do
       ${fn}
