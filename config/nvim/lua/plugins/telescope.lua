@@ -1,13 +1,13 @@
-require('telescope').setup({
+require("telescope").setup({
   defaults = {
     layout_config = {
-      horizontal = { prompt_position = 'top', results_width = 0.6 },
+      horizontal = { prompt_position = "top", results_width = 0.6 },
       vertical = { mirror = false },
     },
-    sorting_strategy = 'ascending',
-    file_previewer = require('telescope.previewers').vim_buffer_cat.new,
-    grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
-    qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+    sorting_strategy = "ascending",
+    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
   },
   extensions = {
     fzy_native = {
@@ -16,5 +16,5 @@ require('telescope').setup({
     },
   },
 })
-require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('file_browser')
+require("telescope").load_extension("fzy_native")
+require("telescope").load_extension("file_browser")

@@ -1,17 +1,17 @@
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local capabilities = vim.tbl_deep_extend(
-  'force',
+  "force",
   vim.lsp.protocol.make_client_capabilities(),
-  require('epo').register_cap()
+  require("epo").register_cap()
 )
 local function attach(client, _)
-  vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
+  vim.opt.omnifunc = "v:lua.vim.lsp.omnifunc"
   client.server_capabilities.semanticTokensProvider = nil
   local orignal = vim.notify
   local mynotify = function(msg, level, opts)
-    if msg == 'No code actions available' or msg:find('overly') then
+    if msg == "No code actions available" or msg:find("overly") then
       return
     end
     orignal(msg, level, opts)
@@ -19,8 +19,7 @@ local function attach(client, _)
   vim.notify = mynotify
 end
 
-vim.lsp.set_log_level('OFF')
-
+vim.lsp.set_log_level("OFF")
 
 lspconfig.lua_ls.setup({
   on_attach = attach,
@@ -29,14 +28,14 @@ lspconfig.lua_ls.setup({
     Lua = {
       diagnostics = {
         enable = true,
-        globals = { 'vim' },
+        globals = { "vim" },
         disable = {
-          'missing-fields',
+          "missing-fields",
         },
       },
       runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
+        version = "LuaJIT",
+        path = vim.split(package.path, ";"),
       },
       workspace = {
         library = {
@@ -45,7 +44,7 @@ lspconfig.lua_ls.setup({
         checkThirdParty = false,
       },
       completion = {
-        callSnippet = 'Replace',
+        callSnippet = "Replace",
       },
     },
   },
@@ -55,16 +54,16 @@ lspconfig.clangd.setup({
   on_attach = attach,
   capabilities = capabilities,
   cmd = {
-    'clangd',
-    '--background-index',
-    '--suggest-missing-includes',
-    '--clang-tidy',
-    '--header-insertion=iwyu',
+    "clangd",
+    "--background-index",
+    "--suggest-missing-includes",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
   },
 })
 
 lspconfig.gopls.setup({
-  cmd = { 'gopls', 'serve' },
+  cmd = { "gopls", "serve" },
   on_attach = attach,
   capabilities = capabilities,
   init_options = {
@@ -85,15 +84,15 @@ lspconfig.rust_analyzer.setup({
   on_attach = attach,
   capabilities = capabilities,
   settings = {
-    ['rust-analyzer'] = {
+    ["rust-analyzer"] = {
       imports = {
         granularity = {
-          group = 'module',
+          group = "module",
         },
-        prefix = 'self',
+        prefix = "self",
       },
       check = {
-        command = 'clippy',
+        command = "clippy",
       },
       cargo = {
         buildScripts = {
@@ -108,12 +107,11 @@ lspconfig.rust_analyzer.setup({
 })
 
 local servers = {
-  'pyright',
-  'bashls',
-  'html',
-  'cssls',
-  'tsserver',
-  'tailwindcss',
+  "pyright",
+  "html",
+  "cssls",
+  "tsserver",
+  "tailwindcss",
 }
 
 for _, server in ipairs(servers) do
@@ -123,7 +121,7 @@ for _, server in ipairs(servers) do
   })
 end
 
-vim.lsp.handlers['workspace/diagnostic/refresh'] = function(_, _, ctx)
+vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
   local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
   local bufnr = vim.api.nvim_get_current_buf()
   vim.diagnostic.reset(ns, bufnr)

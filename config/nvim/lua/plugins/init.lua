@@ -1,75 +1,75 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.api.nvim_command(
-    '!git clone https://github.com/folke/lazy.nvim.git ' .. lazypath
+    "!git clone https://github.com/folke/lazy.nvim.git " .. lazypath
   )
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-require('lazy').setup({
-  { 'nvim-tree/nvim-web-devicons' },
+require("lazy").setup({
+  { "nvim-tree/nvim-web-devicons" },
   {
-    'nvimdev/dbsession.nvim',
-    cmd = { 'SessionSave', 'SessionDelete', 'SessionLoad' },
+    "nvimdev/dbsession.nvim",
+    cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
     opts = true,
   },
   {
-    'nvimdev/guard.nvim',
-    event = 'BufRead',
-    ft = { 'c', 'cpp', 'python', 'go', 'rust', 'lua', 'javascriptreact' },
+    "nvimdev/guard.nvim",
+    event = "BufRead",
+    ft = { "c", "cpp", "python", "go", "rust", "lua", "javascriptreact" },
     dependencies = {
-      'nvimdev/guard-collection',
+      "nvimdev/guard-collection",
     },
     config = function()
-      require('plugins.guard')
+      require("plugins.guard")
     end,
   },
-  { 'nvimdev/hlsearch.nvim', event = 'BufRead', opts = true },
+  { "nvimdev/hlsearch.nvim", event = "BufRead", opts = true },
   {
-    'nvimdev/indentmini.nvim',
-    event = 'BufEnter',
+    "nvimdev/indentmini.nvim",
+    event = "BufEnter",
     opts = true,
   },
-  { 'windwp/nvim-autopairs', event = 'InsertEnter', opts = true },
+  { "windwp/nvim-autopairs", event = "InsertEnter", opts = true },
   {
-    'lewis6991/gitsigns.nvim',
-    event = { 'BufRead', 'BufNewFile' },
+    "lewis6991/gitsigns.nvim",
+    event = { "BufRead", "BufNewFile" },
     opts = {},
   },
   {
-    'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzy-native.nvim',
-      'nvim-telescope/telescope-file-browser.nvim',
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-fzy-native.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
     },
     config = function()
-      require('plugins.telescope')
+      require("plugins.telescope")
     end,
   },
   {
-    'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead',
+    "nvim-treesitter/nvim-treesitter",
+    event = "BufRead",
     dependencies = {},
     config = function()
-      require('plugins.treesitter')
+      require("plugins.treesitter")
     end,
   },
   {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    ft = { 'c', 'rust', 'go', 'lua', 'cpp' },
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    ft = { "c", "rust", "go", "lua", "cpp" },
     config = function()
       vim.defer_fn(function()
-        require('nvim-treesitter.configs').setup({
+        require("nvim-treesitter.configs").setup({
           textobjects = {
             select = {
               enable = true,
               keymaps = {
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = { query = '@class.inner' },
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = { query = "@class.inner" },
               },
             },
           },
@@ -77,20 +77,20 @@ require('lazy').setup({
       end, 0)
     end,
   },
-  { 'nvimdev/coman.nvim' },
+  { "nvimdev/coman.nvim" },
   {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
     config = function()
-      require('plugins.lspconfig')
+      require("plugins.lspconfig")
     end,
   },
   {
-    'nvimdev/lspsaga.nvim',
-    event = 'LspAttach',
-    cmd = 'Lspsaga term_toggle',
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    cmd = "Lspsaga term_toggle",
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons' },
-      { 'nvim-treesitter/nvim-treesitter' },
+      { "nvim-tree/nvim-web-devicons" },
+      { "nvim-treesitter/nvim-treesitter" },
     },
     opts = {
       symbol_in_winbar = {
@@ -99,22 +99,22 @@ require('lazy').setup({
       },
       outline = {
         detail = false,
-        layout = 'float',
+        layout = "float",
       },
     },
   },
   {
-    'nvimdev/epo.nvim',
-    event = 'LspAttach',
+    "nvimdev/epo.nvim",
+    event = "LspAttach",
     opts = true,
   },
   {
-    'nvimdev/rapid.nvim',
-    cmd = 'Rapid',
+    "nvimdev/rapid.nvim",
+    cmd = "Rapid",
     config = function()
-      require('rapid').setup()
-    end
+      require("rapid").setup()
+    end,
   },
 }, {
-  lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',
+  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 })

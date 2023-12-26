@@ -1,24 +1,24 @@
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-require('nvim-treesitter.configs').setup({
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+require("nvim-treesitter.configs").setup({
   ensure_installed = {
-    'c',
-    'cpp',
-    'rust',
-    'go',
-    'lua',
-    'python',
-    'cmake',
-    'ninja',
-    'make',
-    'bash',
-    'css',
-    'html',
-    'javascript',
-    'tsx',
-    'typescript',
-    'markdown',
-    'markdown_inline',
+    "c",
+    "cpp",
+    "rust",
+    "go",
+    "lua",
+    "python",
+    "cmake",
+    "ninja",
+    "make",
+    "bash",
+    "css",
+    "html",
+    "javascript",
+    "tsx",
+    "typescript",
+    "markdown",
+    "markdown_inline",
   },
   highlight = {
     enable = true,
@@ -27,9 +27,9 @@ require('nvim-treesitter.configs').setup({
     end,
   },
 })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'javascriptreact', 'typescriptreact' },
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "javascriptreact", "typescriptreact" },
   callback = function(opt)
-    vim.bo[opt.buf].indentexpr = 'nvim_treesitter#indent()'
+    vim.bo[opt.buf].indentexpr = "nvim_treesitter#indent()"
   end,
 })

@@ -3,78 +3,78 @@ local pd = {}
 
 local stl_bg
 if not stl_bg then
-  stl_bg = api.nvim_get_hl(0, { name = 'StatusLine' }).bg
+  stl_bg = api.nvim_get_hl(0, { name = "StatusLine" }).bg
 end
 
 local function stl_attr(group, trans)
   local color = api.nvim_get_hl(0, { name = group, link = false })
   trans = trans or false
   return {
-    bg = trans and 'NONE' or stl_bg,
+    bg = trans and "NONE" or stl_bg,
     fg = color.fg,
   }
 end
 
-local  alias = {
-    --Normal
-    ['n'] = 'Normal',
-    ['no'] = 'O-Pending',
-    ['nov'] = 'O-Pending',
-    ['noV'] = 'O-Pending',
-    ['no\x16'] = 'O-Pending',
-    ['niI'] = 'Normal',
-    ['niR'] = 'Normal',
-    ['niV'] = 'Normal',
-    ['nt'] = 'Normal',
-    ['ntT'] = 'Normal',
-    ['v'] = 'Visual',
-    ['vs'] = 'Visual',
-    ['V'] = 'V-Line',
-    ['Vs'] = 'V-Line',
-    ['\x16'] = 'V-Block',
-    ['\x16s'] = 'V-Block',
-    ['s'] = 'Select',
-    ['S'] = 'S-Line',
-    ['\x13'] = 'S-Block',
-    ['i'] = 'Insert',
-    ['ic'] = 'Insert',
-    ['ix'] = 'Insert',
-    ['R'] = 'Replace',
-    ['Rc'] = 'Replace',
-    ['Rx'] = 'Replace',
-    ['Rv'] = 'V-Replace',
-    ['Rvc'] = 'V-Replace',
-    ['Rvx'] = 'V-Replace',
-    ['c'] = 'Command',
-    ['cv'] = 'Ex',
-    ['ce'] = 'Ex',
-    ['r'] = 'Replace',
-    ['rm'] = 'More',
-    ['r?'] = 'Confirm',
-    ['!'] = 'Shell',
-    ['t'] = 'Terminal',
-  }
+local alias = {
+  --Normal
+  ["n"] = "Normal",
+  ["no"] = "O-Pending",
+  ["nov"] = "O-Pending",
+  ["noV"] = "O-Pending",
+  ["no\x16"] = "O-Pending",
+  ["niI"] = "Normal",
+  ["niR"] = "Normal",
+  ["niV"] = "Normal",
+  ["nt"] = "Normal",
+  ["ntT"] = "Normal",
+  ["v"] = "Visual",
+  ["vs"] = "Visual",
+  ["V"] = "V-Line",
+  ["Vs"] = "V-Line",
+  ["\x16"] = "V-Block",
+  ["\x16s"] = "V-Block",
+  ["s"] = "Select",
+  ["S"] = "S-Line",
+  ["\x13"] = "S-Block",
+  ["i"] = "Insert",
+  ["ic"] = "Insert",
+  ["ix"] = "Insert",
+  ["R"] = "Replace",
+  ["Rc"] = "Replace",
+  ["Rx"] = "Replace",
+  ["Rv"] = "V-Replace",
+  ["Rvc"] = "V-Replace",
+  ["Rvx"] = "V-Replace",
+  ["c"] = "Command",
+  ["cv"] = "Ex",
+  ["ce"] = "Ex",
+  ["r"] = "Replace",
+  ["rm"] = "More",
+  ["r?"] = "Confirm",
+  ["!"] = "Shell",
+  ["t"] = "Terminal",
+}
 
 function pd.mode()
   local result = {
     stl = function()
       local mode = api.nvim_get_mode().mode
-      return alias[mode] or alias[string.sub(mode, 1, 1)] or 'UNK'
+      return alias[mode] or alias[string.sub(mode, 1, 1)] or "UNK"
     end,
-    name = 'mode',
-    default = 'Normal',
-    event = { 'ModeChanged' },
-    attr = stl_attr('Constant'),
+    name = "mode",
+    default = "Normal",
+    event = { "ModeChanged" },
+    attr = stl_attr("Constant"),
   }
   return result
 end
 
 local function path_sep()
-  return uv.os_uname().sysname == 'Windows_NT' and '\\' or '/'
+  return uv.os_uname().sysname == "Windows_NT" and "\\" or "/"
 end
 
 function pd.fileicon()
-  local ok, devicon = pcall(require, 'nvim-web-devicons')
+  local ok, devicon = pcall(require, "nvim-web-devicons")
   local icon, color
 
   return {
@@ -84,13 +84,13 @@ function pd.fileicon()
           vim.bo.filetype,
           { default = true }
         )
-        api.nvim_set_hl(0, 'Stlfileicon', { bg = stl_bg, fg = color })
-        return icon .. ' '
+        api.nvim_set_hl(0, "Stlfileicon", { bg = stl_bg, fg = color })
+        return icon .. " "
       end
-      return ''
+      return ""
     end,
-    name = 'fileicon',
-    event = { 'BufEnter' },
+    name = "fileicon",
+    event = { "BufEnter" },
     attr = {
       bg = stl_bg,
     },
@@ -99,9 +99,9 @@ end
 
 function pd.fileinfo()
   local result = {
-    stl = '%f',
-    name = 'fileinfo',
-    event = { 'BufEnter' },
+    stl = "%f",
+    name = "fileinfo",
+    event = { "BufEnter" },
     attr = {
       bg = stl_bg,
     },
@@ -113,19 +113,19 @@ end
 function pd.lsp()
   local function lsp_stl(args)
     local client = lsp.get_client_by_id(args.data.client_id)
-    local msg = client and client.name or ''
+    local msg = client and client.name or ""
     if args.data.result then
       local val = args.data.result.value
       msg = val.title
-        .. ' '
-        .. (val.message and val.message .. ' ' or '')
-        .. (val.percentage and val.percentage .. '%' or '')
-      if not val.message or val.kind == 'end' then
+        .. " "
+        .. (val.message and val.message .. " " or "")
+        .. (val.percentage and val.percentage .. "%" or "")
+      if not val.message or val.kind == "end" then
         ---@diagnostic disable-next-line: need-check-nil
         msg = client.name
       end
-    elseif args.event == 'LspDetach' then
-      msg = ''
+    elseif args.event == "LspDetach" then
+      msg = ""
     else
       ---@diagnostic disable-next-line: need-check-nil
       msg = client.name
@@ -135,16 +135,16 @@ function pd.lsp()
 
   local result = {
     stl = lsp_stl,
-    name = 'Lsp',
-    event = { 'LspProgress', 'LspAttach', 'LspDetach' },
-    attr = stl_attr('Function'),
+    name = "Lsp",
+    event = { "LspProgress", "LspAttach", "LspDetach" },
+    attr = stl_attr("Function"),
   }
 
   return result
 end
 
 local function gitsigns_data(bufnr, type)
-  local ok, dict = pcall(api.nvim_buf_get_var, bufnr, 'gitsigns_status_dict')
+  local ok, dict = pcall(api.nvim_buf_get_var, bufnr, "gitsigns_status_dict")
   if not ok or vim.tbl_isempty(dict) or not dict[type] then
     return 0
   end
@@ -154,9 +154,9 @@ end
 
 local function git_icons(type)
   local tbl = {
-    ['added'] = ' ',
-    ['changed'] = ' ',
-    ['deleted'] = ' ',
+    ["added"] = " ",
+    ["changed"] = " ",
+    ["deleted"] = " ",
   }
   return tbl[type]
 end
@@ -164,12 +164,12 @@ end
 function pd.gitadd()
   local result = {
     stl = function(args)
-      local res = gitsigns_data(args.buf, 'added')
-      return res > 0 and git_icons('added') .. res or ''
+      local res = gitsigns_data(args.buf, "added")
+      return res > 0 and git_icons("added") .. res or ""
     end,
-    name = 'gitadd',
-    event = { 'User GitSignsUpdate', 'BufEnter' },
-    attr = stl_attr('DiffAdd'),
+    name = "gitadd",
+    event = { "User GitSignsUpdate", "BufEnter" },
+    attr = stl_attr("DiffAdd"),
   }
 
   return result
@@ -178,12 +178,12 @@ end
 function pd.gitchange()
   local result = {
     stl = function(args)
-      local res = gitsigns_data(args.buf, 'changed')
-      return res > 0 and git_icons('changed') .. res or ''
+      local res = gitsigns_data(args.buf, "changed")
+      return res > 0 and git_icons("changed") .. res or ""
     end,
-    name = 'gitchange',
-    event = { 'User GitSignsUpdate', 'BufEnter' },
-    attr = stl_attr('DiffChange'),
+    name = "gitchange",
+    event = { "User GitSignsUpdate", "BufEnter" },
+    attr = stl_attr("DiffChange"),
   }
 
   return result
@@ -192,37 +192,37 @@ end
 function pd.gitdelete()
   local result = {
     stl = function(args)
-      local res = gitsigns_data(args.buf, 'removed')
-      return res > 0 and git_icons('deleted') .. res or ''
+      local res = gitsigns_data(args.buf, "removed")
+      return res > 0 and git_icons("deleted") .. res or ""
     end,
-    name = 'gitdelete',
-    event = { 'User GitSignsUpdate', 'BufEnter' },
-    attr = stl_attr('DiffDelete'),
+    name = "gitdelete",
+    event = { "User GitSignsUpdate", "BufEnter" },
+    attr = stl_attr("DiffDelete"),
   }
 
   return result
 end
 
 function pd.branch()
-  local icon = ' '
+  local icon = " "
   local result = {
     stl = function(args)
-      local res = gitsigns_data(args.buf, 'head')
-      return res and icon .. res or 'UNKOWN'
+      local res = gitsigns_data(args.buf, "head")
+      return res and icon .. res or "UNKOWN"
     end,
-    name = 'gitbranch',
-    event = { 'User GitSignsUpdate', 'BufEnter' },
-    attr = stl_attr('Include'),
+    name = "gitbranch",
+    event = { "User GitSignsUpdate", "BufEnter" },
+    attr = stl_attr("Include"),
   }
   return result
 end
 
 function pd.lnumcol()
   local result = {
-    stl = '%-4.(%l:%c%) %P',
-    name = 'linecol',
-    event = { 'CursorHold' },
-    attr = stl_attr('Label'),
+    stl = "%-4.(%l:%c%) %P",
+    name = "linecol",
+    event = { "CursorHold" },
+    attr = stl_attr("Label"),
   }
 
   return result
@@ -230,10 +230,10 @@ end
 
 local function diagnostic_info(severity)
   if vim.diagnostic.is_disabled(0) then
-    return ''
+    return ""
   end
   local count = #vim.diagnostic.get(0, { severity = severity })
-  return count == 0 and '' or '⏶ ' .. tostring(count) .. ' '
+  return count == 0 and "" or "⏶ " .. tostring(count) .. " "
 end
 
 function pd.diagError()
@@ -241,9 +241,9 @@ function pd.diagError()
     stl = function()
       return diagnostic_info(1)
     end,
-    name = 'diagError',
-    event = { 'DiagnosticChanged', 'BufEnter' },
-    attr = stl_attr('DiagnosticError'),
+    name = "diagError",
+    event = { "DiagnosticChanged", "BufEnter" },
+    attr = stl_attr("DiagnosticError"),
   }
   return result
 end
@@ -253,9 +253,9 @@ function pd.diagWarn()
     stl = function()
       return diagnostic_info(2)
     end,
-    name = 'diagWarn',
-    event = { 'DiagnosticChanged', 'BufEnter' },
-    attr = stl_attr('DiagnosticWarn'),
+    name = "diagWarn",
+    event = { "DiagnosticChanged", "BufEnter" },
+    attr = stl_attr("DiagnosticWarn"),
   }
   return result
 end
@@ -265,9 +265,9 @@ function pd.diagInfo()
     stl = function()
       return diagnostic_info(3)
     end,
-    name = 'diaginfo',
-    event = { 'DiagnosticChanged', 'BufEnter' },
-    attr = stl_attr('DiagnosticInfo'),
+    name = "diaginfo",
+    event = { "DiagnosticChanged", "BufEnter" },
+    attr = stl_attr("DiagnosticInfo"),
   }
   return result
 end
@@ -277,18 +277,18 @@ function pd.diagHint()
     stl = function()
       return diagnostic_info(4)
     end,
-    name = 'diaghint',
-    event = { 'DiagnosticChanged', 'BufEnter' },
-    attr = stl_attr('DiagnosticHint'),
+    name = "diaghint",
+    event = { "DiagnosticChanged", "BufEnter" },
+    attr = stl_attr("DiagnosticHint"),
   }
   return result
 end
 
 function pd.modified()
   return {
-    name = 'modified',
+    name = "modified",
     stl = '%{&modified?"**":"--"}',
-    event = { 'BufModifiedSet' },
+    event = { "BufModifiedSet" },
     attr = {
       bold = true,
       bg = stl_bg,
@@ -298,9 +298,9 @@ end
 
 function pd.eol()
   return {
-    name = 'eol',
-    stl = path_sep() == '/' and ':' or '(Dos)',
-    event = { 'BufEnter' },
+    name = "eol",
+    stl = path_sep() == "/" and ":" or "(Dos)",
+    event = { "BufEnter" },
     attr = {
       bold = true,
       bg = stl_bg,
@@ -310,18 +310,18 @@ end
 
 function pd.encoding()
   local map = {
-    ['utf-8'] = 'U',
-    ['utf-16'] = 'U16',
-    ['utf-32'] = 'U32',
-    ['unix'] = 'U',
-    ['linux'] = 'L',
-    ['dos'] = 'W',
+    ["utf-8"] = "U",
+    ["utf-16"] = "U16",
+    ["utf-32"] = "U32",
+    ["unix"] = "U",
+    ["linux"] = "L",
+    ["dos"] = "W",
   }
   local result = {
     stl = map[vim.o.ff]
       .. (vim.o.fileencoding and map[vim.o.fileencoding] or map[vim.o.encoding]),
-    name = 'filencode',
-    event = { 'BufEnter' },
+    name = "filencode",
+    event = { "BufEnter" },
     attr = {
       bold = true,
       bg = stl_bg,
@@ -332,24 +332,24 @@ end
 
 function pd.pad()
   return {
-    stl = '%=',
-    name = 'pad',
+    stl = "%=",
+    name = "pad",
   }
 end
 
 function pd.space()
   return {
-    stl = ' ',
-    name = 'space',
+    stl = " ",
+    name = "space",
   }
 end
 
 local function stl_format(name, val)
-  return '%#Stl' .. name .. '#' .. val .. '%*'
+  return "%#Stl" .. name .. "#" .. val .. "%*"
 end
 
 local function stl_hl(name, attr)
-  api.nvim_set_hl(0, 'Stl' .. name, attr)
+  api.nvim_set_hl(0, "Stl" .. name, attr)
 end
 
 local function default()
@@ -389,12 +389,12 @@ local function default()
   vim
     .iter(ipairs(comps))
     :map(function(key, item)
-      if type(item.stl) == 'string' then
+      if type(item.stl) == "string" then
         pieces[#pieces + 1] = stl_format(item.name, item.stl)
       else
         pieces[#pieces + 1] = item.default
             and stl_format(item.name, item.default)
-          or ''
+          or ""
         for _, event in ipairs({ unpack(item.event or {}) }) do
           if not e[event] then
             e[event] = {}
@@ -414,7 +414,7 @@ end
 local function render(comps, events, pieces)
   return coroutine.create(function(args)
     while true do
-      local event = args.event == 'User' and args.event .. ' ' .. args.match
+      local event = args.event == "User" and args.event .. " " .. args.match
         or args.event
       for _, idx in ipairs(events[event]) do
         pieces[idx] = stl_format(comps[idx].name, comps[idx].stl(args))
@@ -438,9 +438,9 @@ local stl_render = render(comps, events, pieces)
 for _, e in ipairs(vim.tbl_keys(events)) do
   local tmp = e
   local pattern
-  if e:find('User') then
-    pattern = vim.split(e, '%s')[2]
-    tmp = 'User'
+  if e:find("User") then
+    pattern = vim.split(e, "%s")[2]
+    tmp = "User"
   end
 
   api.nvim_create_autocmd(tmp, {
@@ -449,7 +449,7 @@ for _, e in ipairs(vim.tbl_keys(events)) do
       vim.schedule(function()
         local ok, res = coroutine.resume(stl_render, args)
         if not ok then
-          vim.notify('[Stl] render failed ' .. res, vim.log.levels.ERROR)
+          vim.notify("[Stl] render failed " .. res, vim.log.levels.ERROR)
         end
       end)
     end,

@@ -2,12 +2,12 @@ local g, opt = vim.g, vim.opt
 
 opt.termguicolors = true
 opt.hidden = true
-opt.encoding = 'utf-8'
-opt.clipboard = 'unnamedplus'
+opt.encoding = "utf-8"
+opt.clipboard = "unnamedplus"
 opt.number = true
 opt.cursorline = true
 opt.textwidth = 100
-opt.colorcolumn = '100'
+opt.colorcolumn = "100"
 opt.completeopt = "menu,menuone,noselect"
 opt.smarttab = true
 opt.expandtab = true
@@ -19,7 +19,7 @@ opt.softtabstop = -1
 opt.laststatus = 3
 opt.cmdheight = 0
 opt.history = 200
-opt.display = 'lastline'
+opt.display = "lastline"
 opt.wildmenu = true
 opt.infercase = true
 opt.ignorecase = true
@@ -39,26 +39,26 @@ opt.ttimeoutlen = 10
 opt.updatetime = 100
 opt.redrawtime = 1500
 opt.list = true
-opt.listchars = 'trail:·,tab:»·,nbsp:+,extends:→,precedes:←'
+opt.listchars = "trail:·,tab:»·,nbsp:+,extends:→,precedes:←"
 opt.showmode = false
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
 opt.foldenable = false
 opt.foldlevelstart = 99
 opt.smoothscroll = true
-vim.cmd.colorscheme('day')
+vim.cmd.colorscheme("day")
 
 -- wsl yanking to windows clipboard
-if vim.fn.has('wsl') == 1 then
-  opt.clipboard = ''
+if vim.fn.has("wsl") == 1 then
+  opt.clipboard = ""
   g.clipboard = {
-    name = 'win32yank-wsl',
+    name = "win32yank-wsl",
     copy = {
-      ['+'] = 'win32yank.exe -i --crlf',
-      ['*'] = 'win32yank.exe -i --crlf',
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
     },
     paste = {
-      ['+'] = 'win32yank.exe -o --lf',
-      ['*'] = 'win32yank.exe -o --lf',
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
     },
     cache_enable = 0,
   }
