@@ -43,7 +43,14 @@ window#waybar {
     border-radius: 5px;
 }
 
-#keyboard-state,#mpd, #cpu, #memory, #clock, #battery,#temperature, #pulseaudio, #network {
+#keyboard-state,
+#cpu,
+#memory,
+#clock,
+#battery,
+#temperature,
+#pulseaudio,
+#network {
     background-color: #fafafa;
     padding: 5px 10px;
     margin: 5px 0px;
@@ -71,12 +78,9 @@ window#waybar {
     padding:5px 10px;
 }
 
-#mpd {
-    border-radius: 5px 0px 0px 5px;
-    color: #2e7de9;
-}
 #cpu {
     color: #7dcfff;
+    border-radius: 5px 0px 0px 5px;
 }
 
 #keyboard-state {

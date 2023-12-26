@@ -3,7 +3,6 @@
         "modules-left": ["custom/launcher","hyprland/workspaces","hyprland/window"],
         //"modules-center": ["hyprland/workspaces"],
         "modules-right": [
-            "mpd",
             "cpu",
             "memory",
             "network",
