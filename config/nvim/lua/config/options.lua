@@ -1,49 +1,69 @@
-local g, opt = vim.g, vim.opt
+local g, opt, api = vim.g, vim.opt, vim.api
 
-opt.termguicolors = true
 opt.hidden = true
-opt.encoding = "utf-8"
+opt.magic = true
+opt.virtualedit = "block"
 opt.clipboard = "unnamedplus"
-opt.number = true
-opt.cursorline = true
-opt.textwidth = 100
-opt.colorcolumn = "100"
-opt.completeopt = "menu,menuone,noselect"
-opt.smarttab = true
-opt.expandtab = true
-opt.autoindent = true
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.splitright = true
-opt.softtabstop = -1
-opt.laststatus = 3
-opt.cmdheight = 0
-opt.history = 200
-opt.display = "lastline"
-opt.wildmenu = true
-opt.infercase = true
-opt.ignorecase = true
-opt.smartcase = true
-opt.hlsearch = true
-opt.incsearch = true
-opt.autoread = true
-opt.backup = false
-opt.writebackup = false
+opt.wildignorecase = true
 opt.swapfile = false
-opt.shiftround = true
-opt.wrap = false
+
+opt.history = 2000
 opt.timeout = true
 opt.ttimeout = true
 opt.timeoutlen = 500
 opt.ttimeoutlen = 10
 opt.updatetime = 100
 opt.redrawtime = 1500
-opt.list = true
-opt.listchars = "trail:·,tab:»·,nbsp:+,extends:→,precedes:←"
+opt.ignorecase = true
+opt.smartcase = true
+opt.infercase = true
+opt.cursorline = true
+
+if vim.fn.executable("rg") == 1 then
+  opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+  opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+end
+
+opt.completeopt = "menu,menuone,noinsert"
 opt.showmode = false
-opt.signcolumn = "yes"
-opt.foldenable = false
+opt.shortmess = "aoOTIcF"
+opt.scrolloff = 2
+opt.sidescrolloff = 5
+opt.ruler = false
+opt.showtabline = 0
+opt.winwidth = 30
+opt.pumheight = 15
+opt.showcmd = false
+
+opt.cmdheight = 0
+opt.laststatus = 3
+opt.list = true
+
+--eol:¬
+opt.listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←,"
+opt.pumblend = 10
+opt.winblend = 0
+opt.undofile = true
+
+opt.smarttab = true
+opt.expandtab = true
+opt.autoindent = true
+opt.tabstop = 4
+opt.shiftwidth = 4
+
 opt.foldlevelstart = 99
+opt.foldmethod = "marker"
+
+opt.splitright = true
+opt.wrap = false
+
+opt.number = true
+opt.signcolumn = "yes"
+opt.spelloptions = "camel"
+
+opt.textwidth = 100
+opt.colorcolumn = "100"
+
 opt.smoothscroll = true
 vim.cmd.colorscheme("day")
 

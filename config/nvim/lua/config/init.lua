@@ -1,3 +1,5 @@
 require("config.options")
 require("config.keymaps")
-require("config.statusline")
+require("plugins.statusline")
+require("config.lazy")
+require("plugins.term")

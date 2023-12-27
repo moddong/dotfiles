@@ -19,8 +19,6 @@ local function attach(client, _)
   vim.notify = mynotify
 end
 
-vim.lsp.set_log_level("OFF")
-
 lspconfig.lua_ls.setup({
   on_attach = attach,
   capabilities = capabilities,
@@ -31,6 +29,7 @@ lspconfig.lua_ls.setup({
         globals = { "vim" },
         disable = {
           "missing-fields",
+          "no-unknown",
         },
       },
       runtime = {
