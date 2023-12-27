@@ -1,4 +1,4 @@
-local g, opt, api = vim.g, vim.opt, vim.api
+local g, opt = vim.g, vim.opt
 
 opt.hidden = true
 opt.magic = true
@@ -19,11 +19,6 @@ opt.smartcase = true
 opt.infercase = true
 opt.cursorline = true
 
-if vim.fn.executable("rg") == 1 then
-  opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
-  opt.grepprg = "rg --vimgrep --no-heading --smart-case"
-end
-
 opt.completeopt = "menu,menuone,noinsert"
 opt.showmode = false
 opt.shortmess = "aoOTIcF"
@@ -39,7 +34,6 @@ opt.cmdheight = 0
 opt.laststatus = 3
 opt.list = true
 
---eol:¬
 opt.listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←,"
 opt.pumblend = 10
 opt.winblend = 0
@@ -64,8 +58,7 @@ opt.spelloptions = "camel"
 opt.textwidth = 100
 opt.colorcolumn = "100"
 
-opt.smoothscroll = true
-vim.cmd.colorscheme("day")
+vim.cmd("colorscheme day")
 
 -- wsl yanking to windows clipboard
 if vim.fn.has("wsl") == 1 then
