@@ -1,5 +1,4 @@
 local api, uv, lsp = vim.api, vim.uv, vim.lsp
-local pd = {}
 
 local stl_bg
 if not stl_bg then
@@ -55,13 +54,13 @@ local alias = {
   ["t"] = "Terminal",
 }
 
-function pd.mode()
+local function modeinfo()
   local result = {
     stl = function()
       local mode = api.nvim_get_mode().mode
       return alias[mode] or alias[string.sub(mode, 1, 1)] or "UNK"
     end,
-    name = "mode",
+    name = "modeinfo",
     default = "Normal",
     event = { "ModeChanged" },
     attr = stl_attr("Constant"),
@@ -73,17 +72,14 @@ local function path_sep()
   return uv.os_uname().sysname == "Windows_NT" and "\\" or "/"
 end
 
-function pd.fileicon()
+local function fileicon()
   local ok, devicon = pcall(require, "nvim-web-devicons")
   local icon, color
 
   return {
     stl = function()
       if ok then
-        icon, color = devicon.get_icon_color_by_filetype(
-          vim.bo.filetype,
-          { default = true }
-        )
+        icon, color = devicon.get_icon_color_by_filetype(vim.bo.filetype, { default = true })
         api.nvim_set_hl(0, "Stlfileicon", { bg = stl_bg, fg = color })
         return icon .. " "
       end
@@ -97,7 +93,7 @@ function pd.fileicon()
   }
 end
 
-function pd.fileinfo()
+local function fileinfo()
   local result = {
     stl = "%f",
     name = "fileinfo",
@@ -110,7 +106,7 @@ function pd.fileinfo()
   return result
 end
 
-function pd.lsp()
+local function lspinfo()
   local function lsp_stl(args)
     local client = lsp.get_client_by_id(args.data.client_id)
     local msg = client and client.name or ""
@@ -161,7 +157,7 @@ local function git_icons(type)
   return tbl[type]
 end
 
-function pd.gitadd()
+local function gitadd()
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "added")
@@ -175,7 +171,7 @@ function pd.gitadd()
   return result
 end
 
-function pd.gitchange()
+local function gitchange()
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "changed")
@@ -189,7 +185,7 @@ function pd.gitchange()
   return result
 end
 
-function pd.gitdelete()
+local function gitdelete()
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "removed")
@@ -203,7 +199,7 @@ function pd.gitdelete()
   return result
 end
 
-function pd.branch()
+local function branch()
   local icon = " "
   local result = {
     stl = function(args)
@@ -217,7 +213,7 @@ function pd.branch()
   return result
 end
 
-function pd.lnumcol()
+local function lnumcol()
   local result = {
     stl = "%-4.(%l:%c%) %P",
     name = "linecol",
@@ -236,7 +232,7 @@ local function diagnostic_info(severity)
   return count == 0 and "" or "⏶ " .. tostring(count) .. " "
 end
 
-function pd.diagError()
+local function diagError()
   local result = {
     stl = function()
       return diagnostic_info(1)
@@ -248,7 +244,7 @@ function pd.diagError()
   return result
 end
 
-function pd.diagWarn()
+local function diagWarn()
   local result = {
     stl = function()
       return diagnostic_info(2)
@@ -260,7 +256,7 @@ function pd.diagWarn()
   return result
 end
 
-function pd.diagInfo()
+local function diagInfo()
   local result = {
     stl = function()
       return diagnostic_info(3)
@@ -272,7 +268,7 @@ function pd.diagInfo()
   return result
 end
 
-function pd.diagHint()
+local function diagHint()
   local result = {
     stl = function()
       return diagnostic_info(4)
@@ -284,7 +280,7 @@ function pd.diagHint()
   return result
 end
 
-function pd.modified()
+local function modified()
   return {
     name = "modified",
     stl = '%{&modified?"**":"--"}',
@@ -296,7 +292,7 @@ function pd.modified()
   }
 end
 
-function pd.eol()
+local function eol()
   return {
     name = "eol",
     stl = path_sep() == "/" and ":" or "(Dos)",
@@ -308,7 +304,7 @@ function pd.eol()
   }
 end
 
-function pd.encoding()
+local function encoding()
   local map = {
     ["utf-8"] = "U",
     ["utf-16"] = "U16",
@@ -318,8 +314,7 @@ function pd.encoding()
     ["dos"] = "W",
   }
   local result = {
-    stl = map[vim.o.ff]
-      .. (vim.o.fileencoding and map[vim.o.fileencoding] or map[vim.o.encoding]),
+    stl = map[vim.o.ff] .. (vim.o.fileencoding and map[vim.o.fileencoding] or map[vim.o.encoding]),
     name = "filencode",
     event = { "BufEnter" },
     attr = {
@@ -330,14 +325,14 @@ function pd.encoding()
   return result
 end
 
-function pd.pad()
+local function pad()
   return {
     stl = "%=",
     name = "pad",
   }
 end
 
-function pd.space()
+local function space()
   return {
     stl = " ",
     name = "space",
@@ -354,36 +349,35 @@ end
 
 local function default()
   local comps = {
-    pd.space(),
-    pd.mode(),
-    pd.space(),
-    --
-    pd.encoding(),
-    pd.eol(),
-    pd.modified(),
-    pd.space(),
-    --
-    pd.fileicon(),
-    pd.fileinfo(),
-    pd.space(),
-    pd.lnumcol(),
-    pd.space(),
-    pd.diagError(),
-    pd.diagWarn(),
-    pd.diagInfo(),
-    pd.diagHint(),
-    pd.pad(),
-    pd.lsp(),
-    pd.pad(),
-    --
-    pd.space(),
-    pd.gitadd(),
-    pd.gitchange(),
-    pd.gitdelete(),
-    pd.space(),
-    pd.branch(),
-    pd.space(),
-    --
+    space(),
+    modeinfo(),
+    space(),
+
+    encoding(),
+    eol(),
+    modified(),
+    space(),
+
+    fileicon(),
+    fileinfo(),
+    space(),
+    lnumcol(),
+    space(),
+    diagError(),
+    diagWarn(),
+    diagInfo(),
+    diagHint(),
+    pad(),
+    lspinfo(),
+    pad(),
+
+    space(),
+    gitadd(),
+    gitchange(),
+    gitdelete(),
+    space(),
+    branch(),
+    space(),
   }
   local e, pieces = {}, {}
   vim
@@ -392,9 +386,7 @@ local function default()
       if type(item.stl) == "string" then
         pieces[#pieces + 1] = stl_format(item.name, item.stl)
       else
-        pieces[#pieces + 1] = item.default
-            and stl_format(item.name, item.default)
-          or ""
+        pieces[#pieces + 1] = item.default and stl_format(item.name, item.default) or ""
         for _, event in ipairs({ unpack(item.event or {}) }) do
           if not e[event] then
             e[event] = {}
@@ -414,8 +406,7 @@ end
 local function render(comps, events, pieces)
   return coroutine.create(function(args)
     while true do
-      local event = args.event == "User" and args.event .. " " .. args.match
-        or args.event
+      local event = args.event == "User" and args.event .. " " .. args.match or args.event
       for _, idx in ipairs(events[event]) do
         pieces[idx] = stl_format(comps[idx].name, comps[idx].stl(args))
       end
