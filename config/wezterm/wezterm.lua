@@ -9,7 +9,7 @@ config.font = wezterm.font_with_fallback({
 	"Operator Mono",
 	"LXGW WenKai Mono",
 })
-config.font_size = 13.5
+config.font_size = 14
 config.enable_tab_bar = false
 config.colors = {
 	background = "#fafafa",
