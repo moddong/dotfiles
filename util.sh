@@ -24,20 +24,9 @@ nvim() {
   rm -rf nvim-linux64*
 }
 
-black() {
-  info "install py formater black"
-  while [[ ! -e ./black_linux ]]; do
-    local black_tag=$(curl -s https://api.github.com/repos/psf/black/releases/latest  | jq -r ".tag_name")
-    curl -fLO "https://github.com/psf/black/releases/download/${black_tag}/black_linux"
-  done
-  [[ -e /usr/local/bin/black ]] && sudo rm /usr/local/bin/black
-  chmod +x black_linux
-  sudo mv black_linux /usr/local/bin/black
-}
-
 arch() {
   sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
-    python3 python-pip python-msgpack cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
+    python3 python-pip python-msgpack python-black cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
     tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit elisa
 
   rustup default stable
@@ -72,7 +61,6 @@ link_file() {
 
 config() {
   info "install dotfiles"
-  sleep 1
   local dotfiles="${HOME}/.dotfiles"
   local dotfiles_home="${dotfiles}/home"
   local dotfiles_config="${dotfiles}/config"
@@ -89,7 +77,7 @@ config() {
 
 main() {
   if [[ $# -eq 0 ]]; then
-    info "script must have one or more arguments: lsp nvim black arch config "
+    info "script must have one or more arguments: lsp nvim arch config"
   else
     for fn in "$@"; do
       ${fn}
