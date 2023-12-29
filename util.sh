@@ -65,11 +65,15 @@ config() {
   local dotfiles_home="${dotfiles}/home"
   local dotfiles_config="${dotfiles}/config"
 
-  for filename in $(ls ${dotfiles_home}); do
-    link_file "${dotfiles_home}/${filename}" "${HOME}/.${filename}"
+  shopt -s dotglob
+  for filename in ${dotfiles_home}/*; do
+    filename=$(basename $filename)
+    link_file "${dotfiles_home}/${filename}" "${HOME}/${filename}"
   done
+  shopt -u dotglob
 
-  for filename in $(ls ${dotfiles_config}); do
+  for filename in ${dotfiles_config}/*; do
+    filename=$(basename $filename)
     link_file "${dotfiles_config}/${filename}" "${HOME}/.config/${filename}"
   done
   info "Dotfiles successfuly installed!"
