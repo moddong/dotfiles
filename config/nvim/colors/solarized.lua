@@ -49,7 +49,7 @@ local groups = {
   { "PmenuExtraSel", { link = "PmenuSel" } },
   { "WildMenu", { link = "pmenu" } },
   --statusline
-  { "StatusLine", { bg = p.base02 } },
+  { "StatusLine", { fg = p.fg, bg = p.base02 } },
   { "StatusLineNC", { fg = p.base02, bg = p.base05 } },
   { "WinBar", { bg = p.non } },
   { "WinBarNC", { bg = p.non } },

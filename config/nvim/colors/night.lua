@@ -45,7 +45,7 @@ local groups = {
   { "PmenuExtraSel", { link = "PmenuSel" } },
   { "WildMenu", { link = "Pmenu" } },
   --statusline
-  { "StatusLine", { fg = p.fg_dim, bg = p.bg_float, bold = true } },
+  { "StatusLine", { fg = p.fg_dim, bg = p.bg_float } },
   { "StatusLineNC", { fg = p.fg_dim, bg = p.bg_float } },
   { "WinBar", { bg = p.none } },
   { "WinBarNC", { bg = p.none } },

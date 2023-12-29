@@ -75,10 +75,7 @@ local groups = {
   { "PmenuExtra", { link = "Pmenu" } },
   { "PmenuExtraSel", { link = "PmenuSel" } },
   { "WildMenu", { link = "Pmenu" } },
-  {
-    "StatusLine",
-    { fg = p.fg_sidebar, bg = p.bg_statusline, bold = true },
-  },
+  { "StatusLine", { fg = p.fg_sidebar, bg = p.bg_statusline } },
   { "StatusLineNC", { fg = p.fg_gutter, bg = p.bg_statusline } },
   { "WinBar", { bg = p.none } },
   { "WinBarNC", { bg = p.none } },

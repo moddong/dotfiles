@@ -14,56 +14,65 @@ local function stl_attr(group, trans)
   }
 end
 
-local alias = {
-  --Normal
-  ["n"] = "Normal",
-  ["no"] = "O-Pending",
-  ["nov"] = "O-Pending",
-  ["noV"] = "O-Pending",
-  ["no\x16"] = "O-Pending",
-  ["niI"] = "Normal",
-  ["niR"] = "Normal",
-  ["niV"] = "Normal",
-  ["nt"] = "Normal",
-  ["ntT"] = "Normal",
-  ["v"] = "Visual",
-  ["vs"] = "Visual",
-  ["V"] = "V-Line",
-  ["Vs"] = "V-Line",
-  ["\x16"] = "V-Block",
-  ["\x16s"] = "V-Block",
-  ["s"] = "Select",
-  ["S"] = "S-Line",
-  ["\x13"] = "S-Block",
-  ["i"] = "Insert",
-  ["ic"] = "Insert",
-  ["ix"] = "Insert",
-  ["R"] = "Replace",
-  ["Rc"] = "Replace",
-  ["Rx"] = "Replace",
-  ["Rv"] = "V-Replace",
-  ["Rvc"] = "V-Replace",
-  ["Rvx"] = "V-Replace",
-  ["c"] = "Command",
-  ["cv"] = "Ex",
-  ["ce"] = "Ex",
-  ["r"] = "Replace",
-  ["rm"] = "More",
-  ["r?"] = "Confirm",
-  ["!"] = "Shell",
-  ["t"] = "Terminal",
-}
+local function alias_mode()
+  return {
+    --Normal
+    ["n"] = "Normal",
+    ["no"] = "O-Pending",
+    ["nov"] = "O-Pending",
+    ["noV"] = "O-Pending",
+    ["no\x16"] = "O-Pending",
+    ["niI"] = "Normal",
+    ["niR"] = "Normal",
+    ["niV"] = "Normal",
+    ["nt"] = "Normal",
+    ["ntT"] = "Normal",
+    ["v"] = "Visual",
+    ["vs"] = "Visual",
+    ["V"] = "V-Line",
+    ["Vs"] = "V-Line",
+    ["\x16"] = "V-Block",
+    ["\x16s"] = "V-Block",
+    ["s"] = "Select",
+    ["S"] = "S-Line",
+    ["\x13"] = "S-Block",
+    ["i"] = "Insert",
+    ["ic"] = "Insert",
+    ["ix"] = "Insert",
+    ["R"] = "Replace",
+    ["Rc"] = "Replace",
+    ["Rx"] = "Replace",
+    ["Rv"] = "V-Replace",
+    ["Rvc"] = "V-Replace",
+    ["Rvx"] = "V-Replace",
+    ["c"] = "Command",
+    ["cv"] = "Ex",
+    ["ce"] = "Ex",
+    ["r"] = "Replace",
+    ["rm"] = "More",
+    ["r?"] = "Confirm",
+    ["!"] = "Shell",
+    ["t"] = "Terminal",
+  }
+end
 
 local function modeinfo()
+  local alias = alias_mode()
+  local color = api.nvim_get_hl(0, { name = "Title" })
   local result = {
     stl = function()
       local mode = api.nvim_get_mode().mode
-      return alias[mode] or alias[string.sub(mode, 1, 1)] or "UNK"
+      local m = alias[mode] or alias[string.sub(mode, 1, 1)] or "UNK"
+      return m:sub(1, 3):upper()
     end,
     name = "modeinfo",
-    default = "Normal",
+    default = "NOR",
     event = { "ModeChanged" },
-    attr = stl_attr("Constant"),
+    attr = {
+      bg = color.fg,
+      fg = "black",
+      bold = true,
+    },
   }
   return result
 end
@@ -72,35 +81,11 @@ local function path_sep()
   return uv.os_uname().sysname == "Windows_NT" and "\\" or "/"
 end
 
-local function fileicon()
-  local ok, devicon = pcall(require, "nvim-web-devicons")
-  local icon, color
-
-  return {
-    stl = function()
-      if ok then
-        icon, color = devicon.get_icon_color_by_filetype(vim.bo.filetype, { default = true })
-        api.nvim_set_hl(0, "Stlfileicon", { bg = stl_bg, fg = color })
-        return icon .. " "
-      end
-      return ""
-    end,
-    name = "fileicon",
-    event = { "BufEnter" },
-    attr = {
-      bg = stl_bg,
-    },
-  }
-end
-
 local function fileinfo()
   local result = {
-    stl = "%f",
+    stl = "%f %P",
     name = "fileinfo",
     event = { "BufEnter" },
-    attr = {
-      bg = stl_bg,
-    },
   }
 
   return result
@@ -122,16 +107,13 @@ local function lspinfo()
       end
     elseif args.event == "LspDetach" then
       msg = ""
-    else
-      ---@diagnostic disable-next-line: need-check-nil
-      msg = client.name
     end
     return '%.40{"' .. msg .. '"}'
   end
 
   local result = {
     stl = lsp_stl,
-    name = "Lsp",
+    name = "Lspinfo",
     event = { "LspProgress", "LspAttach", "LspDetach" },
     attr = stl_attr("Function"),
   }
@@ -150,18 +132,19 @@ end
 
 local function git_icons(type)
   local tbl = {
-    ["added"] = " ",
-    ["changed"] = " ",
-    ["deleted"] = " ",
+    ["added"] = "+",
+    ["changed"] = "~",
+    ["deleted"] = "-",
   }
   return tbl[type]
 end
 
 local function gitadd()
+  local sign = git_icons("added")
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "added")
-      return res > 0 and git_icons("added") .. res or ""
+      return res > 0 and ("%s%s%s"):format(sign, res, " ") or ""
     end,
     name = "gitadd",
     event = { "User GitSignsUpdate", "BufEnter" },
@@ -172,10 +155,11 @@ local function gitadd()
 end
 
 local function gitchange()
+  local sign = git_icons("changed")
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "changed")
-      return res > 0 and git_icons("changed") .. res or ""
+      return res > 0 and ("%s%s%s"):format(sign, res, " ") or ""
     end,
     name = "gitchange",
     event = { "User GitSignsUpdate", "BufEnter" },
@@ -186,10 +170,11 @@ local function gitchange()
 end
 
 local function gitdelete()
+  local sign = git_icons("deleted")
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "removed")
-      return res > 0 and git_icons("deleted") .. res or ""
+      return res > 0 and ("%s%s"):format(sign, res) or ""
     end,
     name = "gitdelete",
     event = { "User GitSignsUpdate", "BufEnter" },
@@ -200,14 +185,14 @@ local function gitdelete()
 end
 
 local function branch()
-  local icon = " "
+  local icon = "  "
   local result = {
     stl = function(args)
       local res = gitsigns_data(args.buf, "head")
-      return res and icon .. res or "UNKOWN"
+      return res and icon .. res or " UNKNOWN"
     end,
     name = "gitbranch",
-    event = { "User GitSignsUpdate", "BufEnter" },
+    event = { "User GitSignsUpdate" },
     attr = stl_attr("Include"),
   }
   return result
@@ -215,10 +200,9 @@ end
 
 local function lnumcol()
   local result = {
-    stl = "%-4.(%l:%c%) %P",
+    stl = "%-5.(%l:%c%)",
     name = "linecol",
     event = { "CursorHold" },
-    attr = stl_attr("Label"),
   }
 
   return result
@@ -229,7 +213,7 @@ local function diagnostic_info(severity)
     return ""
   end
   local count = #vim.diagnostic.get(0, { severity = severity })
-  return count == 0 and "" or "⏶ " .. tostring(count) .. " "
+  return count == 0 and "" or "" .. tostring(count) .. " "
 end
 
 local function diagError()
@@ -285,10 +269,6 @@ local function modified()
     name = "modified",
     stl = '%{&modified?"**":"--"}',
     event = { "BufModifiedSet" },
-    attr = {
-      bold = true,
-      bg = stl_bg,
-    },
   }
 end
 
@@ -297,10 +277,6 @@ local function eol()
     name = "eol",
     stl = path_sep() == "/" and ":" or "(Dos)",
     event = { "BufEnter" },
-    attr = {
-      bold = true,
-      bg = stl_bg,
-    },
   }
 end
 
@@ -317,10 +293,6 @@ local function encoding()
     stl = map[vim.o.ff] .. (vim.o.fileencoding and map[vim.o.fileencoding] or map[vim.o.encoding]),
     name = "filencode",
     event = { "BufEnter" },
-    attr = {
-      bold = true,
-      bg = stl_bg,
-    },
   }
   return result
 end
@@ -349,35 +321,31 @@ end
 
 local function default()
   local comps = {
-    space(),
     modeinfo(),
     space(),
-
     encoding(),
     eol(),
     modified(),
     space(),
 
-    fileicon(),
     fileinfo(),
-    space(),
-    lnumcol(),
     space(),
     diagError(),
     diagWarn(),
     diagInfo(),
     diagHint(),
+    space(),
     pad(),
     lspinfo(),
     pad(),
 
     space(),
+    lnumcol(),
+    space(),
     gitadd(),
     gitchange(),
     gitdelete(),
-    space(),
     branch(),
-    space(),
   }
   local e, pieces = {}, {}
   vim
