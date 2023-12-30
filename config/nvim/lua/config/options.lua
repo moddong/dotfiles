@@ -77,9 +77,8 @@ opt.spelloptions = "camel"
 opt.textwidth = 100
 opt.colorcolumn = "100"
 
-vim.cmd("colorscheme day")
--- vim.cmd("colorscheme night")
--- vim.cmd("colorscheme solarized")
+-- vim.cmd("colorscheme day")
+vim.cmd("colorscheme night")
 
 -- wsl yanking to windows clipboard
 if vim.fn.has("wsl") == 1 then

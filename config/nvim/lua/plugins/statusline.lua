@@ -58,7 +58,7 @@ end
 
 local function modeinfo()
   local alias = alias_mode()
-  local color = api.nvim_get_hl(0, { name = "Title" })
+  local color = api.nvim_get_hl(0, { name = "PreProc" })
   local result = {
     stl = function()
       local mode = api.nvim_get_mode().mode
