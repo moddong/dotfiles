@@ -57,13 +57,6 @@ require("lazy").setup({
   },
   { "nvimdev/coman.nvim" },
   {
-    "nvimdev/rapid.nvim",
-    cmd = "Rapid",
-    config = function()
-      require("rapid").setup({})
-    end,
-  },
-  {
     "nvimdev/dbsession.nvim",
     cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
     opts = true,
