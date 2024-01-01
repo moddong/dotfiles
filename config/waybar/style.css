@@ -3,37 +3,35 @@
     border-radius: 0;
     font-family: SF Mono,LXGW WenKai Mono;
     font-size: 13px;
-    min-height: 0;
 }
 
-/*
- * #fafafa  day
- * #141821  night*/
+@define-color background #141821;
+
 window#waybar {
     background: transparent;
-    color: black;
+
 }
 
 #window {
     color: #3760bf;
-    /*color: #c0caf5;*/
-    background-color: #fafafa;
+    color: #c0caf5;
+    background-color: @background;
     margin: 5px 5px 5px 0;
     border-radius: 0 5px 5px 0;
-    /*%s*/padding: 5px 10px;
+    padding: 5px 5px;
 }
 
 #workspaces {
-    background-color: #fafafa;
-    margin: 5px 0;
+    background-color: @background;
+    margin: 5px 0px;
 }
 #workspaces button {
-    padding: 5px 8px;
+    padding: 5px 5px;
     color: #8990b3;
 }
 
 #workspaces button.active {
-    color: #fafafa;
+    color: @background;
     background-color: #2e7de9;
     border-radius: 5px;
 }
@@ -45,37 +43,34 @@ window#waybar {
 
 #keyboard-state,
 #cpu,
+#tray,
 #memory,
 #clock,
 #battery,
 #temperature,
 #pulseaudio,
 #network {
-    background-color: #fafafa;
-    padding: 5px 10px;
+    background-color: @background;
+    color: #cccccc;
+    padding: 5px 5px;
     margin: 5px 0px;
 }
 
-#tray {
-    background-color: #fafafa;
-    margin: 5px 0;
-    padding: 5px 10px;
-}
 #custom-power {
-    color: #fafafa;
+    color: @background;
     background-color: #db4b4b;
     border-radius: 0px 5px 5px 0px;
     margin: 5px 10px 5px 0;
-    padding: 5px 10px;
+    padding: 5px 5px;
 }
 
 #custom-launcher {
-    font-size: 20px;
+    font-size: 14px;
     color: #89DCEB;
-    background-color: #fafafa;
+    background-color: @background;
     margin: 5px 0 5px 10px;
     border-radius: 5px 0px 0px 5px;
-    padding:5px 10px;
+    padding:5px 5px;
 }
 
 #cpu {
@@ -84,7 +79,7 @@ window#waybar {
 }
 
 #keyboard-state {
-    color: #9ece6a;
+    color: #ffffff;
 }
 
 #memory {
@@ -109,7 +104,7 @@ window#waybar {
 
 #battery.warning:not(.charging) {
     background-color: #f7768e;
-    color: #fafafa;
+    color: #cccccc;
     border-radius: 5px;
 }
 
