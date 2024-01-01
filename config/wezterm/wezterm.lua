@@ -36,6 +36,7 @@ config.window_padding = {
 	left = 0,
 }
 
+config.default_cursor_style = "SteadyBlokc"
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 

@@ -10,7 +10,7 @@ set showmode
 set showcmd
 set encoding=utf-8
 set list
-set listchars=trail:·,tab:»~,nbsp:+
+set listchars=trail:·,tab:»·,nbsp:+
 set mouse=a
 set smartindent
 set expandtab
@@ -29,10 +29,7 @@ set foldmethod=indent
 set foldlevelstart=99
 set fillchars=eob:\ 
 set signcolumn=yes
-"dark
-"colorscheme habamax
-"light
-colorscheme shine
+"colorscheme shine
 
 
 nmap <c-h> <c-w>h
