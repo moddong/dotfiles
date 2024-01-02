@@ -6,6 +6,7 @@ local p = {
   red = "#ff5f59",
   orange = "#cc853d",
   yellow = "#ccad52",
+  gray = "#3d4966",
   green = "#9eb336",
   cyan = "#52bccc",
   blue = "#5c95e6",
@@ -16,24 +17,24 @@ local p = {
 
 local groups = {
 
-  { "Normal", { fg = p.none, bg = p.bg } },
+  { "Normal", { fg = p.fg, bg = p.bg } },
   --signcolumn
   { "SignColumn", { bg = p.bg } },
   --buffer
-  { "LineNr", { fg = "#272d40" } },
-  { "EndOfBuffer", { fg = p.bg, bg = p.none } },
+  { "LineNr", { link = "Comment" } },
+  { "EndOfBuffer", { fg = p.bg, bg = p.bg } },
   { "Search", { fg = p.yellow, reverse = true } },
   { "Visual", { bg = p.yellow } },
-  { "ColorColumn", { bg = p.none } },
-  { "Whitespace", { fg = p.none } },
+  { "ColorColumn", { bg = p.bg } },
+  { "Whitespace", { fg = p.fg } },
   --window
-  { "VertSplit", { fg = p.none } },
-  { "Title", { fg = p.none, bold = true } },
+  { "VertSplit", { fg = p.fg } },
+  { "Title", { fg = p.fg, bold = true } },
   --cursorline
   { "Cursorline", { bg = p.bg_alt } },
-  { "CursorLineNr", { fg = p.none, bg = p.bg_alt } },
+  { "CursorLineNr", { fg = p.fg, bg = p.bg_alt } },
   --pmenu
-  { "Pmenu", { bg = p.bg_float, fg = p.none } },
+  { "Pmenu", { bg = p.bg_float, fg = p.fg } },
   { "PmenuSel", { fg = p.teal } },
   { "PmenuSbar", { fg = "#586e75" } },
   { "PmenuKind", { bg = p.bg_float, fg = p.yellow } },
@@ -42,55 +43,55 @@ local groups = {
   { "PmenuExtraSel", { link = "PmenuSel" } },
   { "WildMenu", { link = "Pmenu" } },
   --statusline
-  { "StatusLine", { fg = p.none, bg = p.none } },
-  { "StatusLineNC", { fg = p.none, bg = p.none } },
-  { "WinBar", { bg = p.none } },
-  { "WinBarNC", { bg = p.none } },
-  { "WinSeparator", { bg = p.bg, fg = p.none } },
+  { "StatusLine", { fg = p.fg, bg = p.bg } },
+  { "StatusLineNC", { fg = p.fg, bg = p.bg } },
+  { "WinBar", { bg = p.bg } },
+  { "WinBarNC", { bg = p.bg } },
+  { "WinSeparator", { bg = p.bg, fg = p.fg } },
   --Error
   { "Error", { fg = p.red, bold = true } },
   { "ErrorMsg", { link = "Error" } },
   --Markup
-  { "TODO", { fg = p.none } },
-  { "Conceal", { fg = p.none } },
+  { "TODO", { fg = p.fg } },
+  { "Conceal", { fg = p.fg } },
   { "NonText", { link = "Comment" } },
   --Float
-  { "FloatBorder", { fg = p.none } },
-  { "NormalFloat", { bg = p.none } },
+  { "FloatBorder", { fg = p.fg } },
+  { "NormalFloat", { bg = p.bg } },
   --Fold
   { "Folded", { fg = p.bg, bold = true } },
   { "FoldColumn", { link = "SignColumn" } },
   --Spell
-  { "SpellBad", { fg = p.none } },
+  { "SpellBad", { fg = p.fg } },
   { "SpellCap", { undercurl = true, sp = p.none } },
-  { "SpellRare", { undercurl = true, fg = p.none } },
+  { "SpellRare", { undercurl = true, fg = p.fg } },
   { "SpellLocal", { undercurl = true } },
   --Msg
-  { "WarningMsg", { fg = p.none } },
-  { "MoreMsg", { fg = p.none } },
+  { "WarningMsg", { fg = p.green } },
+  { "MoreMsg", { fg = p.green } },
   --Internal
-  { "NvimInternalError", { fg = p.none } },
-  { "Directory", { fg = p.none } },
+  { "NvimInternalError", { fg = p.red } },
+  { "Directory", { fg = p.fg } },
   --------------------------------------------------------
   ---
   ---@Langauge Relate
   ---@Identifier
-  { "Identifier", { fg = p.none } },
+  { "Identifier", { fg = p.fg } },
   -- various variable names
-  { "@variable", { fg = p.none } },
+  { "@variable", { fg = p.fg } },
   --built-in variable names (e, {g, `this`)
-  { "@variable.builtin", { fg = p.none } },
-  { "Constant", { fg = p.none } },
+  { "@variable.builtin", { fg = p.fg } },
+  { "Constant", { fg = p.fg } },
   { "@constant.builtin", { link = "Constant" } },
   -- constants defined by the preprocessor
   { "@constant.macro", { link = "Constant" } },
   --modules or namespaces
-  { "@namespace", { fg = p.none } },
+  { "@namespace", { fg = p.fg } },
   --symbols or atoms
   -- ['@symbol'] = exe}},
   --------------------------------------------------------
   ---@Keywords
-  { "Keyword", { fg = p.none } },
+  { "Keyword", { fg = p.fg } },
   { "@keyword.function", { link = "Keyword" } },
   { "@keyword.return", { link = "Keyword" } },
   { "@keyword.operat", { link = "Operator" } },
@@ -100,12 +101,12 @@ local groups = {
   { "Repeat", { link = "Conditional" } },
   --for attribute
   { "@attribute", { link = "Keyword" } },
-  { "Debug", { fg = p.none } },
-  { "Label", { fg = p.none } },
-  { "PreProc", { fg = p.none } },
+  { "Debug", { fg = p.fg } },
+  { "Label", { fg = p.fg } },
+  { "PreProc", { fg = p.fg } },
   { "Include", { link = "PreProc" } },
-  { "Exception", { fg = p.none } },
-  { "Statement", { fg = p.none } },
+  { "Exception", { fg = p.fg } },
+  { "Statement", { fg = p.fg } },
   { "SpecialKey", { link = "Comment" } },
   { "Special", { link = "Comment" } },
   --------------------------------------------------------
@@ -118,11 +119,11 @@ local groups = {
   { "@type.qualifier", { link = "KeyWord" } },
   --modifiers that affect storage in memory or life-time like C `static`
   { "@storageclass", { link = "Keyword" } },
-  { "@field", { fg = p.none } },
+  { "@field", { fg = p.fg } },
   { "@property", { link = "@field" } },
   --------------------------------------------------------
   ---@Functions
-  { "Function", { fg = p.none } },
+  { "Function", { fg = p.fg } },
   --built-in functions
   { "@function.builtin", { link = "Function" } },
   --function calls
@@ -135,21 +136,21 @@ local groups = {
   { "@parameter", { link = "@variable" } },
   --------------------------------------------------------
   ---@Literals
-  { "String", { fg = p.none } },
-  { "Number", { fg = p.none } },
+  { "String", { fg = p.fg } },
+  { "Number", { fg = p.fg } },
   { "Float", { link = "Number" } },
   { "Boolean", { link = "Constant" } },
   --
   { "Define", { link = "PreProc" } },
-  { "Operator", { fg = p.none } },
-  { "Comment", { fg = "#3d4966" } },
+  { "Operator", { fg = p.fg } },
+  { "Comment", { fg = p.gray } },
   --------------------------------------------------------
   ---@punctuation
-  { "@punctuation.bracket", { fg = p.none } },
-  { "@punctuation.delimiter", { fg = p.none } },
+  { "@punctuation.bracket", { fg = p.fg } },
+  { "@punctuation.delimiter", { fg = p.fg } },
   --------------------------------------------------------
   ---@Tag
-  { "@tag.html", { fg = p.none } },
+  { "@tag.html", { fg = p.fg } },
   { "@tag.attribute.html", { link = "@property" } },
   { "@tag.delimiter.html", { link = "@punctuation.delimiter" } },
   { "@tag.javascript", { link = "@tag.html" } },
@@ -160,7 +161,7 @@ local groups = {
   { "@tag.delimiter.typescript", { link = "@tag.delimiter.html" } },
   --------------------------------------------------------
   ---@Markdown
-  { "@text.reference.markdown.inline", { fg = p.none } },
+  { "@text.reference.markdown.inline", { fg = p.fg } },
   ---@Diff
   { "DiffAdd", { fg = p.teal } },
   { "DiffChange", { fg = p.blue } },
@@ -189,18 +190,18 @@ local groups = {
   { "GitGutterDelete", { fg = p.red } },
   { "GitGutterChangeDelete", { fg = p.red } },
   --Telescope
-  { "TelescopePromptBorder", { bg = p.none, fg = p.none } },
-  { "TelescopePromptNormal", { bg = p.none, fg = p.none } },
-  { "TelescopeResultsBorder", { bg = p.none, fg = p.none } },
-  { "TelescopePreviewBorder", { bg = p.none, fg = p.none } },
-  { "TelescopeResultsNormal", { fg = p.none } },
+  { "TelescopePromptBorder", { bg = p.bg, fg = p.fg } },
+  { "TelescopePromptNormal", { bg = p.bg, fg = p.fg } },
+  { "TelescopeResultsBorder", { bg = p.bg, fg = p.fg } },
+  { "TelescopePreviewBorder", { bg = p.bg, fg = p.fg } },
+  { "TelescopeResultsNormal", { fg = p.fg } },
   { "TelescopeSelectionCaret", { fg = p.blue } },
   { "TelescopeMatching", { fg = p.blue } },
   --CursorWord
-  { "CursorWord", { bg = p.none } },
+  { "CursorWord", { bg = p.bg } },
   { "IndentLine", { link = "Comment" } },
   --Lspsaga
-  { "SagaVariable", { fg = p.none } },
+  { "SagaVariable", { fg = p.fg } },
   --lsp relate
   { "LspSignatureActiveParameter", { fg = p.yellow, underline = true } },
   --netrw
@@ -208,21 +209,21 @@ local groups = {
 }
 local g, api, opt = vim.g, vim.api, vim.opt
 g.terminal_color_0 = p.bg
-g.terminal_color_1 = p.none
-g.terminal_color_2 = p.none
+g.terminal_color_1 = p.red
+g.terminal_color_2 = p.green
 g.terminal_color_3 = p.yellow
-g.terminal_color_4 = p.none
-g.terminal_color_5 = p.none
-g.terminal_color_6 = p.none
-g.terminal_color_7 = p.none
-g.terminal_color_8 = p.none
-g.terminal_color_9 = p.none
-g.terminal_color_10 = p.none
+g.terminal_color_4 = p.blue
+g.terminal_color_5 = p.purple
+g.terminal_color_6 = p.cyan
+g.terminal_color_7 = p.fg
+g.terminal_color_8 = p.fg_dim
+g.terminal_color_9 = p.red
+g.terminal_color_10 = p.green
 g.terminal_color_11 = p.yellow
-g.terminal_color_12 = p.none
-g.terminal_color_13 = p.none
-g.terminal_color_14 = p.none
-g.terminal_color_15 = p.none
+g.terminal_color_12 = p.blue
+g.terminal_color_13 = p.purple
+g.terminal_color_14 = p.cyan
+g.terminal_color_15 = p.fg
 
 api.nvim_command("hi clear")
 opt.background = "dark"
