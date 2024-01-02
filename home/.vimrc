@@ -66,24 +66,6 @@ cmap <c-a> <home>
 cmap <c-e> <end>
 
 
-hi! link Terminal Normal
-hi! link StatuslineTerm Statusline
-hi! link StatuslineTermNC StatuslineNC
-hi! link MessageWindow Pmenu
-hi! link PopupNotification Todo
-hi! link javaScriptFunction Statement
-hi! link javaScriptIdentifier Statement
-hi! link sqlKeyword Statement
-hi! link yamlBlockMappingKey Statement
-hi! link rubyMacro Statement
-hi! link rubyDefine Statement
-hi! link vimVar Normal
-hi! link vimOper Normal
-hi! link vimSep Normal
-hi! link vimParenSep Normal
-hi! link vimCommentString Comment
-hi! link gitCommitSummary Title
-hi! link markdownUrl String
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE
 hi Statusline ctermfg=NONE ctermbg=NONE cterm=NONE
 hi StatuslineNC ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -157,3 +139,17 @@ hi diffRemoved ctermfg=NONE ctermbg=166 cterm=bold
 hi diffSubname ctermfg=NONE ctermbg=28 cterm=NONE
 hi DiffText term=reverse cterm=bold ctermbg=NONE
 hi DiffChange ctermfg=NONE ctermbg=76 cterm=bold
+hi! link Terminal Normal
+hi! link StatuslineTerm Statusline
+hi! link StatuslineTermNC StatuslineNC
+hi! link MessageWindow Pmenu
+hi! link PopupNotification Todo
+hi! link sqlKeyword Statement
+hi! link yamlBlockMappingKey Statement
+hi! link vimVar Normal
+hi! link vimOper Normal
+hi! link vimSep Normal
+hi! link vimParenSep Normal
+hi! link vimCommentString Comment
+hi! link gitCommitSummary Title
+hi! link markdownUrl String
