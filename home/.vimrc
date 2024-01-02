@@ -6,6 +6,9 @@ set number
 "set relativenumber
 set cursorline
 set colorcolumn=80
+set vb
+set t_vb=""
+set noeb
 set showmode
 set showcmd
 set encoding=utf-8
