@@ -314,58 +314,6 @@ local function stl_hl(name, attr)
   api.nvim_set_hl(0, "Stl" .. name, attr)
 end
 
-local function default()
-  local comps = {
-    modeinfo(),
-    space(),
-    encoding(),
-    eol(),
-    modified(),
-    space(),
-
-    fileinfo(),
-    space(),
-    diagError(),
-    diagWarn(),
-    diagInfo(),
-    diagHint(),
-    space(),
-    pad(),
-    lspinfo(),
-    pad(),
-
-    space(),
-    lnumcol(),
-    space(),
-    gitadd(),
-    gitchange(),
-    gitdelete(),
-    branch(),
-  }
-  local e, pieces = {}, {}
-  vim
-    .iter(ipairs(comps))
-    :map(function(key, item)
-      if type(item.stl) == "string" then
-        pieces[#pieces + 1] = stl_format(item.name, item.stl)
-      else
-        pieces[#pieces + 1] = item.default and stl_format(item.name, item.default) or ""
-        for _, event in ipairs({ unpack(item.event or {}) }) do
-          if not e[event] then
-            e[event] = {}
-          end
-          e[event][#e[event] + 1] = key
-        end
-      end
-
-      if item.attr and item.name then
-        stl_hl(item.name, item.attr)
-      end
-    end)
-    :totable()
-  return comps, e, pieces
-end
-
 local function render(comps, events, pieces)
   return coroutine.create(function(args)
     while true do
@@ -387,7 +335,56 @@ local function render(comps, events, pieces)
   end)
 end
 
-local comps, events, pieces = default()
+local comps = {
+  modeinfo(),
+  space(),
+  encoding(),
+  eol(),
+  modified(),
+  space(),
+
+  fileinfo(),
+  space(),
+  diagError(),
+  diagWarn(),
+  diagInfo(),
+  diagHint(),
+  space(),
+  pad(),
+  lspinfo(),
+  pad(),
+
+  space(),
+  lnumcol(),
+  space(),
+  gitadd(),
+  gitchange(),
+  gitdelete(),
+  branch(),
+}
+local events, pieces = {}, {}
+
+vim
+  .iter(ipairs(comps))
+  :map(function(key, item)
+    if type(item.stl) == "string" then
+      pieces[#pieces + 1] = stl_format(item.name, item.stl)
+    else
+      pieces[#pieces + 1] = item.default and stl_format(item.name, item.default) or ""
+      for _, event in ipairs({ unpack(item.event or {}) }) do
+        if not events[event] then
+          events[event] = {}
+        end
+        events[event][#events[event] + 1] = key
+      end
+    end
+
+    if item.attr and item.name then
+      stl_hl(item.name, item.attr)
+    end
+  end)
+  :totable()
+
 local stl_render = render(comps, events, pieces)
 for _, e in ipairs(vim.tbl_keys(events)) do
   local tmp = e
