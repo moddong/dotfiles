@@ -13,7 +13,7 @@ set showmode
 set showcmd
 set encoding=utf-8
 set list
-set listchars=trail:·,tab:·»,nbsp:+,extends:→,precedes:←
+set listchars=trail:·,tab:··»,nbsp:+,extends:→,precedes:←
 set mouse=a
 set smartindent
 set expandtab
