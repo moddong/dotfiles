@@ -2,7 +2,7 @@ local p = {
   bg = "#141821",
   bg_alt = "#222738",
   bg_float = "#14131f",
-  -- fg = "#cccccc",
+  fg = "#cccccc",
   red = "#ff5f59",
   orange = "#cc853d",
   yellow = "#ccad52",
@@ -21,12 +21,12 @@ local groups = {
   --signcolumn
   { "SignColumn", { bg = p.bg } },
   --buffer
-  { "LineNr", { link = "Comment" } },
+  { "LineNr", { fg = p.gray } },
   { "EndOfBuffer", { fg = p.bg, bg = p.bg } },
   { "Search", { fg = p.yellow, reverse = true } },
   { "Visual", { bg = p.yellow } },
   { "ColorColumn", { bg = p.bg } },
-  { "Whitespace", { fg = p.fg } },
+  { "Whitespace", { link = "LineNr" } },
   --window
   { "VertSplit", { fg = p.fg } },
   { "Title", { fg = p.fg, bold = true } },
@@ -54,7 +54,7 @@ local groups = {
   --Markup
   { "TODO", { fg = p.fg } },
   { "Conceal", { fg = p.fg } },
-  { "NonText", { link = "Comment" } },
+  { "NonText", { link = "LineNr" } },
   --Float
   { "FloatBorder", { fg = p.fg } },
   { "NormalFloat", { bg = p.bg } },
@@ -107,8 +107,8 @@ local groups = {
   { "Include", { link = "PreProc" } },
   { "Exception", { fg = p.fg } },
   { "Statement", { fg = p.fg } },
-  { "SpecialKey", { link = "Comment" } },
-  { "Special", { link = "Comment" } },
+  { "SpecialKey", { link = "LineNr" } },
+  { "Special", { link = "LineNr" } },
   --------------------------------------------------------
   ---@Types
   { "Type", { fg = p.yellow } },
@@ -143,7 +143,7 @@ local groups = {
   --
   { "Define", { link = "PreProc" } },
   { "Operator", { fg = p.fg } },
-  { "Comment", { fg = p.gray } },
+  { "Comment", { link = "LineNr" } },
   --------------------------------------------------------
   ---@punctuation
   { "@punctuation.bracket", { fg = p.fg } },
