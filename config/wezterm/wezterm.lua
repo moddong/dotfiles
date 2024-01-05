@@ -6,16 +6,15 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 end
 config.font = wezterm.font_with_fallback({
 	-- "SF Mono",
-  -- "BlexMono Nerd Font Mono",
-  -- "FiraCode Nerd Font Mono",
+	-- "FiraCode Nerd Font Mono",
 	"Operator Mono",
 	"LXGW WenKai Mono",
 })
 config.font_size = 14
 config.enable_tab_bar = false
 config.colors = {
-  background = "#141821",
-  foreground = "#cccccc",
+	background = "#141821",
+	foreground = "#cccccc",
 }
 -- config.colors = {
 -- 	background = "#fafafa",

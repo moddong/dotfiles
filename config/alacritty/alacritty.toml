@@ -2,11 +2,10 @@
 dynamic_padding = true
 
 [font]
-# BlexMono FiraCode
-normal = { family = "BlexMono Nerd Font Mono" }
-bold = { family = "BlexMono Nerd Font Mono" }
-italic = { family = "BlexMono Nerd Font Mono"}
-bold_italic = { family = "BlexMono Nerd Font Mono"}
+normal = { family = "FiraCode Nerd Font Mono" }
+bold = { family = "FiraCode Nerd Font Mono" }
+italic = { family = "FiraCode Nerd Font Mono"}
+bold_italic = { family = "FiraCode Nerd Font Mono"}
 size = 14.0
 
 [colors.primary]
