@@ -111,7 +111,7 @@ local groups = {
   { "Special", { link = "LineNr" } },
   --------------------------------------------------------
   ---@Types
-  { "Type", { fg = p.yellow } },
+  { "Type", { fg = p.fg } },
   { "@type.builtin", { link = "Type" } },
   --type definitions (e, {g, `typedef` in C)
   { "@type.definition", { link = "Type" } },
