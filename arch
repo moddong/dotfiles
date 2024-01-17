@@ -4,8 +4,12 @@ info() {
   echo -e "\e[1;32m${@}\e[0m"
 }
 
+link_file() {
+  rm -rf "$2"
+  ln -sv "$1" "$2"
+}
 
-nvim() {
+nvim_nightly() {
   info "install nvim-nightly"
   while [ ! -e ./nvim-linux64.tar.gz ]; do
     curl -fLO "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
@@ -15,7 +19,7 @@ nvim() {
   rm -rf nvim-linux64*
 }
 
-arch() {
+init() {
   sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
     python3 python-pip python-msgpack python-black cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
     tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit
@@ -37,12 +41,7 @@ arch() {
 
 }
 
-link_file() {
-  rm -rf "$2"
-  ln -sv "$1" "$2"
-}
-
-config() {
+dotfiles() {
   info "install dotfiles"
   local dotfiles="${HOME}/.dotfiles"
   local dotfiles_home="${dotfiles}/home"
@@ -64,7 +63,7 @@ config() {
 
 main() {
   if [[ $# -eq 0 ]]; then
-    info "script must have one or more arguments: nvim arch config"
+    info "script must have one or more arguments: nvim_nightly dotfiles init"
   else
     for fn in "$@"; do
       ${fn}
