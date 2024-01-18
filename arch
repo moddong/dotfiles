@@ -65,7 +65,7 @@ main() {
   if [[ $# -eq 0 ]]; then
     info "script must have one or more arguments: nvim_nightly dotfiles init"
   else
-    for fn in "$@"; do
+    for fn in $@; do
       ${fn}
     done
   fi
