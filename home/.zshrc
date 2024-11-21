@@ -46,8 +46,9 @@ alias update="sudo pacman -Syyu --noconfirm"
 alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -"
 proxy() {
     if [ -d /mnt/c/ ]; then
-        export HTTP_PROXY="http://192.168.0.110:10811"
-        export HTTPS_PROXY="http://192.168.0.110:10811"
+        export HTTP_PROXY="http://192.168.1.5:10811"
+        export HTTPS_PROXY="http://192.168.1.5:10811"
+        all_proxy="socks5://192.168.1.5:10811"
     else
         export HTTP_PROXY="http://127.0.0.1:10811"
         export HTTPS_PROXY="http://127.0.0.1:10811"

@@ -20,7 +20,7 @@ nvim_nightly() {
 }
 
 init() {
-  sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting zsh-theme-powerlevel10k \
+  sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting \
     python3 python-pip python-msgpack python-black cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
     tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit
 
@@ -37,7 +37,7 @@ init() {
   sudo go env -w GO111MODULE=on
   sudo go env -w GOPROXY=https://goproxy.cn,direct
   [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
-  echo -e "[source.crates-io]\nreplace-with = "ustc"\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"" | tee -a ${CARGO_HOME}/config
+  echo -e "[source.crates-io]\nreplace-with = \"ustc\"\n\n[source.ustc]\nregistry = \"https://mirrors.ustc.edu.cn/crates.io-index\"" | tee -a ${CARGO_HOME}/config.toml
 
 }
 

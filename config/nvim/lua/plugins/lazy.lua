@@ -50,11 +50,6 @@ require("lazy").setup({
       require("plugins.lspsaga")
     end,
   },
-  {
-    "nvimdev/epo.nvim",
-    event = "LspAttach",
-    opts = true,
-  },
   { "nvimdev/coman.nvim" },
   {
     "nvimdev/whiskyline.nvim",

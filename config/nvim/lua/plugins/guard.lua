@@ -1,11 +1,27 @@
-local ft = require("guard.filetype")
+local ft = require('guard.filetype')
+ft('c,cpp'):fmt({
+  cmd = 'clang-format',
+  stdin = true,
+  ignore_patterns = { 'neovim', 'vim' },
+})
 
-ft("c"):fmt("clang-format")
-ft("cpp"):fmt("clang-format")
-ft("lua"):fmt("stylua")
-ft("rust"):fmt("rustfmt")
+ft('lua'):fmt({
+  cmd = 'stylua',
+  args = { '-' },
+  stdin = true,
+  ignore_patterns = 'function.*_spec%.lua',
+  find = '.stylua.toml',
+})
+ft('go'):fmt('lsp'):append('golines')
+ft('rust'):fmt('rustfmt')
 ft("python"):fmt("black")
-ft("go"):fmt("lsp"):append("golines")
-ft("javascript,typescript,javascriptreact"):fmt("prettier")
-
-require("guard").setup()
+ft('typescript', 'javascript', 'typescriptreact', 'javascriptreact'):fmt('prettier')
+-- hack when save diagnostic is missing
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'GuardFmt',
+  callback = function(args)
+    if args.data.status == 'done' then
+      vim.diagnostic.show()
+    end
+  end,
+})

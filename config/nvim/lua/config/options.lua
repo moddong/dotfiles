@@ -78,22 +78,21 @@ opt.textwidth = 100
 opt.colorcolumn = "100"
 
 -- vim.cmd("colorscheme day")
-vim.cmd("colorscheme night")
--- vim.cmd("colorscheme pure")
+vim.cmd("colorscheme solarized")
 
 -- wsl yanking to windows clipboard
 if vim.fn.has("wsl") == 1 then
-  opt.clipboard = ""
-  g.clipboard = {
-    name = "win32yank-wsl",
-    copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
-    },
-    paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
-    },
-    cache_enable = 0,
-  }
+	opt.clipboard = ""
+	g.clipboard = {
+		name = "win32yank-wsl",
+		copy = {
+			["+"] = "win32yank.exe -i --crlf",
+			["*"] = "win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "win32yank.exe -o --lf",
+			["*"] = "win32yank.exe -o --lf",
+		},
+		cache_enable = 0,
+	}
 end

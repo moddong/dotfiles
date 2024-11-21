@@ -1,3 +1,7 @@
 [user]
 	name = moddong
 	email = lxwyylm@gmail.com
+[http]
+	prox = http://192.168.1.5:10811
+[https]
+	prox = https://192.168.1.5:10811
