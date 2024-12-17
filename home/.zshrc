@@ -44,7 +44,7 @@ alias vi="nvim"
 alias lg="lazygit"
 alias update="sudo pacman -Syyu --noconfirm"
 alias autoremove="sudo pacman -Qtdq | sudo pacman -Rns -"
-www_proxy="127.0.0.1:10808"
+www_proxy="http://127.0.0.1:10808"
 toggle_proxy() {
   local proxy="${www_proxy}"
   case $1 in
@@ -53,6 +53,12 @@ toggle_proxy() {
       ;;
     unset)
       unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+      ;;
+    show)
+      echo "\$http_proxy: ${http_proxy}"
+      echo "\$https_proxy: ${http_proxy}"
+      echo "\$HTTP_PROXY: ${HTTP_PROXY}"
+      echo "\$HTTPS_PROXY: ${HTTP_PROXY}"
       ;;
     *) return 0
   esac
