@@ -1,0 +1,22 @@
+{
+  "main": {
+    "prefix": "pkm",
+    "body": ["package main\n\n\nfunc main() {", "\t$0", "}"],
+    "description": "main function"
+  },
+  "struct": {
+    "prefix": "st",
+    "body": ["type ${1} struct {", "\t${2}", "}"],
+    "description": "struct"
+  },
+  "type interface declaration": {
+    "prefix": "tyi",
+    "body": "type ${1:name} interface {\n\t$0\n}",
+    "description": "Snippet for a type interface"
+  },
+  "if err != nil": {
+    "prefix": "iferr",
+    "body": "if err != nil {\n\tpanic(err)$0\n}",
+    "description": "Snippet for if err != nil"
+  }
+}
