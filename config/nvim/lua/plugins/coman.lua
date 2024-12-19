@@ -1,0 +1,1 @@
+return { "nvimdev/coman.nvim" }
