@@ -20,6 +20,15 @@ nvim_nightly() {
 }
 
 init() {
+  sudo pacman -S git base-devel
+
+  echo -e "\n[archlinuxcn]\nServer = https://mirrors.ustc.edu.cn/archlinuxcn/\$arch" | sudo tee -a /etc/pacman.conf
+
+  sudo pacman -Syu
+  sudo pacman -S archlinuxcn-keyring
+
+  sudo pacman -Syu yay
+  yay -Syu zsh-theme-powerlevel10k
   sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting \
     python3 python-pip python-msgpack python-black cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
     tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit
@@ -41,7 +50,7 @@ init() {
 
 }
 
-dotfiles() {
+install() {
   info "install dotfiles"
   local dotfiles="${HOME}/.dotfiles"
   local dotfiles_home="${dotfiles}/home"
@@ -63,7 +72,7 @@ dotfiles() {
 
 main() {
   if [[ $# -eq 0 ]]; then
-    info "script must have one or more arguments: nvim_nightly dotfiles init"
+    exit 1
   else
     for fn in $@; do
       ${fn}

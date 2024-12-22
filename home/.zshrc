@@ -84,3 +84,5 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 path_add "$GOBIN"
 path_add "$CARGO_HOME/bin"
 unset -f path_add
+
+export editor=vim
