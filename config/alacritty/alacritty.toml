@@ -1,0 +1,59 @@
+[font]
+size = 19
+glyph_offset = { x = 0, y = 0 }
+offset = { x = 0, y = 0 }
+
+[font.normal]
+family = "Lambda"
+style = "Regular"
+
+[font.bold]
+family = "Lambda"
+style = "Bold"
+
+[font.bold_italic]
+family = "Lambda"
+style = "Bold Italic"
+
+[font.italic]
+family = "Lambda"
+style = "Italic"
+
+[window]
+# opacity = 0.9
+dynamic_padding = true
+padding = {x = 2, y = 0}
+decorations = "None"
+option_as_alt = "OnlyLeft"
+
+[mouse]
+hide_when_typing = true
+
+[cursor]
+style = { shape ="Beam", blinking = "Never" }
+vi_mode_style = { shape = "Block", blinking = "Never" }
+
+[keyboard]
+bindings = [
+  { key = "q", mode = "Vi", action = "ToggleViMode" },
+]
+
+[colors.primary]
+background ="#002837"
+foreground ="#b6b6b6"
+
+[colors]
+cursor = { cursor = '#a7c4bc' }
+
+[colors.normal]
+black  = "#555555"
+red  = "#ff5f59"
+green = "#84a800"
+yellow = "#b58900"
+blue = "#268bd2"
+cyan = "#2aa198"
+magenta = "#9884c4"
+white = "#b6b6b6"
+
+[colors.bright]
+yellow = "#ccad52"

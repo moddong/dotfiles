@@ -29,37 +29,6 @@ keymap.set("c", "<c-f>", "<right>")
 keymap.set("c", "<c-a>", "<home>")
 keymap.set("c", "<c-e>", "<end>")
 
-keymap.set("i", "<tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-n>"
-  elseif vim.snippet.jumpable(1) then
-    return "<cmd>lua vim.snippet.jump(1)<cr>"
-  else
-    return "<TAB>"
-  end
-end, { expr = true })
-keymap.set("i", "<s-tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<c-p>"
-  elseif vim.snippet.jumpable(-1) then
-    return "<cmd>lua vim.snippet.jump(-1)<cr>"
-  else
-    return "<s-tab>"
-  end
-end, { expr = true })
-keymap.set("i", "<cr>", function()
-  return vim.fn.pumvisible() == 1 and "<c-y>" or vim.fn.lexima["expand"]("<lt>cr>", "i")
-end, { expr = true })
-
-keymap.set("i", "<c-e>", function()
-  if vim.fn.pumvisible() == 1 then
-    require("epo").disable_trigger()
-    return "<c-e>"
-  else
-    return "<esc>g_a"
-  end
-end, { expr = true })
-
 keymap.set({ "n", "v" }, "ga", "<cmd>Lspsaga code_action<cr>")
 keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<cr>")
 keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>")
