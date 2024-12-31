@@ -9,7 +9,7 @@ link_file() {
   ln -sv "$1" "$2"
 }
 
-nvim_nightly() {
+nvim() {
   info "install nvim-nightly"
   while [ ! -e ./nvim-linux64.tar.gz ]; do
     curl -fLO "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
