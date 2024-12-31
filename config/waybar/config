@@ -41,6 +41,7 @@
     "custom/os_button": {
         "format": " ",
         "on-click": "wofi --show drun",
+        "on-click-right": "killall wofi",
         "tooltip": false
     },
     "cpu": {
