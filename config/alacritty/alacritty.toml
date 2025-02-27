@@ -4,19 +4,19 @@ glyph_offset = { x = 0, y = 0 }
 offset = { x = 0, y = 0 }
 
 [font.normal]
-family = "Lambda"
+family = "Iosevka NFM"
 style = "Regular"
 
 [font.bold]
-family = "Lambda"
+family = "Iosevka NFM"
 style = "Bold"
 
 [font.bold_italic]
-family = "Lambda"
+family = "Iosevka NFM"
 style = "Bold Italic"
 
 [font.italic]
-family = "Lambda"
+family = "Iosevka NFM"
 style = "Italic"
 
 [window]
@@ -39,21 +39,67 @@ bindings = [
 ]
 
 [colors.primary]
-background ="#002837"
-foreground ="#b6b6b6"
+background = "#303446"
+foreground = "#c6d0f5"
+dim_foreground = "#838ba7"
+bright_foreground = "#c6d0f5"
 
-[colors]
-cursor = { cursor = '#a7c4bc' }
+[colors.cursor]
+text = "#303446"
+cursor = "#f2d5cf"
+
+[colors.vi_mode_cursor]
+text = "#303446"
+cursor = "#babbf1"
+
+[colors.search.matches]
+foreground = "#303446"
+background = "#a5adce"
+
+[colors.search.focused_match]
+foreground = "#303446"
+background = "#a6d189"
+
+[colors.footer_bar]
+foreground = "#303446"
+background = "#a5adce"
+
+[colors.hints.start]
+foreground = "#303446"
+background = "#e5c890"
+
+[colors.hints.end]
+foreground = "#303446"
+background = "#a5adce"
+
+[colors.selection]
+text = "#303446"
+background = "#f2d5cf"
 
 [colors.normal]
-black  = "#555555"
-red  = "#ff5f59"
-green = "#84a800"
-yellow = "#b58900"
-blue = "#268bd2"
-cyan = "#2aa198"
-magenta = "#9884c4"
-white = "#b6b6b6"
+black = "#51576d"
+red = "#e78284"
+green = "#a6d189"
+yellow = "#e5c890"
+blue = "#8caaee"
+magenta = "#f4b8e4"
+cyan = "#81c8be"
+white = "#b5bfe2"
 
 [colors.bright]
-yellow = "#ccad52"
+black = "#626880"
+red = "#e78284"
+green = "#a6d189"
+yellow = "#e5c890"
+blue = "#8caaee"
+magenta = "#f4b8e4"
+cyan = "#81c8be"
+white = "#a5adce"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#ef9f76"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#f2d5cf"
