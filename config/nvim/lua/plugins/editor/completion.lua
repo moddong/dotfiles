@@ -6,16 +6,16 @@ return {
     appearance = { use_nvim_cmp_as_default = false },
     completion = {
       keyword = { range = "full" },
+      accept = { auto_brackets = { enabled = false } },
     },
     signature = {
       enabled = true,
     },
     fuzzy = {
-      use_typo_resistance = false,
+      max_typos = nil,
     },
-    sources = {
-      cmdline = {},
+    cmdline = {
+      enabled = false
     },
   },
-
 }

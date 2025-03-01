@@ -1,5 +1,5 @@
 [general]
-#working_directory = "C:\\Users\\mdd"
+working_directory = "C:\\Users\\mdd"
 
 [font]
 size = 18
@@ -29,6 +29,9 @@ padding = {x = 2, y = 0}
 # decorations = "None"
 option_as_alt = "OnlyLeft"
 dimensions = { columns = 100, lines = 25 }
+
+[terminal]
+shell = "nu"
 
 [mouse]
 hide_when_typing = true

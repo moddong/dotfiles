@@ -1,0 +1,2 @@
+mklink /D C:\Users\mdd\AppData\Local\nvim C:\Users\mdd\dotfiles\config\nvim
+mklink /D C:\Users\mdd\AppData\Roaming\alacritty  C:\Users\mdd\dotfiles\config\alacritty
