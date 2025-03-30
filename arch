@@ -21,17 +21,10 @@ nvim() {
 
 init() {
   sudo pacman -S git base-devel
-
-  echo -e "\n[archlinuxcn]\nServer = https://mirrors.ustc.edu.cn/archlinuxcn/\$arch" | sudo tee -a /etc/pacman.conf
-
-  sudo pacman -Syu
-  sudo pacman -S archlinuxcn-keyring
-
-  sudo pacman -Syu yay
-  yay -Syu zsh-theme-powerlevel10k
   sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting \
-    python3 python-pip python-msgpack python-black cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
-    tree-sitter nodejs npm rustup rust-analyzer go gopls tmux fzf lazygit
+    python3 python-pip python-msgpack python-black python-ruff cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
+    tree-sitter nodejs npm rustup rust-analyzer go gopls lua-language-server stylua fzf lazygit
+
 
   rustup default stable
 
@@ -45,6 +38,7 @@ init() {
   go env -w GOPROXY=https://goproxy.cn,direct
   sudo go env -w GO111MODULE=on
   sudo go env -w GOPROXY=https://goproxy.cn,direct
+  sudo npm i -g bash-language-server pyright vscode-langservers-extracted typescript typescript-language-server
   [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
   echo -e "[source.crates-io]\nreplace-with = "ustc"\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"" | tee -a ${CARGO_HOME}/config
 
