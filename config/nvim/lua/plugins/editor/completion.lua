@@ -1,11 +1,11 @@
 return {
-  "saghen/blink.cmp",
-  version = "*",
+  'saghen/blink.cmp',
+  version = '*',
   opts = {
-    keymap = { preset = "enter" },
+    keymap = { preset = 'enter' },
     appearance = { use_nvim_cmp_as_default = false },
     completion = {
-      keyword = { range = "full" },
+      keyword = { range = 'full' },
       accept = { auto_brackets = { enabled = false } },
     },
     signature = {
@@ -15,7 +15,7 @@ return {
       max_typos = nil,
     },
     cmdline = {
-      enabled = false
+      enabled = false,
     },
   },
 }

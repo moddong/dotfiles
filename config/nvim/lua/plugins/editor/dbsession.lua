@@ -1,5 +1,5 @@
 return {
-  "nvimdev/dbsession.nvim",
-  cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
+  'nvimdev/dbsession.nvim',
+  cmd = { 'SessionSave', 'SessionDelete', 'SessionLoad' },
   opts = true,
 }

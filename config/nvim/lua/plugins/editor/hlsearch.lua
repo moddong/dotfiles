@@ -1,5 +1,5 @@
 return {
-  "nvimdev/hlsearch.nvim",
-  event = "BufRead",
+  'nvimdev/hlsearch.nvim',
+  event = 'BufRead',
   opts = true,
 }

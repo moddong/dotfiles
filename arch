@@ -39,8 +39,18 @@ init() {
   sudo go env -w GO111MODULE=on
   sudo go env -w GOPROXY=https://goproxy.cn,direct
   sudo npm i -g bash-language-server pyright vscode-langservers-extracted typescript typescript-language-server
-  [ -e ${CARGO_HOME} ] || mkdir -p ${CARGO_HOME}
-  echo -e "[source.crates-io]\nreplace-with = "ustc"\n\n[source.ustc]\nregistry = "https://mirrors.ustc.edu.cn/crates.io-index"" | tee -a ${CARGO_HOME}/config
+  [ -e ${CARGO_HOME} ] || mkdir -vp ${CARGO_HOME:-$XDG_DATA_HOME/cargo}
+cat << EOF | tee -a ${CARGO_HOME:-$XDG_DATA_HOME}/config.toml
+[source.crates-io]
+replace-with = "ustc"
+
+[source.ustc]
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+[registries.ustc]
+index = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+EOF
 
 }
 

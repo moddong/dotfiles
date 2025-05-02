@@ -17,12 +17,12 @@ g.loaded_rrhelper = 1
 
 g.netrw_winsize = 25
 g.netrw_banner = 0
-g.mapleader = " "
+g.mapleader = ' '
 
 opt.hidden = true
 opt.magic = true
-opt.virtualedit = "block"
-opt.clipboard = "unnamedplus"
+opt.virtualedit = 'block'
+opt.clipboard = 'unnamedplus'
 opt.wildignorecase = true
 opt.swapfile = false
 
@@ -38,9 +38,9 @@ opt.smartcase = true
 opt.infercase = true
 opt.cursorline = true
 
-opt.completeopt = "menu,menuone,noinsert"
+opt.completeopt = 'menu,menuone,noinsert'
 opt.showmode = false
-opt.shortmess = "aoOTIcF"
+opt.shortmess = 'aoOTIcF'
 opt.scrolloff = 2
 opt.sidescrolloff = 5
 opt.ruler = false
@@ -53,7 +53,7 @@ opt.cmdheight = 0
 opt.laststatus = 3
 opt.list = true
 
-opt.listchars = "tab:»·»,nbsp:+,trail:·,extends:→,precedes:←,"
+opt.listchars = 'tab:»·»,nbsp:+,trail:·,extends:→,precedes:←,'
 opt.pumblend = 10
 opt.winblend = 0
 opt.undofile = true
@@ -65,30 +65,30 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 
 opt.foldlevelstart = 99
-opt.foldmethod = "marker"
+opt.foldmethod = 'marker'
 
 opt.splitright = true
 opt.wrap = false
 
 opt.number = true
-opt.signcolumn = "yes"
-opt.spelloptions = "camel"
+opt.signcolumn = 'yes'
+opt.spelloptions = 'camel'
 
 opt.textwidth = 100
-opt.colorcolumn = "100"
+opt.colorcolumn = '100'
 
 -- wsl yanking to windows clipboard
-if vim.fn.has("wsl") == 1 then
-  opt.clipboard = ""
+if vim.fn.has('wsl') == 1 then
+  opt.clipboard = ''
   g.clipboard = {
-    name = "win32yank-wsl",
+    name = 'win32yank-wsl',
     copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
+      ['+'] = 'win32yank.exe -i --crlf',
+      ['*'] = 'win32yank.exe -i --crlf',
     },
     paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
+      ['+'] = 'win32yank.exe -o --lf',
+      ['*'] = 'win32yank.exe -o --lf',
     },
     cache_enable = 0,
   }

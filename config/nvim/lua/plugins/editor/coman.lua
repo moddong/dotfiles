@@ -1,1 +1,1 @@
-return { "nvimdev/coman.nvim" }
+return { 'nvimdev/coman.nvim' }
