@@ -19,16 +19,16 @@ nvim() {
   rm -rf nvim-linux-x86_64*
 }
 
-init() {
+config() {
   sudo pacman -S git base-devel
   sudo pacman  --noconfirm -Syu zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting \
-    python3 python-pip python-msgpack python-black python-ruff cmake ninja gcc clang curl unzip jq ripgrep lua-language-server proxychains \
-    tree-sitter nodejs npm rustup rust-analyzer go gopls lua-language-server stylua fzf lazygit
+    python3 python-pip python-msgpack python-black python-ruff cmake ninja gcc clang curl unzip jq ripgrep proxychains \
+    tree-sitter nodejs npm go gopls lua-language-server stylua fzf lazygit
 
 
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   rustup default stable
-
-  sudo chsh -s /bin/zsh mdd
+  rustup component add rust-analyzer
 
   npm config set registry https://registry.npmmirror.com/
   sudo npm config set registry https://registry.npmmirror.com/
