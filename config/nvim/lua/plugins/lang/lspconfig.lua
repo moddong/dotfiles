@@ -102,7 +102,7 @@ return {
       'rust_analyzer',
       'basedpyright',
       'ruff',
-      --'bashls',
+      'bashls',
       --'zls',
       --'cmake',
       --'jsonls',
