@@ -1,7 +1,6 @@
 local keymap = vim.keymap
 
 keymap.set('n', '<c-x>k', '<cmd>bdelete<cr>')
-keymap.set('n', '<c-x>d', '<cmd>Vexplore<cr>')
 keymap.set('n', '<c-n>', '<cmd>bn<cr>')
 keymap.set('n', '<c-p>', '<cmd>bp<cr>')
 keymap.set('n', '<c-h>', '<c-w>h')
