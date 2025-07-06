@@ -2,9 +2,7 @@
 
 
 
-sudo pacman -Syu git base-devel zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting \
-  python3 python-pip python-msgpack python-black python-ruff cmake ninja gcc clang curl unzip jq ripgrep \
-  tree-sitter nodejs npm go gopls lua-language-server stylua fzf lazygit
+sudo pacman -Syu git base-devel zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting
 
 
 [ -e ${CARGO_HOME} ] || mkdir -vp ${CARGO_HOME:-$XDG_DATA_HOME/cargo}
@@ -17,7 +15,9 @@ EOF
 
 rustup default stable
 rustup component add rust-analyzer
-cargo install cargo-shear cargo-expand cargo-msrv cargo-edit cargo-supply-chain  cargo-deny cargo-audit cargo-depgraph cargo-update cargo-cache cargo-xwin cargo-zigbuild cargo-wizard cargo-binstall cargo-get cargo-workspace-unused-pub cargo-insta cargo-autoinherit  cargo-bloat
+cargo install cargo-shear cargo-expand cargo-msrv cargo-edit cargo-supply-chain  cargo-deny \
+  cargo-audit cargo-depgraph cargo-update cargo-cache cargo-xwin cargo-zigbuild cargo-wizard \
+  cargo-binstall cargo-get cargo-workspace-unused-pub cargo-insta cargo-autoinherit  cargo-bloat
 
 
 
@@ -30,7 +30,17 @@ done
 rm -rf paru
 
 if [[ -x "/usr/bin/paru" ]]; then
-  paru -Sy --needed linuxqq-nt-bwrap thunderbird wechat-universal-bwrap wemeet-bin qemu-full pipewir wireplumber pipewire-pulse pipewire-alsa pipewire-jack shfmt gopls biome cliphist dbeaver sqlitebrowser exa postgresql sqlite rsync parallel-disk-usage bottom yazi ffmpegthumbnailer unarchiver ffmpeg man-db man-pages kdiff3 dos2unix choose bat fd hexyl libtree zip unrar 7zip viu imagemagick mupdf-tools gwenvied zathura poppler wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts wps-office-fonts openssh lsof gping rustscan asciinema screenkey macchina erdtree dysk bottom acpi bandwhich obs-studio pueue gwenview inkscape gmp pot-translation procs navi qbittorrent gimp atuin microsoft-edge-stable-bin microsoft-edge-stable-bin
+  paru -Sy --needed linuxqq thunderbird wechat-universal-bwrap wemeet-wayland-screenshare-git \
+    python3 python-pip python-msgpack python-black python-ruff cmake ninja gcc clang curl unzip  \
+    jq ripgrep tree-sitter nodejs npm go gopls lua-language-server stylua fzf lazygit \
+    qemu-full pipewir wireplumber pipewire-pulse pipewire-alsa pipewire-jack shfmt biome \
+    cliphist dbeaver sqlitebrowser exa postgresql sqlite rsync parallel-disk-usage bottom yazi \
+    ffmpegthumbnailer unarchiver ffmpeg man-db man-pages kdiff3 dos2unix choose bat fd hexyl \
+    libtree zip unrar 7zip viu imagemagick mupdf-tools gwenvied zathura poppler \
+    wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts wps-office-fonts openssh lsof gping \
+    rustscan asciinema screenkey macchina erdtree dysk bottom acpi bandwhich obs-studio pueue \
+    gwenview inkscape gmp pot-translation procs navi qbittorrent gimp atuin \
+    microsoft-edge-stable-bin microsoft-edge-stable-bin ghostty
 fi
 
 npm config set registry https://registry.npmmirror.com/

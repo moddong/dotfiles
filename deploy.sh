@@ -29,4 +29,4 @@ main() {
   info "Dotfiles successfuly installed!"
 }
 
-main "$@"
+main
