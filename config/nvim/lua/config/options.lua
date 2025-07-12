@@ -77,6 +77,8 @@ opt.spelloptions = 'camel'
 opt.textwidth = 100
 opt.colorcolumn = '100'
 
+vim.cmd.colorscheme(vim.env.NVIMTHEME and vim.env.NVIMTHEME or 'solarized')
+
 -- wsl yanking to windows clipboard
 if vim.fn.has('wsl') == 1 then
   opt.clipboard = ''
