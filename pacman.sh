@@ -21,11 +21,10 @@ cargo install cargo-shear cargo-expand cargo-msrv cargo-edit cargo-supply-chain 
 
 
 
-do
+until [[ -x "/usr/bin/paru" ]]; do
   git clone https://aur.archlinux.org/paru.git
   cd paru
   makepkg -si
-util [[ -x "/usr/bin/paru" ]]
 done
 rm -rf paru
 
