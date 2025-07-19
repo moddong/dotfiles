@@ -1,12 +1,9 @@
 #! /usr/bin/bash
 
-
-
 sudo pacman -Syu git base-devel zsh-autosuggestions  zsh-completions  zsh-syntax-highlighting
 
 
-[ -e ${CARGO_HOME} ] || mkdir -vp ${CARGO_HOME:-$XDG_DATA_HOME/cargo}
-cat << EOF | tee -a ${CARGO_HOME:-$XDG_DATA_HOME}/config.toml
+cat << EOF | tee -a ~/.cargo/config.toml
 [source]
 crates-io = { replace-with = "rsproxy-sparse" }
 rsproxy-sparse = { registry = "sparse+https://rsproxy.cn/index/" }
