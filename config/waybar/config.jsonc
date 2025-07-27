@@ -1,7 +1,7 @@
 {
   "layer": "top",
-  "position": "bottom",
-  "height": 20,
+  "position": "top",
+  "height": 26,
   "spacing": 10,
   "modules-left": ["hyprland/submap", "hyprland/workspaces", "hyprland/window"],
   "modules-center": [],
@@ -36,7 +36,8 @@
     "max-length": 10
   },
   "tray": {
-    "icon-size": 20
+    "icon-size": 20,
+    "spacing": 10
   },
   "backlight": {
     "format": "{icon} {percent}%",
