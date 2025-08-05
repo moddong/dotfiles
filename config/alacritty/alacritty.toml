@@ -4,19 +4,19 @@ glyph_offset = { x = 0, y = 0 }
 offset = { x = 0, y = 0 }
 
 [font.normal]
-family = "JetBrainsMono Nerd Font Mono"
+family = "Maple Mono NF CN"
 style = "Regular"
 
 [font.bold]
-family = "JetBrainsMono Nerd Font Mono"
+family = "Maple Mono NF CN"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono Nerd Font Mono"
+family = "Maple Mono NF CN"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font Mono"
+family = "Maple Mono NF CN"
 style = "Italic"
 
 [window]

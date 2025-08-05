@@ -31,12 +31,12 @@ if [[ -x "/usr/bin/paru" ]]; then
     jq ripgrep tree-sitter nodejs npm go gopls lua-language-server stylua fzf lazygit \
     qemu-full pipewir wireplumber pipewire-pulse pipewire-alsa pipewire-jack shfmt biome \
     cliphist dbeaver sqlitebrowser exa postgresql sqlite rsync parallel-disk-usage bottom yazi \
-    ffmpegthumbnailer unarchiver ffmpeg man-db man-pages kdiff3 dos2unix choose bat fd hexyl \
-    libtree zip unrar 7zip viu imagemagick mupdf-tools gwenvied zathura poppler \
+    ffmpegthumbnailer unarchiver ffmpeg man-db man-pages kdiff3 dos2unix bat fd hexyl \
+    libtree zip unrar 7zip viu imagemagick mupdf-tools gwenvied poppler \
     wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts wps-office-fonts openssh lsof gping \
     rustscan asciinema screenkey macchina erdtree dysk bottom acpi bandwhich obs-studio pueue \
-    gwenview inkscape gmp pot-translation procs navi qbittorrent gimp atuin \
-    microsoft-edge-stable-bin microsoft-edge-stable-bin ghostty
+    gwenview inkscape gmp pot-translation procs navi qbittorrent gimp atuin wl-clipboard libnotify \
+    microsoft-edge-stable-bin microsoft-edge-stable-bin alacritty mako grim  swappy jq slurp
 fi
 
 npm config set registry https://registry.npmmirror.com/

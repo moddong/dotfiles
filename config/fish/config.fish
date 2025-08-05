@@ -20,6 +20,7 @@ end
 
 
 set -gx PATH "$HOME/.local/bin" $PATH
+set -gx  HYPRSHOT_DIR  "$HOME/Pictures/Screenshots"
 set --export EDITOR nvim
 
 
