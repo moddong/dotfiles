@@ -14,7 +14,8 @@ rustup default stable
 rustup component add rust-analyzer
 cargo install cargo-shear cargo-expand cargo-msrv cargo-edit cargo-supply-chain  cargo-deny \
   cargo-audit cargo-depgraph cargo-update cargo-cache cargo-xwin cargo-zigbuild cargo-wizard \
-  cargo-binstall cargo-get cargo-workspace-unused-pub cargo-insta cargo-autoinherit  cargo-bloat
+  cargo-binstall cargo-get cargo-workspace-unused-pub cargo-insta cargo-autoinherit  cargo-bloat \
+  typos-cli git-cliff cargo-nextest cargo-generate
 
 
 
